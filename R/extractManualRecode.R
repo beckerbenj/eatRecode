@@ -5,7 +5,7 @@
 #'
 #' @examples # tbd
 
-manualRecode <- function(recodedList){
+extractManualRecode <- function(recodedList){
 
   if(!is.data.frame(recodedList)) stop("'df' must be a data.frame.")
 

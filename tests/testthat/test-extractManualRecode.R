@@ -2,14 +2,14 @@ df <- data.frame(oldValues = c("ANGOLA", "Anggola", "UND TUNESISCH", "England", 
                  newValues = c("Angola", NA, -98, "VereinigtesKoenigreich", NA))
 
 test_that("errors", {
-  expect_error(manualRecode(recodedList = 1),
+  expect_error(extractManualRecode(recodedList = 1),
                "'df' must be a data.frame.")
 })
 
 
 test_that("correct rows are selected", {
 
-  out <- manualRecode(recodedList = df)
+  out <- extractManualRecode(recodedList = df)
 
   expect_true(all(is.na(out$newValues)))
 
