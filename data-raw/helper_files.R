@@ -22,6 +22,6 @@ saveRDS(dat1, "tests/testthat/helper_dat.RDS")
 
 input <- list(country = rl, language = rl2)
 createRecodeDB(input, filePath = "tests/testthat/helper_recodeDB.xlsx")
+createRecodeDB(input, filePath = "inst/extdata/example_recodeDB.xlsx")
 
-
-#usethis::use_data(helper_files, overwrite = TRUE)
+#db_path <- system.file("extdata", "example_recodeDB.xlsx", package = "eatRecode")
