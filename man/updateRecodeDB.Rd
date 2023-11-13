@@ -4,14 +4,25 @@
 \alias{updateRecodeDB}
 \title{Update Recode Data Base}
 \usage{
-updateRecodeDB(newRecodes, recodeDBPath, name)
+updateRecodeDB(
+  newRecodes,
+  recodeDBPath,
+  newRecodeDBPath,
+  name,
+  override = FALSE
+)
 }
 \arguments{
 \item{newRecodes}{A \code{data.frame} containing new recode information.}
 
 \item{recodeDBPath}{Path to the \code{.xlsx} file in which the data base is stored.}
 
+\item{newRecodeDBPath}{Path to the \code{.xlsx} file in which the updated data base should be stored.}
+
 \item{name}{Name of the specific recode list.}
+
+\item{override}{Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs
+are present in the \code{newRecodes}?}
 }
 \description{
 Update a recode data base.
