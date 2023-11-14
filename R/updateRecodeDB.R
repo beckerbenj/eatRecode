@@ -2,35 +2,37 @@
 #'
 #' Update a recode data base.
 #'
-#'@param newRecodes A `data.frame` containing new recode information.
-#'@param recodeDBPath Path to the `.xlsx` file in which the data base is stored.
-#'@param newRecodeDBPath Path to the `.xlsx` file in which the updated data base should be stored.
-#'@param name Name of the specific recode list.
-#'@param override Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs
-#'are present in the `newRecodes`?
+#' @param newRecodes A `data.frame` containing new recode information.
+#' @param recodeDBPath Path to the `.xlsx` file in which the data base is stored.
+#' @param newRecodeDBPath Path to the `.xlsx` file in which the updated data base should be stored.
+#' @param name Name of the specific recode list.
+#' @param override Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs
+#' are present in the `newRecodes`?
 #'
-#'@return NULL
+#' @return NULL
 #'
 #'
-#'@examples
-#'# tbd
+#' @examples
+#' # tbd
 #'
-#'@export
+#' @export
 updateRecodeDB <- function(newRecodes, recodeDBPath, newRecodeDBPath, name, override = FALSE) {
   recode_db <- getRecodeDB(filePath = recodeDBPath)
   old_recode_list <- recode_db[[name]]
   checkRecodeList(old_recode_list)
 
   oldValues_conflicts <- character()
-  if(override) {
+  if (override) {
     newRecodes_manual <- unique(newRecodes)
     oldValues_conflicts <- newRecodes_manual[newRecodes_manual$oldValues %in% old_recode_list$oldValues, "oldValues"]
-    if(length(oldValues_conflicts) > 0) {
-      message("The recodes for the following oldValues in the existing data base in sheet '", name, "' will be overwritten: ",
-              paste(oldValues_conflicts, collapse = ", "))
-      #browser()
+    if (length(oldValues_conflicts) > 0) {
+      message(
+        "The recodes for the following oldValues in the existing data base in sheet '", name, "' will be overwritten: ",
+        paste(oldValues_conflicts, collapse = ", ")
+      )
+      # browser()
     }
-  } else{
+  } else {
     newRecodes_manual <- unique(newRecodes[!newRecodes$oldValues %in% old_recode_list$oldValues, ])
   }
 
@@ -44,5 +46,3 @@ updateRecodeDB <- function(newRecodes, recodeDBPath, newRecodeDBPath, name, over
 
   NULL
 }
-
-

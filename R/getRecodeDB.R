@@ -2,16 +2,16 @@
 #'
 #' Get a recode list.
 #'
-#'@param filePath Path to the `.xlsx` file in which the data base is stored.
-#'@param name Name of the specific recode list.
+#' @param filePath Path to the `.xlsx` file in which the data base is stored.
+#' @param name Name of the specific recode list.
 #'
-#'@return A recode list.
+#' @return A recode list.
 #'
 #'
-#'@examples
-#'# tbd
+#' @examples
+#' # tbd
 #'
-#'@export
+#' @export
 getRecodeList <- function(filePath, name) {
   as.data.frame(readxl::read_xlsx(filePath, sheet = name))
 }
@@ -20,15 +20,15 @@ getRecodeList <- function(filePath, name) {
 #'
 #' Get a complete recode data base.
 #'
-#'@param filePath Path to the \code{.xlsx} file in which the data base is stored.
+#' @param filePath Path to the \code{.xlsx} file in which the data base is stored.
 #'
-#'@return A recode list.
+#' @return A recode list.
 #'
 #'
-#'@examples
-#'# tbd
+#' @examples
+#' # tbd
 #'
-#'@export
+#' @export
 getRecodeDB <- function(filePath) {
   sheet_names <- readxl::excel_sheets(filePath)
   names(sheet_names) <- sheet_names
@@ -44,17 +44,15 @@ getRecodeDB <- function(filePath) {
 #'
 #' Get the names of the individual recode lists within a recode data base.
 #'
-#'@param filePath Path to the \code{.xlsx} file in which the data base is stored.
+#' @param filePath Path to the \code{.xlsx} file in which the data base is stored.
 #'
-#'@return A recode list.
+#' @return A recode list.
 #'
 #'
-#'@examples
-#'# tbd
+#' @examples
+#' # tbd
 #'
-#'@export
+#' @export
 namesRecodeDB <- function(filePath) {
   readxl::excel_sheets(filePath)
 }
-
-
