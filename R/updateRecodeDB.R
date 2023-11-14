@@ -2,12 +2,12 @@
 #'
 #' Update a recode data base.
 #'
-#'@param newRecodes A \code{data.frame} containing new recode information.
-#'@param recodeDBPath Path to the \code{.xlsx} file in which the data base is stored.
-#'@param newRecodeDBPath Path to the \code{.xlsx} file in which the updated data base should be stored.
+#'@param newRecodes A `data.frame` containing new recode information.
+#'@param recodeDBPath Path to the `.xlsx` file in which the data base is stored.
+#'@param newRecodeDBPath Path to the `.xlsx` file in which the updated data base should be stored.
 #'@param name Name of the specific recode list.
 #'@param override Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs
-#'are present in the \code{newRecodes}?
+#'are present in the `newRecodes`?
 #'
 #'@return NULL
 #'

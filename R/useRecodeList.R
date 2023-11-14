@@ -3,8 +3,8 @@
 #' Use Recode List.
 #'
 #'@param df A data.frame.
-#'@param oldCol Column in \code{df} which should be recoded.
-#'@param newCol Column name in \code{df} which should contain the recoded values.
+#'@param oldCol Column in `df` which should be recoded.
+#'@param newCol Column name in `df` which should contain the recoded values.
 #'@param recodeList A recode list.
 #'
 #'@return The \code{df} with a recoded \code{newCol}.

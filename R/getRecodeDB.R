@@ -2,7 +2,7 @@
 #'
 #' Get a recode list.
 #'
-#'@param filePath Path to the \code{.xlsx} file in which the data base is stored.
+#'@param filePath Path to the `.xlsx` file in which the data base is stored.
 #'@param name Name of the specific recode list.
 #'
 #'@return A recode list.

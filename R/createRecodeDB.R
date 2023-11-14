@@ -2,8 +2,8 @@
 #'
 #' Create a recode data base.
 #'
-#'@param recodeListList A named list of \code{recodeLists}.
-#'@param filePath Path to the \code{.xlsx} file in which the data base should be stored.
+#'@param recodeListList A named list of `recodeLists`.
+#'@param filePath Path to the `.xlsx` file in which the data base should be stored.
 #'
 #'@return NULL
 #'
