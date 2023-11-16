@@ -9,9 +9,10 @@ License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Imports: eatTools (>= 0.5.0), writexl, readxl
+Imports: eatTools (>= 0.7.5), writexl, readxl
 Suggests: 
     covr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 URL: https://beckerbenj.github.io/eatRecode/
+remotes: weirichs/eatTools

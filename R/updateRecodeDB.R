@@ -21,23 +21,37 @@ updateRecodeDB <- function(newRecodes, recodeDBPath, newRecodeDBPath, name, over
   old_recode_list <- recode_db[[name]]
   checkRecodeList(old_recode_list)
 
-  oldValues_conflicts <- character()
+  oldValues_conflicts <- data.frame(oldValues = character(), newValues = character())
   if (override) {
     newRecodes_manual <- unique(newRecodes)
-    oldValues_conflicts <- newRecodes_manual[newRecodes_manual$oldValues %in% old_recode_list$oldValues, "oldValues"]
-    if (length(oldValues_conflicts) > 0) {
+    oldValues_conflicts <- newRecodes_manual[newRecodes_manual$oldValues %in% old_recode_list$oldValues, ]
+
+    # recodes identical to the existing ones in the data base should not be reported
+    number_of_conflicts <- nrow(oldValues_conflicts)
+    for(i in eatTools::seq2(from = 1, to = number_of_conflicts)) {
+      oldValues_conflicts[i, "old_newValues"] <- old_recode_list[old_recode_list$oldValues ==
+                                                                    oldValues_conflicts[i, "oldValues"], "newValues"]
+    }
+    oldValues_conflicts_filtered <- oldValues_conflicts[oldValues_conflicts$newValues != oldValues_conflicts$old_newValues, ]
+
+    number_of_actual_conflicts <- nrow(oldValues_conflicts_filtered)
+    if (number_of_actual_conflicts > 0) {
+      conflict_details <- paste0(oldValues_conflicts_filtered$oldValues, " -> ",
+                                 oldValues_conflicts_filtered$old_newValues, "; now: ",
+                                 oldValues_conflicts_filtered$newValues)
+
       message(
-        "The recodes for the following oldValues in the existing data base in sheet '", name, "' will be overwritten: ",
-        paste(oldValues_conflicts, collapse = ", ")
+        "The following recode pairs in the existing data base in sheet '",
+        name, "' will be overwritten:\n",
+        paste(conflict_details, collapse = "\n")
       )
-      # browser()
     }
   } else {
     newRecodes_manual <- unique(newRecodes[!newRecodes$oldValues %in% old_recode_list$oldValues, ])
   }
 
   ## if necessary, override & order
-  updated_recode_list <- rbind(old_recode_list[!old_recode_list$oldValues %in% oldValues_conflicts, ], newRecodes_manual)
+  updated_recode_list <- rbind(old_recode_list[!old_recode_list$oldValues %in% oldValues_conflicts$oldValues, ], newRecodes_manual)
   updated_recode_list <- updated_recode_list[order(updated_recode_list$oldValues), ]
   recode_db[[name]] <- updated_recode_list
 
