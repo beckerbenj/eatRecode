@@ -1,8 +1,5 @@
-
-#rl <- readRDS("tests/testthat/helper_recodeList.RDS")
-#rl2 <- readRDS("tests/testthat/helper_recodeList2.RDS")
-rl <- readRDS("helper_recodeList.RDS")
-rl2 <- readRDS("helper_recodeList2.RDS")
+rl <- readRDS(test_path("helper_recodeList.RDS"))
+rl2 <- readRDS(test_path("helper_recodeList2.RDS"))
 
 
 
