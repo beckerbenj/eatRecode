@@ -15,4 +15,4 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 URL: https://beckerbenj.github.io/eatRecode/
-remotes: weirichs/eatTools
+Remotes: weirichs/eatTools
