@@ -16,7 +16,7 @@ createRecodeDB <- function(recodeListList, filePath) {
   if (!is.list(recodeListList)) stop("'recodeListList' must be a named list of data.frames.")
   if (!is.data.frame(recodeListList[[1]])) stop("'recodeListList' must be named a list of data.frames.")
   if (is.null(names(recodeListList)) || any(is.na(names(recodeListList)))) stop("'recodeListList' must be named a list of data.frames.")
-  lapply(recodeListList, checkRecodeList)
+  lapply(recodeListList, checkRecode)
 
   writexl::write_xlsx(recodeListList, path = filePath, col_names = TRUE)
 
