@@ -6,8 +6,8 @@ test_that("input validation works", {
     "newValues" = c("c", "d")
   )
 
-  expect_error(checkRecode(dat_list), "'dat' must be a data.frame.")
-  expect_error(checkRecode(dat_missing_column), "'dat' must contain the column 'newValues'.")
+  expect_error(checkRecode(dat_list), "'recodeList' must be a data.frame.")
+  expect_error(checkRecode(dat_missing_column), "'recodeList' must contain the column 'newValues'.")
   expect_no_error(checkRecode(dat_no_error))
 })
 

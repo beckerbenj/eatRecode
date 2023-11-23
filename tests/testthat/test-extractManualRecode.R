@@ -6,7 +6,7 @@ df <- data.frame(
 test_that("errors", {
   expect_error(
     extractManualRecode(recodedList = 1),
-    "'dat' must be a data.frame."
+    "'recodeList' must be a data.frame."
   )
 })
 
