@@ -4,10 +4,12 @@
 \alias{checkRecode}
 \title{Check Recode List}
 \usage{
-checkRecode(dat)
+checkRecode(recodeList, columnNames = NULL)
 }
 \arguments{
 \item{recodeList}{A recode list.}
+
+\item{columnNames}{Character Vector of columns names that should be checked. Defaults to c("newValues", "oldValues").}
 }
 \description{
 Check Recode List
