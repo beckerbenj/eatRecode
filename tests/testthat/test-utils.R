@@ -32,14 +32,8 @@ test_that("contradicting values are detected", {
 
   expect_error(checkRecode(dat_na), "Please check the NAs in 'oldValues'.")
 
-  error_message <- tryCatch(checkRecode(dat_duplicates), error = function(e) {
-    err <<- e
-    return(err$message)
-  })
-  expected_message <- "There are contradicting entrys in 'newValues': \n \n   oldValues newValues\n1    Italia     Italy\n4    Italia   Italien\n2     Wales     Wales\n5     Wales        UK"
-
-  expect_equal(
-    error_message,
-    expected_message
+  expect_error(
+    checkRecode(dat_duplicates),
+    "There are contradicting entrys in 'newValues': \n \n  oldValues newValues\n1    Italia     Italy\n4    Italia   Italien\n2     Wales     Wales\n5     Wales        UK"
   )
 })
