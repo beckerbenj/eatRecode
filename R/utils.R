@@ -1,18 +1,23 @@
 #' Check Recode List
 #'
 #' @param recodeList A recode list.
+#' @param columnNames Character Vector of columns names that should be checked. Defaults to c("newValues", "oldValues").
 #'
 #' @return NULL
 #'
 #' @export
 #' @examples
 #' # tbd
-checkRecode <- function(recodeList) {
+checkRecode <- function(recodeList, columnNames = NULL) {
+  if (is.null(columnNames)) {
+    columnNames <- c("newValues", "oldValues")
+  }
+
   # Check input object type -------------------------------------------------
   if (!is.data.frame(recodeList)) stop("'recodeList' must be a data.frame.")
 
   # Check column names ------------------------------------------------------
-  for (i in c("newValues", "oldValues")) {
+  for (i in columnNames) {
     if (!(i %in% colnames(recodeList))) stop(paste0("'recodeList' must contain the column '", i, "'."))
   }
 
@@ -30,9 +35,8 @@ checkRecode <- function(recodeList) {
     recodeList_newValues_diff_sorted <- recodeList_newValues_diff[order(recodeList_newValues_diff$oldValues), ]
 
     stop(
-         "There are contradicting entrys in 'newValues': \n \n",
-        print_and_capture(recodeList_newValues_diff_sorted)
-      ,
+      "There are contradicting entrys in 'newValues': \n \n",
+      print_and_capture(recodeList_newValues_diff_sorted),
       call. = FALSE
     )
   }
