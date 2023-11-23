@@ -1,39 +1,38 @@
 #' Check Recode List
 #'
 #' @param recodeList A recode list.
-#' @noRd
 #'
 #' @return NULL
 #'
+#' @export
 #' @examples
 #' # tbd
-checkRecode <- function(dat) {
+checkRecode <- function(recodeList) {
   # Check input object type -------------------------------------------------
-  if (!is.data.frame(dat)) stop("'dat' must be a data.frame.")
+  if (!is.data.frame(recodeList)) stop("'recodeList' must be a data.frame.")
 
   # Check column names ------------------------------------------------------
   for (i in c("newValues", "oldValues")) {
-    if (!(i %in% colnames(dat))) stop(paste0("'dat' must contain the column '", i, "'."))
+    if (!(i %in% colnames(recodeList))) stop(paste0("'recodeList' must contain the column '", i, "'."))
   }
 
   # Check NA ----------------------------------------------------------------
-  if (any(is.na(dat[, "oldValues"]))) stop("Please check the NAs in 'oldValues'.")
+  if (any(is.na(recodeList[, "oldValues"]))) stop("Please check the NAs in 'oldValues'.")
 
   # Check for contradicting entries in 'newValues' --------------------------
-  dat_unique_rows <- unique(dat[, c("oldValues", "newValues")])
+  recodeList_unique_rows <- unique(recodeList[, c("oldValues", "newValues")])
 
   ## Duplicates still remaining in oldValues have contradicting values in newValues:
-  duplicated_oldValues <- dat_unique_rows[duplicated(dat_unique_rows$oldValues), "oldValues"]
-  dat_newValues_diff <- dat_unique_rows[dat_unique_rows$oldValues %in% duplicated_oldValues, ]
+  duplicated_oldValues <- recodeList_unique_rows[duplicated(recodeList_unique_rows$oldValues), "oldValues"]
+  recodeList_newValues_diff <- recodeList_unique_rows[recodeList_unique_rows$oldValues %in% duplicated_oldValues, ]
 
-  if (nrow(dat_newValues_diff) > 0) {
-    dat_newValues_diff_sorted <- dat_newValues_diff[order(dat_newValues_diff$oldValues), ]
+  if (nrow(recodeList_newValues_diff) > 0) {
+    recodeList_newValues_diff_sorted <- recodeList_newValues_diff[order(recodeList_newValues_diff$oldValues), ]
 
     stop(
-      paste(
-        "There are contradicting entrys in 'newValues': \n \n",
-        print_and_capture(dat_newValues_diff_sorted)
-      ),
+         "There are contradicting entrys in 'newValues': \n \n",
+        print_and_capture(recodeList_newValues_diff_sorted)
+      ,
       call. = FALSE
     )
   }
