@@ -20,6 +20,7 @@ updateRecodeDB <- function(newRecodes, recodeDBPath, newRecodeDBPath, name, over
   recode_db <- getRecodeDB(filePath = recodeDBPath)
   old_recode_list <- recode_db[[name]]
   checkRecodeList(old_recode_list)
+  checkRecodeList(newRecodes)
 
   oldValues_conflicts <- data.frame(oldValues = character(), newValues = character())
   if (override) {

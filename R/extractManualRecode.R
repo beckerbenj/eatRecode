@@ -5,7 +5,6 @@
 #'
 #' @examples # tbd
 extractManualRecode <- function(recodedList) {
-  if (!is.data.frame(recodedList)) stop("'df' must be a data.frame.")
-
+  checkRecodeList(recodedList)
   recodedList[is.na(recodedList$newValues), ]
 }
