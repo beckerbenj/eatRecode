@@ -7,7 +7,7 @@
 #' @export
 #' @examples
 #' # tbd
-checkRecode <- function(recodeList) {
+checkRecodeList <- function(recodeList) {
 
   # Check input object type -------------------------------------------------
   checkmate::assert_data_frame(recodeList)

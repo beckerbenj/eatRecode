@@ -5,6 +5,6 @@
 #'
 #' @examples # tbd
 extractManualRecode <- function(recodedList) {
-  checkRecode(recodedList)
+  checkRecodeList(recodedList)
   recodedList[is.na(recodedList$newValues), ]
 }

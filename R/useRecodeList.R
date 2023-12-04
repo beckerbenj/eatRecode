@@ -15,7 +15,7 @@
 #'
 #' @export
 useRecodeList <- function(df, oldCol, newCol, recodeList) {
-  checkRecode(recodeList)
+  checkRecodeList(recodeList)
   if (!is.data.frame(df)) stop("'df' must be a data.frame.")
   if (!newCol %in% names(df)) stop("'oldCol' must be a variable in 'df'.")
   # newCol in df?
