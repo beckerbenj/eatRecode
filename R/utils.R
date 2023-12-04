@@ -10,15 +10,14 @@
 checkRecode <- function(recodeList) {
 
   # Check input object type -------------------------------------------------
-  if (!is.data.frame(recodeList)) stop("'recodeList' must be a data.frame.")
+  checkmate::assert_data_frame(recodeList)
 
   # Check column names ------------------------------------------------------
-  for (i in c("oldValues", "newValues")) {
-    if (!(i %in% colnames(recodeList))) stop(paste0("'recodeList' must contain the column '", i, "'."))
-  }
+  checkmate::assert_subset(c("oldValues", "newValues"), choices = colnames(recodeList))
 
   # Check NA ----------------------------------------------------------------
-  if (any(is.na(recodeList[, "oldValues"]))) stop("Please check the NAs in 'oldValues'.")
+  checkmate::assert_character(recodeList$oldValues, any.missing = FALSE)
+
 
   # Check for contradicting entries in 'newValues' --------------------------
   recodeList_unique_rows <- unique(recodeList[, c("oldValues", "newValues")])
@@ -32,8 +31,7 @@ checkRecode <- function(recodeList) {
 
     stop(
       "There are contradicting entrys in 'newValues': \n \n",
-      print_and_capture(recodeList_newValues_diff_sorted),
-      call. = FALSE
+      print_and_capture(recodeList_newValues_diff_sorted)
     )
   }
 }
