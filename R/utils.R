@@ -1,23 +1,19 @@
 #' Check Recode List
 #'
 #' @param recodeList A recode list.
-#' @param columnNames Character Vector of columns names that should be checked. Defaults to c("newValues", "oldValues").
 #'
 #' @return NULL
 #'
 #' @export
 #' @examples
 #' # tbd
-checkRecode <- function(recodeList, columnNames = NULL) {
-  if (is.null(columnNames)) {
-    columnNames <- c("newValues", "oldValues")
-  }
+checkRecode <- function(recodeList) {
 
   # Check input object type -------------------------------------------------
   if (!is.data.frame(recodeList)) stop("'recodeList' must be a data.frame.")
 
   # Check column names ------------------------------------------------------
-  for (i in columnNames) {
+  for (i in c("oldValues", "newValues")) {
     if (!(i %in% colnames(recodeList))) stop(paste0("'recodeList' must contain the column '", i, "'."))
   }
 
