@@ -13,7 +13,8 @@ Imports:
     eatTools (>= 0.7.5),
     writexl,
     readxl,
-    checkmate
+    checkmate,
+    here
 Suggests: 
     covr,
     testthat (>= 3.0.0)
