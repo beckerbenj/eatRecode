@@ -1,0 +1,75 @@
+---
+title: "Introduction"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{getting_started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+#remotes::install_github("eatRecode") 
+library(eatRecode)
+```
+
+The `eatRecode` package helps you recode open text fields.
+The infrastructure is pretty straight forward: `eatRecode` draws on existing data bases containing already recoded value pairs. All values in your data set that are already part of the data base can be recoded automatically. All other values are handled manually, and can be added to the data base in the end. Over time, your data bases will grow, calling for less and less manual recodes every time. 
+
+Use a little example. 
+
+# Getting started
+
+For this tutorial, we are using a small data set with a column that should be recoded, and a minimal data base with some examples. Let's take a look at both! 
+
+A data base always has to contain the two columns `oldValues` and `newValues`:
+
+```{r, echo = FALSE}
+recode_db <- readRDS(here::here("tests", "testthat", "helper_recodeList.RDS"))
+recode_db
+```
+
+We have the following data frame, and want to recode the values contained in the column `country`:
+```{r, echo = FALSE}
+df <- data.frame(
+  id = 1:4,
+  country = c("Berlin", "Kairo", "England", "Schottland"))
+df
+```
+
+
+
+The two main functions of `eatRecode` are `useRecodeList()` and `extractManualRecode()`. As you might have guessed, `useRecodeList()` applies a recode data base to a column of your data frame:
+
+```{r}
+recoded_df <- useRecodeList(df, oldCol = "country", newCol = "country_r", recodeList = recode_db)
+recoded_df
+```
+
+As you can see, the values represented in `recode_db` have been changed. All others can be extracted with `extractManualRecode()`:
+
+```{r}
+extractManualRecode(recoded_df)
+```
+
+
+
+
+To get started, you can use one of the already available recode data bases. 
+
+1. First, you have to read in the recode list, containing recoded value pairs. Use `getRecodeDB()` to load the recode data base you want to use into R. 
+1. Next, you can automatically recode all values in a column of a data frame. 
+
+
+- Automatic recoding
+- Manual recoding
+- Updating a data base
+
+Creating a data base
+ 
