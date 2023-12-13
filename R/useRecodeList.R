@@ -17,10 +17,7 @@
 useRecodeList <- function(df, oldCol, newCol, recodeList) {
   checkRecodeList(recodeList)
   if (!is.data.frame(df)) stop("'df' must be a data.frame.")
-  if (!newCol %in% names(df)) stop("'oldCol' must be a variable in 'df'.")
-  # newCol in df?
-
-  # browser()
+  if (!oldCol %in% names(df)) stop("'oldCol' must be a variable in 'df'.")
 
   df[, newCol] <- eatTools::recodeLookup(df[, oldCol], lookup = recodeList)
   df[!df[, oldCol] %in% recodeList[, 1], newCol] <- NA
