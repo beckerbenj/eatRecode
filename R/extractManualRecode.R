@@ -5,6 +5,11 @@
 #'
 #' @examples # tbd
 extractManualRecode <- function(recodedList) {
-  checkRecodeList(recodedList)
+  # Check input object type -------------------------------------------------
+  checkmate::assert_data_frame(recodedList)
+
+  # Check column names ------------------------------------------------------
+  checkmate::assert_subset(c("newValues"), choices = colnames(recodedList))
+
   recodedList[is.na(recodedList$newValues), ]
 }
