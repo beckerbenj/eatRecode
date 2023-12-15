@@ -20,21 +20,30 @@ library(eatRecode)
 ```
 
 The `eatRecode` package helps you recode open text fields.
-The infrastructure is pretty straight forward: `eatRecode` draws on existing data bases containing already recoded value pairs. All values in your data set that are already part of the data base can be recoded automatically. All other values are handled manually, and can be added to the data base in the end. Over time, your data bases will grow, calling for less and less manual recodes every time. 
+The infrastructure is pretty straight forward: `eatRecode` draws on existing recode lists containing already recoded value pairs. All values in your data set that are already part of the recode list can be recoded automatically. All other values are handled manually, and can be added to the recode list in the end. Over time, your recode lists will grow, calling for less and less manual recodes every time. 
 
 Use a little example. 
 
-# Getting started
-
-For this tutorial, we are using a small data set with a column that should be recoded, and a minimal data base with some examples. Let's take a look at both! 
-
-A data base always has to contain the two columns `oldValues` and `newValues`:
+# Recode Lists
+A recode List always has to contain the two columns `oldValues` and `newValues`:
 
 ```{r, echo = FALSE}
 recode_db <- readRDS(here::here("tests", "testthat", "helper_recodeList.RDS"))
 recode_db
 ```
+The values in the column `oldValues` will be matched with values in the column you want to recode. All values in your column that already are in the data set will be recoded to the values saved in the column `newValues` of the recode List.
 
+# Getting started
+The workflow is quite simple:
+
+1. Apply a recode list to your data frame.
+1. Extract all columns that couldn't be recoded and recode them manually.
+1. Update your recode list.
+1. Apply this updated recode list to your data frame. 
+
+Let's take a closer look at these four steps:
+
+## 1. Apply a recode list to your data.frame
 We have the following data frame, and want to recode the values contained in the column `country`:
 ```{r, echo = FALSE}
 df <- data.frame(
@@ -44,32 +53,52 @@ df
 ```
 
 
-
-The two main functions of `eatRecode` are `useRecodeList()` and `extractManualRecode()`. As you might have guessed, `useRecodeList()` applies a recode data base to a column of your data frame:
+The two main functions of `eatRecode` are `useRecodeList()` and `extractManualRecode()`. As you might have guessed, `useRecodeList()` applies a recode list to a column of your data frame:
 
 ```{r}
-recoded_df <- useRecodeList(df, oldCol = "country", newCol = "country_r", recodeList = recode_db)
+recoded_df <- useRecodeList(df, oldCol = "country", recodeList = recode_db)
 recoded_df
 ```
 
-As you can see, the values represented in `recode_db` have been changed. All others can be extracted with `extractManualRecode()`:
+This adds the column `newValues` to our data frame `df`, which contains all recoded values that were part of the recode list `recode_db`. 
+
+
+## 2. Extract all columns that couldn't be recoded and recode them manually.
+
+All others can be extracted with `extractManualRecode()`:
 
 ```{r}
-extractManualRecode(recoded_df)
+manual_recodes <- extractManualRecode(recoded_df)
+manual_recodes
+```
+This list can be edited manually to add the recoded values in `newValues`. For example, you can save the file as an `.xlsx` file and edit it in excel, and then load it into R again:
+
+```{r, eval = FALSE}
+openxlsx::write_xlsx(manual_recodes, "./manual_recodes.xlsx")
+recoded_df2 <- openxlsx::read_xlsx("./manual_recodes_changed.xlsx")
 ```
 
+Or, you can edit the data directly in R:
+```{r}
+manual_recodes$newValues <- c("Egypt", "UK")
+```
 
+## 3. Update your recode list 
+The next step is to update your recode list, so it is contains all needed values:
+```{r}
+recode_db2 <- updateRecodeDB(newRecodes = manual_recodes,
+                             recodeDBPath = here::here("tests", "testthat", "helper_recodeDB.xlsx"),
+                             newRecodeDBPath = here::here("tests", "testthat", "helper_recodeDB_2.xlsx"), 
+                             name = "country")
+```
 
+## 4. Apply this updated recode list to your data frame. 
+Now you can use this recoded list on your data frame
 
-To get started, you can use one of the already available recode data bases. 
+```{r}
+colnames(manual_recodes) <- c("id", "oldValues", "newValues")
+manual_recodes$id <- NULL
+recoded_df2 <- useRecodeList(df, oldCol = "country", recodeList = manual_recodes)
+```
 
-1. First, you have to read in the recode list, containing recoded value pairs. Use `getRecodeDB()` to load the recode data base you want to use into R. 
-1. Next, you can automatically recode all values in a column of a data frame. 
-
-
-- Automatic recoding
-- Manual recoding
-- Updating a data base
-
-Creating a data base
  
