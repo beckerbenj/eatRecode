@@ -11,7 +11,8 @@ test_that("errors", {
 
 test_that("use recode list", {
   out <- useRecodeList(df = dat1, oldCol = "var1", recodeList = rl)
-  expect_equal(names(out), c("var1", "var2", "newValues"))
+  expect_equal(names(out), c("var1", "var2", "oldValues", "newValues"))
   expect_equal(out[["var1"]], dat1[["var1"]])
   expect_equal(out[["newValues"]], c(NA, NA, "Germany", "UK", NA, NA))
 })
+
