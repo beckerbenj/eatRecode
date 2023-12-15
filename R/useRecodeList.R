@@ -18,6 +18,7 @@ useRecodeList <- function(df, oldCol, recodeList) {
   if (!is.data.frame(df)) stop("'df' must be a data.frame.")
   if (!(oldCol %in% colnames(df))) stop(paste("The column", oldCol, "is not part of the 'df'."))
 
+  df$oldValues <- df[, oldCol]
   df$newValues <- eatTools::recodeLookup(df[, oldCol], lookup = recodeList)
   df[!df[, oldCol] %in% recodeList[, 1], "newValues"] <- NA
 
