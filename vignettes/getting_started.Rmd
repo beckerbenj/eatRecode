@@ -56,7 +56,7 @@ df
 The two main functions of `eatRecode` are `useRecodeList()` and `extractManualRecode()`. As you might have guessed, `useRecodeList()` applies a recode list to a column of your data frame:
 
 ```{r}
-recoded_df <- useRecodeList(df, oldCol = "country", recodeList = recode_db)
+recoded_df <- useRecodeList(df, varName = "country", new_varName = "country_r", recodeList = recode_db)
 recoded_df
 ```
 
@@ -68,7 +68,7 @@ This adds the column `newValues` to our data frame `df`, which contains all reco
 All others can be extracted with `extractManualRecode()`:
 
 ```{r}
-manual_recodes <- extractManualRecode(recoded_df)
+manual_recodes <- extractManualRecode(recoded_df, varName = "country_r")
 manual_recodes
 ```
 This list can be edited manually to add the recoded values in `newValues`. For example, you can save the file as an `.xlsx` file and edit it in excel, and then load it into R again:
