@@ -4,12 +4,14 @@
 \alias{useRecodeList}
 \title{Use Recode List}
 \usage{
-useRecodeList(df, oldCol, recodeList)
+useRecodeList(df, varName, new_varName, recodeList)
 }
 \arguments{
 \item{df}{A data.frame.}
 
-\item{oldCol}{Column in \code{df} which should be recoded.}
+\item{varName}{Column in \code{df} which should be recoded.}
+
+\item{new_varName}{Column in which the recoded values will be stored.}
 
 \item{recodeList}{A recode list.}
 }
