@@ -60,7 +60,7 @@ recoded_df <- useRecodeList(df, varName = "country", new_varName = "country_r", 
 recoded_df
 ```
 
-This adds the column `newValues` to our data frame `df`, which contains all recoded values that were part of the recode list `recode_db`. 
+This adds the column `country_r` to our data frame `df`, which contains all recoded values that were part of the recode list `recode_db`. 
 
 
 ## 2. Extract all columns that couldn't be recoded and recode them manually.
@@ -86,7 +86,8 @@ manual_recodes$newValues <- c("Egypt", "UK")
 ## 3. Update your recode list 
 The next step is to update your recode data base, so it is contains all needed values:
 ```{r}
-recode_db2 <- updateRecodeDB(newRecodes = manual_recodes,
+updateRecodeDB(newRecodes = manual_recodes,
+                             oldValues = "country",
                              recodeDBPath = here::here("tests", "testthat", "helper_recodeDB.xlsx"),
                              newRecodeDBPath = here::here("tests", "testthat", "helper_recodeDB_2.xlsx"), 
                              name = "country")
@@ -96,9 +97,9 @@ recode_db2 <- updateRecodeDB(newRecodes = manual_recodes,
 Now you can use this recoded list on your data frame
 
 ```{r}
-colnames(manual_recodes) <- c("id", "oldValues", "newValues")
-manual_recodes$id <- NULL
-recoded_df2 <- useRecodeList(df, oldCol = "country", recodeList = manual_recodes)
+recodeList_2 <- as.data.frame(readxl::read_xlsx(here::here("tests", "testthat", "helper_recodeDB_2.xlsx")))
+recoded_df2 <- useRecodeList(df, varName = "country", new_varName = "country_r", 
+                             recodeList = recodeList_2)
 ```
 
  

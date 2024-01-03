@@ -40,3 +40,8 @@ checkRecodeList <- function(recodeList) {
 print_and_capture <- function(x) {
   paste(utils::capture.output(print(x)), collapse = "\n")
 }
+
+rename_column <- function(df, oldName, newName){
+  colnames(df)[colnames(df) == oldName] <- newName
+  return(df)
+}

@@ -16,8 +16,10 @@
 #' # tbd
 #'
 #' @export
-updateRecodeDB <- function(newRecodes, recodeDBPath, newRecodeDBPath, name, override = FALSE) {
+updateRecodeDB <- function(newRecodes, oldValues, newValues = "newValues", recodeDBPath, newRecodeDBPath, name, override = FALSE) {
   recode_db <- getRecodeDB(filePath = recodeDBPath)
+  newRecodes <- prep_newRecodes(newRecodes, oldValues, newValues)
+
   old_recode_list <- recode_db[[name]]
   checkRecodeList(old_recode_list)
   checkRecodeList(newRecodes)
@@ -60,4 +62,11 @@ updateRecodeDB <- function(newRecodes, recodeDBPath, newRecodeDBPath, name, over
   writexl::write_xlsx(recode_db, path = newRecodeDBPath, col_names = TRUE)
 
   NULL
+}
+
+prep_newRecodes <- function(newRecodes, oldValues, newValues){
+  newRecodes <- rename_column(newRecodes, oldName = oldValues, newName = "oldValues")
+  newRecodes <- rename_column(newRecodes, oldName = newValues, newName = "newValues")
+  newRecodes <- newRecodes[, c("oldValues", "newValues")]
+  return(newRecodes)
 }
