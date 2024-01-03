@@ -2,7 +2,7 @@
 #'
 #' @param recodedList A data frame with the automatically recoded values.+
 #' @param varName Character string for the column containing the automatically recoded values.
-#' @return Returns a data frame wich only includes the values that have to be recoded manually. This can be saved to excel for manual recoding.
+#' @return Returns a data frame which only includes the values that have to be recoded manually. It can be saved to excel for manual recoding.
 #'
 #' @examples # tbd
 extractManualRecode <- function(recodedList, varName) {
@@ -13,5 +13,7 @@ extractManualRecode <- function(recodedList, varName) {
   checkmate::assert_subset(c(varName), choices = colnames(recodedList))
 
   missing_recodes <- recodedList[is.na(recodedList[, varName]), ]
+  missing_recodes$newValues <- missing_recodes[, varName]
+  missing_recodes[, varName] <- NULL
   return(missing_recodes)
 }

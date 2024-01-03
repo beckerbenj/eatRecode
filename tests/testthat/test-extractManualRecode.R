@@ -13,5 +13,5 @@ test_that("errors", {
 test_that("correct rows are selected", {
   out <- extractManualRecode(recodedList = df, varName = "country_r")
 
-  expect_true(all(is.na(out$country_r)))
+  expect_true(all(is.na(out$newValues)))
 })

@@ -84,7 +84,7 @@ manual_recodes$newValues <- c("Egypt", "UK")
 ```
 
 ## 3. Update your recode list 
-The next step is to update your recode list, so it is contains all needed values:
+The next step is to update your recode data base, so it is contains all needed values:
 ```{r}
 recode_db2 <- updateRecodeDB(newRecodes = manual_recodes,
                              recodeDBPath = here::here("tests", "testthat", "helper_recodeDB.xlsx"),
