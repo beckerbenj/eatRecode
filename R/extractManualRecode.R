@@ -5,6 +5,7 @@
 #' @return Returns a data frame which only includes the values that have to be recoded manually. It can be saved to excel for manual recoding.
 #'
 #' @examples # tbd
+#' @export
 extractManualRecode <- function(recodedList, varName) {
   # Check input object type -------------------------------------------------
   checkmate::assert_data_frame(recodedList)
