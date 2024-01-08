@@ -17,6 +17,7 @@ new_recodes3 <- data.frame(
 test_that("updating a recode list", {
   f <- tempfile()
   updateRecodeDB(new_recodes1,
+    oldValues = "oldValues",
     recodeDBPath = test_path("helper_recodeDB.xlsx"),
     newRecodeDBPath = f,
     name = "country"
@@ -28,6 +29,7 @@ test_that("updating a recode list", {
   expect_equal(out$newValues[c(1, 4:5)], c("Germany", "England", "Italy"))
 
   updateRecodeDB(new_recodes2,
+    oldValues = "oldValues",
     recodeDBPath = test_path("helper_recodeDB.xlsx"),
     newRecodeDBPath = f,
     name = "country"
@@ -42,9 +44,11 @@ test_that("updating a recode list", {
 test_that("updating a recode list while overriding existing recodes", {
   f2a <- tempfile()
   updateRecodeDB(new_recodes1,
-                 recodeDBPath = test_path("helper_recodeDB.xlsx"), newRecodeDBPath = f2a,
-                 name = "country",
-                 override = TRUE)
+    oldValues = "oldValues",
+    recodeDBPath = test_path("helper_recodeDB.xlsx"), newRecodeDBPath = f2a,
+    name = "country",
+    override = TRUE
+  )
 
   out <- getRecodeList(f2a, name = "country")
   expect_equal(out$oldValues[c(1, 4:5, 6)], c("Bavaria", "Ingland", "Italia", "Wales"))
@@ -53,6 +57,7 @@ test_that("updating a recode list while overriding existing recodes", {
   f2 <- tempfile()
   expect_message(
     updateRecodeDB(new_recodes2,
+      oldValues = "oldValues",
       recodeDBPath = test_path("helper_recodeDB.xlsx"), newRecodeDBPath = f2,
       name = "country",
       override = TRUE
@@ -69,9 +74,10 @@ test_that("updating a recode list while overriding existing recodes with redunda
   f3 <- tempfile()
   expect_message(
     updateRecodeDB(new_recodes3,
-                   recodeDBPath = test_path("helper_recodeDB.xlsx"), newRecodeDBPath = f3,
-                   name = "country",
-                   override = TRUE
+      oldValues = "oldValues",
+      recodeDBPath = test_path("helper_recodeDB.xlsx"), newRecodeDBPath = f3,
+      name = "country",
+      override = TRUE
     ),
     "The following recode pairs in the existing data base in sheet 'country' will be overwritten:\nBavaria -> Germany; now: Austria"
   )

@@ -12,7 +12,7 @@ extractManualRecode(recodedList, varName)
 \item{varName}{Character string for the column containing the automatically recoded values.}
 }
 \value{
-Returns a data frame wich only includes the values that have to be recoded manually. This can be saved to excel for manual recoding.
+Returns a data frame which only includes the values that have to be recoded manually. It can be saved to excel for manual recoding.
 }
 \description{
 Get manual recodes

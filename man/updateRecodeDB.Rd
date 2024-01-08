@@ -6,6 +6,8 @@
 \usage{
 updateRecodeDB(
   newRecodes,
+  oldValues,
+  newValues = "newValues",
   recodeDBPath,
   newRecodeDBPath,
   name,
