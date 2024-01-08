@@ -3,6 +3,8 @@
 #' Update a recode data base.
 #'
 #' @param newRecodes A `data.frame` containing new recode information.
+#' @param oldValues A character string of the column name containing the old values in the `newRecodes data.frame`.
+#' @param newValues A character string of the column name containing the newly recoded values in the `newRecodes data.frame`.
 #' @param recodeDBPath Path to the `.xlsx` file in which the data base is stored.
 #' @param newRecodeDBPath Path to the `.xlsx` file in which the updated data base should be stored.
 #' @param name Name of the specific recode list.

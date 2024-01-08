@@ -17,6 +17,10 @@ updateRecodeDB(
 \arguments{
 \item{newRecodes}{A \code{data.frame} containing new recode information.}
 
+\item{oldValues}{A character string of the column name containing the old values in the \verb{newRecodes data.frame}.}
+
+\item{newValues}{A character string of the column name containing the newly recoded values in the \verb{newRecodes data.frame}.}
+
 \item{recodeDBPath}{Path to the \code{.xlsx} file in which the data base is stored.}
 
 \item{newRecodeDBPath}{Path to the \code{.xlsx} file in which the updated data base should be stored.}
