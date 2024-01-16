@@ -13,10 +13,14 @@ Imports:
     eatTools (>= 0.7.5),
     writexl,
     readxl,
-    checkmate
+    checkmate,
+    here
 Suggests: 
     covr,
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 URL: https://beckerbenj.github.io/eatRecode/
 Remotes: weirichs/eatTools
+VignetteBuilder: knitr

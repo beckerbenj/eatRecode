@@ -3,6 +3,8 @@
 #' Update a recode data base.
 #'
 #' @param newRecodes A `data.frame` containing new recode information.
+#' @param oldValues A character string of the column name containing the old values in the `newRecodes data.frame`.
+#' @param newValues A character string of the column name containing the newly recoded values in the `newRecodes data.frame`.
 #' @param recodeDBPath Path to the `.xlsx` file in which the data base is stored.
 #' @param newRecodeDBPath Path to the `.xlsx` file in which the updated data base should be stored.
 #' @param name Name of the specific recode list.
@@ -16,8 +18,10 @@
 #' # tbd
 #'
 #' @export
-updateRecodeDB <- function(newRecodes, recodeDBPath, newRecodeDBPath, name, override = FALSE) {
+updateRecodeDB <- function(newRecodes, oldValues, newValues = "newValues", recodeDBPath, newRecodeDBPath, name, override = FALSE) {
   recode_db <- getRecodeDB(filePath = recodeDBPath)
+  newRecodes <- prep_newRecodes(newRecodes, oldValues, newValues)
+
   old_recode_list <- recode_db[[name]]
   checkRecodeList(old_recode_list)
   checkRecodeList(newRecodes)
@@ -60,4 +64,11 @@ updateRecodeDB <- function(newRecodes, recodeDBPath, newRecodeDBPath, name, over
   writexl::write_xlsx(recode_db, path = newRecodeDBPath, col_names = TRUE)
 
   NULL
+}
+
+prep_newRecodes <- function(newRecodes, oldValues, newValues){
+  newRecodes <- rename_column(newRecodes, oldName = oldValues, newName = "oldValues")
+  newRecodes <- rename_column(newRecodes, oldName = newValues, newName = "newValues")
+  newRecodes <- newRecodes[, c("oldValues", "newValues")]
+  return(newRecodes)
 }

@@ -2,6 +2,7 @@
 
 export(checkRecodeList)
 export(createRecodeDB)
+export(extractManualRecode)
 export(getRecodeDB)
 export(getRecodeList)
 export(namesRecodeDB)

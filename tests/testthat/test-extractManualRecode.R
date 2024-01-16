@@ -1,6 +1,6 @@
 df <- data.frame(
-  oldValues = c("ANGOLA", "Anggola", "UND TUNESISCH", "England", "ENGGLAND"),
-  newValues = c("Angola", NA, -98, "VereinigtesKoenigreich", NA)
+  country = c("ANGOLA", "Anggola", "UND TUNESISCH", "England", "ENGGLAND"),
+  country_r = c("Angola", NA, -98, "VereinigtesKoenigreich", NA)
 )
 
 test_that("errors", {
@@ -11,7 +11,7 @@ test_that("errors", {
 
 
 test_that("correct rows are selected", {
-  out <- extractManualRecode(recodedList = df)
+  out <- extractManualRecode(recodedList = df, varName = "country_r")
 
   expect_true(all(is.na(out$newValues)))
 })
