@@ -69,7 +69,7 @@ All others can be extracted with `extractManualRecode()`:
 manual_recodes <- extractManualRecode(recoded_df, varName = "country_r")
 manual_recodes
 ```
-This list can be edited manually to add the recoded values in `newValues`. For example, you can save the file as an `.xlsx` file and edit it in excel, and then load it into R again:
+This list can be edited manually to add the recoded values in `newValues`. For example, you can save the file as an `.xlsx` file and edit it in excel, then load it into R again:
 
 ```{r, eval = FALSE}
 openxlsx::write_xlsx(manual_recodes, "./manual_recodes.xlsx")
@@ -82,13 +82,13 @@ manual_recodes$newValues <- c("Egypt", "UK")
 ```
 
 ## 3. Update your recode list 
-The next step is to update your recode data base, so it is contains all needed values:
+The next step is to update your recode data base, so it contains all needed values:
 ```{r}
 updateRecodeDB(newRecodes = manual_recodes,
-                             oldValues = "country",
-                             recodeDBPath = here::here("tests", "testthat", "helper_recodeDB.xlsx"),
-                             newRecodeDBPath = here::here("tests", "testthat", "helper_recodeDB_2.xlsx"), 
-                             name = "country")
+                            oldValues = "country",
+                            recodeDBPath = here::here("tests", "testthat", "helper_recodeDB.xlsx"), # I use the here package to set the path to the data base
+                            newRecodeDBPath = here::here("tests", "testthat", "helper_recodeDB_2.xlsx"), 
+                            name = "country")
 ```
 
 ## 4. Apply this updated recode list to your data frame. 
@@ -98,6 +98,8 @@ Now you can use this recoded list on your data frame
 recodeList_2 <- as.data.frame(readxl::read_xlsx(here::here("tests", "testthat", "helper_recodeDB_2.xlsx")))
 recoded_df2 <- useRecodeList(df, varName = "country", new_varName = "country_r", 
                              recodeList = recodeList_2)
+
+recoded_df2
 ```
 
  
