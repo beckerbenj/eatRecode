@@ -31,7 +31,7 @@ recode_db
 ```
 The values in the column `oldValues` will be matched with values in the column you want to recode. All values in your column that already are in the data set will be recoded to the values saved in the column `newValues` of the recode list.
 
-# Getting started
+# Getting Started
 The workflow is quite simple:
 
 1. Apply a recode list to your data frame.
@@ -41,7 +41,7 @@ The workflow is quite simple:
 
 Let's take a closer look at these four steps:
 
-## 1. Apply a recode list to your data frame
+## 1. Apply a Recode List to Your Data Frame
 We have the following data frame, and want to recode the values contained in the column `country`:
 ```{r, echo = FALSE}
 df <- data.frame(
