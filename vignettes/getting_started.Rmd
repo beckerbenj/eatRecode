@@ -73,7 +73,7 @@ This list can be edited manually to add the recoded values in `newValues`. For e
 
 ```{r, eval = FALSE}
 openxlsx::write.xlsx(manual_recodes, "./manual_recodes.xlsx")
-recoded_df2 <- openxlsx::read_xlsx("./manual_recodes_changed.xlsx")
+recoded_df2 <- openxlsx::read.xlsx("./manual_recodes_changed.xlsx")
 ```
 
 Or, you can edit the data directly in R:
