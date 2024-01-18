@@ -91,8 +91,8 @@ updateRecodeDB(newRecodes = manual_recodes,
                             name = "country")
 ```
 
-## 4. Apply this updated recode list to your data frame. 
-Now you can use this recoded list on your data frame
+## 4. Apply this Updated Recode List to Your Data Frame 
+Now you can use this recoded list on your data frame.
 
 ```{r}
 recodeList_2 <- as.data.frame(readxl::read_xlsx(here::here("tests", "testthat", "helper_recodeDB_2.xlsx")))
