@@ -29,7 +29,7 @@ A recode list always has to contain the two columns `oldValues` and `newValues`:
 recode_db <- readRDS(here::here("tests", "testthat", "helper_recodeList.RDS"))
 recode_db
 ```
-The values in the column `oldValues` will be matched with values in the column you want to recode. All values in your column that already are in the data set will be recoded to the values saved in the column `newValues` of the recode List.
+The values in the column `oldValues` will be matched with values in the column you want to recode. All values in your column that already are in the data set will be recoded to the values saved in the column `newValues` of the recode list.
 
 # Getting started
 The workflow is quite simple:
