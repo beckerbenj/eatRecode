@@ -42,7 +42,7 @@ The workflow is quite simple:
 Let's take a closer look at these four steps:
 
 ## 1. Apply a Recode List to Your Data Frame
-We have the following data frame, and want to recode the values contained in the column `country`:
+We have the following data frame, and want to recode the values in the column `country`:
 ```{r, echo = FALSE}
 df <- data.frame(
   id = 1:4,
