@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-remotes::install_github("beckerbenj/eatRecode") 
+#remotes::install_github("beckerbenj/eatRecode") 
 library(eatRecode)
 ```
 
@@ -23,7 +23,7 @@ The `eatRecode` package helps you to recode open text fields.
 The infrastructure is pretty straight forward: `eatRecode` draws on existing recode lists containing already recoded value pairs. All values in your data set that are already part of the recode list can be recoded automatically. All other values are handled manually, and can be added to the recode list in the end. Over time, your recode lists will grow, calling for less and less manual recodes every time. 
 
 # Recode Lists
-A recode List always has to contain the two columns `oldValues` and `newValues`:
+A recode list always has to contain the two columns `oldValues` and `newValues`:
 
 ```{r, echo = FALSE}
 recode_db <- readRDS(here::here("tests", "testthat", "helper_recodeList.RDS"))
