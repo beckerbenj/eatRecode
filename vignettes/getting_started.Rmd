@@ -61,7 +61,7 @@ recoded_df
 This adds the column `country_r` to our data frame `df`, which contains all recoded values that were part of the recode list `recode_db`. 
 
 
-## 2. Extract all columns that couldn't be recoded and recode them manually.
+## 2. Extract All Columns That Couldn't Be Recoded and Recode Them Manually
 
 All others can be extracted with `extractManualRecode()`:
 
