@@ -81,7 +81,7 @@ You can also edit the data directly in R:
 manual_recodes$newValues <- c("Egypt", "UK")
 ```
 
-## 3. Update your recode list 
+## 3. Update Your Recode List 
 The next step is to update your recode data base, so it contains all needed values:
 ```{r}
 updateRecodeDB(newRecodes = manual_recodes,
