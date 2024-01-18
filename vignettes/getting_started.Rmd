@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-#remotes::install_github("eatRecode") 
+remotes::install_github("beckerbenj/eatRecode") 
 library(eatRecode)
 ```
 
