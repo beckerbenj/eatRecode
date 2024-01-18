@@ -72,7 +72,7 @@ manual_recodes
 This list can be edited manually to add the recoded values in `newValues`. For example, you can save the file as an `.xlsx` file and edit it in excel, then load it into R again:
 
 ```{r, eval = FALSE}
-openxlsx::write_xlsx(manual_recodes, "./manual_recodes.xlsx")
+openxlsx::write.xlsx(manual_recodes, "./manual_recodes.xlsx")
 recoded_df2 <- openxlsx::read_xlsx("./manual_recodes_changed.xlsx")
 ```
 
