@@ -76,7 +76,7 @@ openxlsx::write.xlsx(manual_recodes, "./manual_recodes.xlsx")
 recoded_df2 <- openxlsx::read.xlsx("./manual_recodes_changed.xlsx")
 ```
 
-Or, you can edit the data directly in R:
+You can also edit the data directly in R:
 ```{r}
 manual_recodes$newValues <- c("Egypt", "UK")
 ```
