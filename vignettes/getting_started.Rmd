@@ -41,7 +41,7 @@ The workflow is quite simple:
 
 Let's take a closer look at these four steps:
 
-## 1. Apply a recode list to your data.frame
+## 1. Apply a recode list to your data frame
 We have the following data frame, and want to recode the values contained in the column `country`:
 ```{r, echo = FALSE}
 df <- data.frame(
