@@ -89,7 +89,6 @@ updateRecodeDB(newRecodes = manual_recodes,
                             recodeDBPath = here::here("tests", "testthat", "helper_recodeDB.xlsx"), # I use the here package to set the path to the data base
                             newRecodeDBPath = here::here("tests", "testthat", "helper_recodeDB_2.xlsx"), 
                             name = "country")
-# is it supposed to return NULL?
 ```
 
 ## 4. Apply this Updated Recode List to Your Data Frame 
