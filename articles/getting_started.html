@@ -71,7 +71,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#remotes::install_github("eatRecode") </span></span>
+<code class="sourceCode R"><span><span class="co">#remotes::install_github("beckerbenj/eatRecode") </span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://beckerbenj.github.io/eatRecode/">eatRecode</a></span><span class="op">)</span></span></code></pre></div>
 <p>The <code>eatRecode</code> package helps you to recode open text
 fields. The infrastructure is pretty straight forward:
@@ -84,7 +84,7 @@ recodes every time.</p>
 <div class="section level2">
 <h2 id="recode-lists">Recode Lists<a class="anchor" aria-label="anchor" href="#recode-lists"></a>
 </h2>
-<p>A recode List always has to contain the two columns
+<p>A recode list always has to contain the two columns
 <code>oldValues</code> and <code>newValues</code>:</p>
 <pre><code><span><span class="co">#&gt;   oldValues newValues</span></span>
 <span><span class="co">#&gt; 1   Bavaria   Germany</span></span>
@@ -94,10 +94,10 @@ recodes every time.</p>
 <p>The values in the column <code>oldValues</code> will be matched with
 values in the column you want to recode. All values in your column that
 already are in the data set will be recoded to the values saved in the
-column <code>newValues</code> of the recode List.</p>
+column <code>newValues</code> of the recode list.</p>
 </div>
 <div class="section level2">
-<h2 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
+<h2 id="getting-started">Getting Started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
 </h2>
 <p>The workflow is quite simple:</p>
 <ol style="list-style-type: decimal">
@@ -109,10 +109,10 @@ manually.</li>
 </ol>
 <p>Let’s take a closer look at these four steps:</p>
 <div class="section level3">
-<h3 id="apply-a-recode-list-to-your-data-frame">1. Apply a recode list to your data.frame<a class="anchor" aria-label="anchor" href="#apply-a-recode-list-to-your-data-frame"></a>
+<h3 id="apply-a-recode-list-to-your-data-frame">1. Apply a Recode List to Your Data Frame<a class="anchor" aria-label="anchor" href="#apply-a-recode-list-to-your-data-frame"></a>
 </h3>
-<p>We have the following data frame, and want to recode the values
-contained in the column <code>country</code>:</p>
+<p>We have the following data frame, and want to recode the values in
+the column <code>country</code>:</p>
 <pre><code><span><span class="co">#&gt;   id    country</span></span>
 <span><span class="co">#&gt; 1  1     Berlin</span></span>
 <span><span class="co">#&gt; 2  2      Kairo</span></span>
@@ -135,8 +135,8 @@ list to a column of your data frame:</p>
 recode list <code>recode_db</code>.</p>
 </div>
 <div class="section level3">
-<h3 id="extract-all-columns-that-couldnt-be-recoded-and-recode-them-manually-">2. Extract all columns that couldn’t be recoded and recode them
-manually.<a class="anchor" aria-label="anchor" href="#extract-all-columns-that-couldnt-be-recoded-and-recode-them-manually-"></a>
+<h3 id="extract-all-columns-that-couldnt-be-recoded-and-recode-them-manually">2. Extract All Columns That Couldn’t Be Recoded and Recode Them
+Manually<a class="anchor" aria-label="anchor" href="#extract-all-columns-that-couldnt-be-recoded-and-recode-them-manually"></a>
 </h3>
 <p>All others can be extracted with
 <code><a href="../reference/extractManualRecode.html">extractManualRecode()</a></code>:</p>
@@ -151,14 +151,14 @@ manually.<a class="anchor" aria-label="anchor" href="#extract-all-columns-that-c
 <code>.xlsx</code> file and edit it in excel, then load it into R
 again:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">openxlsx</span><span class="fu">::</span><span class="fu">write_xlsx</span><span class="op">(</span><span class="va">manual_recodes</span>, <span class="st">"./manual_recodes.xlsx"</span><span class="op">)</span></span>
-<span><span class="va">recoded_df2</span> <span class="op">&lt;-</span> <span class="fu">openxlsx</span><span class="fu">::</span><span class="fu">read_xlsx</span><span class="op">(</span><span class="st">"./manual_recodes_changed.xlsx"</span><span class="op">)</span></span></code></pre></div>
-<p>Or, you can edit the data directly in R:</p>
+<code class="sourceCode R"><span><span class="fu">openxlsx</span><span class="fu">::</span><span class="fu">write.xlsx</span><span class="op">(</span><span class="va">manual_recodes</span>, <span class="st">"./manual_recodes.xlsx"</span><span class="op">)</span></span>
+<span><span class="va">recoded_df2</span> <span class="op">&lt;-</span> <span class="fu">openxlsx</span><span class="fu">::</span><span class="fu">read.xlsx</span><span class="op">(</span><span class="st">"./manual_recodes_changed.xlsx"</span><span class="op">)</span></span></code></pre></div>
+<p>You can also edit the data directly in R:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">manual_recodes</span><span class="op">$</span><span class="va">newValues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Egypt"</span>, <span class="st">"UK"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="update-your-recode-list">3. Update your recode list<a class="anchor" aria-label="anchor" href="#update-your-recode-list"></a>
+<h3 id="update-your-recode-list">3. Update Your Recode List<a class="anchor" aria-label="anchor" href="#update-your-recode-list"></a>
 </h3>
 <p>The next step is to update your recode data base, so it contains all
 needed values:</p>
@@ -171,9 +171,9 @@ needed values:</p>
 <span><span class="co">#&gt; NULL</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="apply-this-updated-recode-list-to-your-data-frame-">4. Apply this updated recode list to your data frame.<a class="anchor" aria-label="anchor" href="#apply-this-updated-recode-list-to-your-data-frame-"></a>
+<h3 id="apply-this-updated-recode-list-to-your-data-frame">4. Apply this Updated Recode List to Your Data Frame<a class="anchor" aria-label="anchor" href="#apply-this-updated-recode-list-to-your-data-frame"></a>
 </h3>
-<p>Now you can use this recoded list on your data frame</p>
+<p>Now you can use this recoded list on your data frame.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">recodeList_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_xlsx</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html" class="external-link">here</a></span><span class="op">(</span><span class="st">"tests"</span>, <span class="st">"testthat"</span>, <span class="st">"helper_recodeDB_2.xlsx"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">recoded_df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/useRecodeList.html">useRecodeList</a></span><span class="op">(</span><span class="va">df</span>, varName <span class="op">=</span> <span class="st">"country"</span>, new_varName <span class="op">=</span> <span class="st">"country_r"</span>, </span>
