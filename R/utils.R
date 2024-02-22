@@ -1,5 +1,6 @@
 #' Check Recode List
 #'
+#' Checks whether a data frame called 'recodeList' has columns 'oldValues', containing the values to be recoded, and 'newValues', containing the new values which replace the old ones.
 #' @param recodeList A recode list.
 #'
 #' @return NULL
