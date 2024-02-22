@@ -11,7 +11,12 @@
 #'
 #'
 #' @examples
-#' # tbd
+#' # example data frame
+#'df <- data.frame(id = 1:4, country = c("Berlin", "Kairo", "England", "Schottland"))
+#' # example recode list
+#' recodeList <- data.frame(oldValues = c("Berlin", "Kairo", "England", "Schottland"), newValues = c("Deutschland", "Ägypten", "England", "Schottland"))
+#'
+#' useRecodeList(df, varName = "country", new_varName = "r_country", recodeList)
 #'
 #' @export
 useRecodeList <- function(df, varName, new_varName, recodeList) {
