@@ -21,8 +21,8 @@
 #' @export
 useRecodeList <- function(df, varName, new_varName, recodeList) {
   checkRecodeList(recodeList)
-  if (!is.data.frame(df)) stop("'df' must be a data.frame.")
-  if (!(varName %in% colnames(df))) stop(paste("The column", varName, "is not part of the 'df'."))
+  checkmate::assert_data_frame(df)
+  checkmate::assert_subset(varName, choices = colnames(df))
 
   df[ , new_varName] <- eatTools::recodeLookup(df[, varName], lookup = recodeList)
   df[!df[, varName] %in% recodeList[, 1], new_varName] <- NA
