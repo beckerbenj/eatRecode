@@ -6,7 +6,8 @@
 #'
 #' @export
 #' @examples
-#' # tbd
+#' recodeList <- data.frame(oldValues = c("Berlin", "Kairo", "England", "Schottland"), newValues = c("Deutschland", "Ägypten", "England", "Schottland"))
+#' checkRecodeList(recodeList)
 checkRecodeList <- function(recodeList) {
 
   # Check input object type -------------------------------------------------
