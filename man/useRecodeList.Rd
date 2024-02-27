@@ -13,15 +13,21 @@ useRecodeList(df, varName, new_varName, recodeList)
 
 \item{new_varName}{Column in which the recoded values will be stored.}
 
-\item{recodeList}{A recode list.}
+\item{recodeList}{A recode list: a data frame with the columns "oldValues" and "newValues".}
 }
 \value{
 The \code{df} with a recoded \code{newValues}.
 }
 \description{
-Use Recode List.
+Add a new column to a data frame containing recoded values from a chosen column in that data frame.
 }
 \examples{
-# tbd
+# example data frame
+df <- data.frame(id = 1:4, country = c("Berlin", "Kairo", "Englant", "Schottland"))
+# example recode list
+recodeList <- data.frame(oldValues = c("Berlin", "Kairo", "Englant"),
+                         newValues = c("Deutschland", "Ägypten", "England"))
+
+useRecodeList(df, varName = "country", new_varName = "r_country", recodeList)
 
 }
