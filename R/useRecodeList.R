@@ -7,14 +7,15 @@
 #' @param new_varName Column in which the recoded values will be stored.
 #' @param recodeList A recode list: a data frame with the columns "oldValues" and "newValues".
 #'
-#' @return The \code{df} with a recoded \code{newValues}.
+#' @return The `df` with a recoded `newValues`.
 #'
 #'
 #' @examples
 #' # example data frame
-#' df <- data.frame(id = 1:4, country = c("Berlin", "Kairo", "England", "Schottland"))
+#' df <- data.frame(id = 1:4, country = c("Berlin", "Kairo", "Englant", "Schottland"))
 #' # example recode list
-#' recodeList <- data.frame(oldValues = c("Berlin", "Kairo", "England", "Schottland"), newValues = c("Deutschland", "Ägypten", "England", "Schottland"))
+#' recodeList <- data.frame(oldValues = c("Berlin", "Kairo", "Englant"),
+#'                          newValues = c("Deutschland", "Ägypten", "England"))
 #'
 #' useRecodeList(df, varName = "country", new_varName = "r_country", recodeList)
 #'
