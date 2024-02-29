@@ -1,8 +1,8 @@
 #' Get manual recodes
 #'
-#' @param recodedList A data frame with the automatically recoded values.+
+#' @param recodedList A data frame with the automatically recoded values.
 #' @param varName Character string for the column containing the automatically recoded values.
-#' @return Returns a data frame which only includes the values that have to be recoded manually. It can be saved to excel for manual recoding.
+#' @return Returns a data frame which only includes the values that have to be recoded manually. It can be saved to Excel for manual recoding.
 #'
 #' @examples # tbd
 #' @export
