@@ -71,13 +71,25 @@ getRecodeDB <- function(filePath) {
 #'
 #' Get the names of the individual recode lists within a recode data base.
 #'
-#' @param filePath Path to the \code{.xlsx} file in which the data base is stored.
+#' @param filePath Path to the `.xlsx` file in which the data base is stored.
 #'
 #' @return A recode list.
 #'
-#'
 #' @examples
-#' # tbd
+#' # Create recode list data base using `createRecodeDB`
+#' recodeListList <- list( Europe = data.frame(
+#'                                   id = 1:4,
+#'                                   oldValues = c("Berlin", "Copenhagen", "Rome", "Madrid"),
+#'                                   newValues = c("Germany", "Denmark", "Italy" , "Spain")),
+#'                         Asia = data.frame(
+#'                                   id = 1:4,
+#'                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
+#'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
+#' print(recodeListList)
+#' filePath <- paste0(tempdir(),"\\recodeListList.xlsx")
+#' createRecodeDB(recodeListList = recodeListList, filePath = filePath)
+#' # Import data base
+#' namesRecodeDB(filePath = filePath)
 #'
 #' @export
 namesRecodeDB <- function(filePath) {
