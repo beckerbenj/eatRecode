@@ -7,13 +7,13 @@
 #' @examples
 #' # example data frame
 #' df <- data.frame(id = 1:4,
-#'                  oldValues = c("Germany", "Scotland", Sweden , "Egypt"),
-#'                  newValues = c("Berlin", "Edinburgh", NA, "Cairo"))
+#'              country = c("Germany", "Scotland", "Sweden" , "Egypt"),
+#'              capital = c("Berlin", "Edinburgh", NA, "Cairo"))
 #' # extract values to recode manually
-#' manual_recodes <- extractManualRecode(recodedList = df, varName = "country")
+#' manual_recodes <- extractManualRecode(recodedList = df, varName = "capital")
 #' print(manual_recodes)
 #' # export to Excel, edit, import
-#' filePath <- paste0(tempdir(),"\\manual_recodes.xlsx"
+#' filePath <- paste0(tempdir(),"\\manual_recodes.xlsx")
 #' writexl::write_xlsx(manual_recodes, path = filePath)
 #' readxl::read_xlsx(filePath)
 #'
