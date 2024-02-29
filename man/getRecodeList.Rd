@@ -9,15 +9,29 @@ getRecodeList(filePath, name)
 \arguments{
 \item{filePath}{Path to the \code{.xlsx} file in which the data base is stored.}
 
-\item{name}{Name of the specific recode list.}
+\item{name}{Name of the specific recode list (Excel sheet) to be imported.}
 }
 \value{
 A recode list.
 }
 \description{
-Get a recode list.
+Import a recode list from an Excel file containing a data base of different \code{recodeLists}.
 }
 \examples{
-# tbd
+# Create recode list data base using `createRecodeDB`
+recodeListList <- list( Europe = data.frame(
+                                  id = 1:4,
+                                  oldValues = c("Berlin", "Copenhagen", "Rome", "Madrid"),
+                                  newValues = c("Germany", "Denmark", "Italy" , "Spain")),
+                        Asia = data.frame(
+                                  id = 1:4,
+                                  oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
+                                  newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
+print(recodeListList)
+filePath <- paste0(tempdir(),"\\\\recodeListList.xlsx")
+createRecodeDB(recodeListList = recodeListList, filePath = filePath)
+# Import lists from the data base
+getRecodeList(filePath = filePath, name = "Europe")
+getRecodeList(filePath = filePath, name = "Asia")
 
 }
