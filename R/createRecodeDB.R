@@ -11,12 +11,14 @@
 #'
 #' @examples
 #' # create a named list of data frames
-#' recodeListList <- list( Europe = data.frame(id = 1:4,
-#'                                             oldValues = c("Berlin", "Copenhagen", "Rome", "Madrid"),
-#'                                             newValues = c("Germany", "Denmark", "Italy" , "Spain")),
-#'                         Asia = data.frame(id = 1:4,
-#'                                           oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
-#'                                           newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
+#' recodeListList <- list( Europe = data.frame(
+#'                                   id = 1:4,
+#'                                   oldValues = c("Berlin", "Copenhagen", "Rome", "Madrid"),
+#'                                   newValues = c("Germany", "Denmark", "Italy" , "Spain")),
+#'                         Asia = data.frame(
+#'                                   id = 1:4,
+#'                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
+#'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 #' print(recodeListList)
 #' filePath <- paste0(tempdir(),"\\recodeListList.xlsx")
 #' # create the Excel-file
