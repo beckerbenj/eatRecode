@@ -1,6 +1,7 @@
 #' Create Recode Data Base
 #'
-#' Create a recode data base.
+#' Create and store a recode data base in an Excel file.
+#' The Excel file will have sheets corresponding to each recodeList name.
 #'
 #' @param recodeListList A named list of `recodeLists`.
 #' @param filePath Path to the `.xlsx` file in which the data base should be stored.
