@@ -13,9 +13,9 @@
 #' manual_recodes <- extractManualRecode(recodedList = df, varName = "country")
 #' print(manual_recodes)
 #' # export to Excel, edit, import
-#' tmp <- writexl::write_xlsx(manual_recodes, path = "manual_recodes.xlsx")
-#' readxl::read_xlsx(tmp)
-#' file.remove(tmp)
+#' filePath <- paste0(tempdir(),"\\manual_recodes.xlsx"
+#' writexl::write_xlsx(manual_recodes, path = filePath)
+#' readxl::read_xlsx(filePath)
 #'
 #' @export
 extractManualRecode <- function(recodedList, varName) {
