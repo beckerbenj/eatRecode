@@ -20,14 +20,14 @@ Get manual recodes
 \examples{
 # example data frame
 df <- data.frame(id = 1:4,
-                 country = c("Germany", "Scotland", NA , "Egypt"),
-                 capital = c("Berlin", "Edinburgh", "Stockholm", "Cairo"))
+             country = c("Germany", "Scotland", "Sweden" , "Egypt"),
+             capital = c("Berlin", "Edinburgh", NA, "Cairo"))
 # extract values to recode manually
-manual_recodes <- extractManualRecode(recodedList = df, varName = "country")
+manual_recodes <- extractManualRecode(recodedList = df, varName = "capital")
 print(manual_recodes)
-# export to excel, edit, import
-tmp <- writexl::write_xlsx(manual_recodes, path = "manual_recodes.xlsx")
-readxl::read_xlsx(tmp)
-file.remove(tmp)
+# export to Excel, edit, import
+filePath <- paste0(tempdir(),"\\\\manual_recodes.xlsx")
+writexl::write_xlsx(manual_recodes, path = filePath)
+readxl::read_xlsx(filePath)
 
 }
