@@ -32,9 +32,9 @@ getRecodeList <- function(filePath, name) {
 
 #' Get Recode Data Base
 #'
-#' Get a complete recode data base.
+#' Import a complete recode data base containing multiple `recodeLists`.
 #'
-#' @param filePath Path to the \code{.xlsx} file in which the data base is stored.
+#' @param filePath Path to the `.xlsx` file in which the data base is stored.
 #'
 #' @return A recode list.
 #'
