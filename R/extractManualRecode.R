@@ -7,8 +7,8 @@
 #' @examples
 #' # example data frame
 #' df <- data.frame(id = 1:4,
-#'                  country = c("Germany", "Scotland", NA , "Egypt"),
-#'                  capital = c("Berlin", "Edinburgh", "Stockholm", "Cairo"))
+#'                  oldValues = c("Germany", "Scotland", Sweden , "Egypt"),
+#'                  newValues = c("Berlin", "Edinburgh", NA, "Cairo"))
 #' # extract values to recode manually
 #' manual_recodes <- extractManualRecode(recodedList = df, varName = "country")
 #' print(manual_recodes)
