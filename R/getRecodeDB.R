@@ -1,9 +1,9 @@
 #' Get Recode List
 #'
-#' Get a recode list.
+#' Import a recode list from an Excel file containing a data base of different `recodeLists`.
 #'
 #' @param filePath Path to the `.xlsx` file in which the data base is stored.
-#' @param name Name of the specific recode list.
+#' @param name Name of the specific recode list (Excel sheet) to be imported.
 #'
 #' @return A recode list.
 #'
