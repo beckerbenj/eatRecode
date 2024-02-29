@@ -4,7 +4,19 @@
 #' @param varName Character string for the column containing the automatically recoded values.
 #' @return Returns a data frame which only includes the values that have to be recoded manually. It can be saved to Excel for manual recoding.
 #'
-#' @examples # tbd
+#' @examples
+#' # example data frame
+#' df <- data.frame(id = 1:4,
+#'                  country = c("Germany", "Scotland", NA , "Egypt"),
+#'                  capital = c("Berlin", "Edinburgh", "Stockholm", "Cairo"))
+#' # extract values to recode manually
+#' manual_recodes <- extractManualRecode(recodedList = df, varName = "country")
+#' print(manual_recodes)
+#' # export to Excel, edit, import
+#' tmp <- writexl::write_xlsx(manual_recodes, path = "manual_recodes.xlsx")
+#' readxl::read_xlsx(tmp)
+#' file.remove(tmp)
+#'
 #' @export
 extractManualRecode <- function(recodedList, varName) {
   # Check input object type -------------------------------------------------
