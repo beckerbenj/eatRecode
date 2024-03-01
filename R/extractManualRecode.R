@@ -7,10 +7,10 @@
 #' @examples
 #' # example data frame
 #' df <- data.frame(id = 1:4,
-#'              country = c("Germany", "Scotland", "Sweden" , "Egypt"),
-#'              capital = c("Berlin", "Edinburgh", NA, "Cairo"))
+#'              country = c("Berlin", "Skotland", "Sweden" , "Cairo"),
+#'              country_recoded = c("Germany", "NA", "Sweden", NA))
 #' # extract values to recode manually
-#' manual_recodes <- extractManualRecode(recodedList = df, varName = "capital")
+#' manual_recodes <- extractManualRecode(recodedList = df, varName = "country_recoded")
 #' print(manual_recodes)
 #' # export to Excel, edit, import
 #' filePath <- paste0(tempdir(),"\\manual_recodes.xlsx")
