@@ -15,7 +15,36 @@
 #'
 #'
 #' @examples
-#' # tbd
+#' # example data base
+#' oldDatabase <- list( Europe = data.frame(oldValues = c("Berlin", "Copenhagen", "Rome", "Madrid"),
+#'                                          newValues = c("France", "Denmark", "Italy" , "Spain")),
+#'                      Asia = data.frame(oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
+#'                                        newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
+#' print(oldDatabase)
+#' recodeDBPath <- paste0(tempdir(),"\\oldDatabase.xlsx")
+#' createRecodeDB(recodeListList = oldDatabase, filePath = recodeDBPath)
+#' # new recode information
+#' newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
+#'                           country = c("Germany", "France", "Greece"))
+#' newRecodeDBPath <- paste0(tempdir(),"\\updatedDatabase.xlsx")
+#' # update the data base without overwriting old information
+#' updateRecodeDB(newRecodes = newRecodes,
+#'                oldValues = "city",
+#'                newValues = "country",
+#'                recodeDBPath = recodeDBPath,
+#'                newRecodeDBPath = newRecodeDBPath,
+#'                name = "Europe",
+#'                override = FALSE)
+#' print(getRecodeDB(newRecodeDBPath))
+#' # update the data base, overwriting old information
+#' updateRecodeDB(newRecodes = newRecodes,
+#'                oldValues = "city",
+#'                newValues = "country",
+#'                recodeDBPath = recodeDBPath,
+#'                newRecodeDBPath = newRecodeDBPath,
+#'                name = "Europe",
+#'                override = TRUE)
+#' print(getRecodeDB(newRecodeDBPath))
 #'
 #' @export
 updateRecodeDB <- function(newRecodes, oldValues, newValues = "newValues", recodeDBPath, newRecodeDBPath, name, override = FALSE) {
