@@ -1,6 +1,7 @@
 #' Update Recode Data Base
 #'
-#' Update a recode data base.
+#' Update a recode data base stored in an Excel file.
+#' Takes new recode information, compares it to the existing recode database, and updates the database accordingly.
 #'
 #' @param newRecodes A `data.frame` containing new recode information.
 #' @param oldValues A character string of the column name containing the old values in the `newRecodes data.frame`.
