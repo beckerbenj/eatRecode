@@ -9,9 +9,6 @@ namesRecodeDB(filePath)
 \arguments{
 \item{filePath}{Path to the \code{.xlsx} file in which the data base is stored.}
 }
-\value{
-A recode list.
-}
 \description{
 Get the names of the individual recode lists within a recode data base.
 }

@@ -9,9 +9,6 @@ getRecodeDB(filePath)
 \arguments{
 \item{filePath}{Path to the \code{.xlsx} file in which the data base is stored.}
 }
-\value{
-A recode list.
-}
 \description{
 Import a complete recode data base containing multiple \code{recodeLists}.
 }

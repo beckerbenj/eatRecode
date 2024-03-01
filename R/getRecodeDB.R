@@ -34,10 +34,7 @@ getRecodeList <- function(filePath, name) {
 #'
 #' Import a complete recode data base containing multiple `recodeLists`.
 #'
-#' @param filePath Path to the `.xlsx` file in which the data base is stored.
-#'
-#' @return A recode list.
-#'
+#' @inheritParams getRecodeList
 #'
 #' @examples
 #' # Create recode list data base using `createRecodeDB`
@@ -71,9 +68,7 @@ getRecodeDB <- function(filePath) {
 #'
 #' Get the names of the individual recode lists within a recode data base.
 #'
-#' @param filePath Path to the `.xlsx` file in which the data base is stored.
-#'
-#' @return A recode list.
+#' @inheritParams getRecodeList
 #'
 #' @examples
 #' # Create recode list data base using `createRecodeDB`
