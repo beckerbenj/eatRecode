@@ -11,7 +11,7 @@
 #'              country_recoded = c("Germany", NA, "Sweden", NA))
 #' # extract values to recode manually
 #' manual_recodes <- extractManualRecode(recodedList = df, varName = "country_recoded")
-#' print(manual_recodes)
+#' manual_recodes
 #' # export to Excel, edit, import
 #' filePath_temp <- tempfile(fileext = ".xlsx")
 #' writexl::write_xlsx(manual_recodes, path = filePath_temp)
