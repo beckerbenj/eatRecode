@@ -20,9 +20,9 @@
 #'                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
 #'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 #' recodeListList
-#' filePath <- paste0(tempdir(),"\\recodeListList.xlsx")
+#' filePath_temp <- tempfile(fileext = ".xlsx")
 #' # create the Excel-file
-#' createRecodeDB(recodeListList = recodeListList, filePath = filePath)
+#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
 #'
 #' @export
 #'

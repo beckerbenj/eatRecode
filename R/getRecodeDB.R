@@ -18,12 +18,12 @@
 #'                                   id = 1:4,
 #'                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
 #'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
-#' print(recodeListList)
-#' filePath <- paste0(tempdir(),"\\recodeListList.xlsx")
-#' createRecodeDB(recodeListList = recodeListList, filePath = filePath)
+#' recodeListList
+#' filePath_temp <- tempfile(fileext = ".xlsx")
+#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
 #' # Import lists from the data base
-#' getRecodeList(filePath = filePath, name = "Europe")
-#' getRecodeList(filePath = filePath, name = "Asia")
+#' getRecodeList(filePath = filePath_temp, name = "Europe")
+#' getRecodeList(filePath = filePath_temp, name = "Asia")
 #'
 #' @export
 getRecodeList <- function(filePath, name) {
@@ -49,11 +49,11 @@ getRecodeList <- function(filePath, name) {
 #'                                   id = 1:4,
 #'                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
 #'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
-#' print(recodeListList)
-#' filePath <- paste0(tempdir(),"\\recodeListList.xlsx")
-#' createRecodeDB(recodeListList = recodeListList, filePath = filePath)
+#' recodeListList
+#' filePath_temp <- tempfile(fileext = ".xlsx")
+#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
 #' # Import data base
-#' getRecodeDB(filePath = filePath)
+#' getRecodeDB(filePath = filePath_temp)
 #'
 #' @export
 getRecodeDB <- function(filePath) {
@@ -85,11 +85,11 @@ getRecodeDB <- function(filePath) {
 #'                                   id = 1:4,
 #'                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
 #'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
-#' print(recodeListList)
-#' filePath <- paste0(tempdir(),"\\recodeListList.xlsx")
-#' createRecodeDB(recodeListList = recodeListList, filePath = filePath)
+#' recodeListList
+#' filePath_temp <- tempfile(fileext = ".xlsx")
+#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
 #' # Import data base
-#' namesRecodeDB(filePath = filePath)
+#' namesRecodeDB(filePath = filePath_temp)
 #'
 #' @export
 namesRecodeDB <- function(filePath) {
