@@ -21,13 +21,13 @@ Get manual recodes
 # example data frame
 df <- data.frame(id = 1:4,
              country = c("Berlin", "Skotland", "Sweden" , "Cairo"),
-             country_recoded = c("Germany", "NA", "Sweden", NA))
+             country_recoded = c("Germany", NA, "Sweden", NA))
 # extract values to recode manually
 manual_recodes <- extractManualRecode(recodedList = df, varName = "country_recoded")
 print(manual_recodes)
 # export to Excel, edit, import
-filePath <- paste0(tempdir(),"\\\\manual_recodes.xlsx")
-writexl::write_xlsx(manual_recodes, path = filePath)
-readxl::read_xlsx(filePath)
+filePath_temp <- tempfile(fileext = ".xlsx")
+writexl::write_xlsx(manual_recodes, path = filePath_temp)
+readxl::read_xlsx(filePath_temp)
 
 }
