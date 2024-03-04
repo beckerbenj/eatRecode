@@ -31,7 +31,8 @@ updateRecodeDB(
 are present in the \code{newRecodes}?}
 }
 \description{
-Update a recode data base.
+Update a recode data base stored in an Excel file.
+Takes new recode information, compares it to the existing recode database, and updates the database accordingly.
 }
 \examples{
 # example data base
@@ -39,30 +40,30 @@ oldDatabase <- list( Europe = data.frame(oldValues = c("Berlin", "Copenhagen", "
                                          newValues = c("France", "Denmark", "Italy" , "Spain")),
                      Asia = data.frame(oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
                                        newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
-print(oldDatabase)
-recodeDBPath <- paste0(tempdir(),"\\\\oldDatabase.xlsx")
-createRecodeDB(recodeListList = oldDatabase, filePath = recodeDBPath)
+oldDatabase
+oldFilePath_temp <- tempfile(fileext = ".xlsx")
+createRecodeDB(recodeListList = oldDatabase, filePath = oldFilePath_temp)
 # new recode information
 newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
                           country = c("Germany", "France", "Greece"))
-newRecodeDBPath <- paste0(tempdir(),"\\\\updatedDatabase.xlsx")
-# update the data base without overwriting old information
+newFilePath_temp <- tempfile(fileext = ".xlsx")
+# update the data base without overwriting old information (the row containing "Berlin - France" keeps it's old value)
 updateRecodeDB(newRecodes = newRecodes,
                oldValues = "city",
                newValues = "country",
-               recodeDBPath = recodeDBPath,
-               newRecodeDBPath = newRecodeDBPath,
+               recodeDBPath = oldFilePath_temp,
+               newRecodeDBPath = newFilePath_temp,
                name = "Europe",
                override = FALSE)
-print(getRecodeDB(newRecodeDBPath))
-# update the data base, overwriting old information
+getRecodeDB(newFilePath_temp)
+# update the data base, overwriting old information (the row containing "Berlin - France" get's updated)
 updateRecodeDB(newRecodes = newRecodes,
                oldValues = "city",
                newValues = "country",
-               recodeDBPath = recodeDBPath,
-               newRecodeDBPath = newRecodeDBPath,
+               recodeDBPath = oldFilePath_temp,
+               newRecodeDBPath = newFilePath_temp,
                name = "Europe",
                override = TRUE)
-print(getRecodeDB(newRecodeDBPath))
+getRecodeDB(newFilePath_temp)
 
 }

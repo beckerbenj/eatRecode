@@ -22,30 +22,30 @@
 #'                      Asia = data.frame(oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
 #'                                        newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 #' oldDatabase
-#' recodeDBPath <- paste0(tempdir(),"\\oldDatabase.xlsx")
-#' createRecodeDB(recodeListList = oldDatabase, filePath = recodeDBPath)
+#' oldFilePath_temp <- tempfile(fileext = ".xlsx")
+#' createRecodeDB(recodeListList = oldDatabase, filePath = oldFilePath_temp)
 #' # new recode information
 #' newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
 #'                           country = c("Germany", "France", "Greece"))
-#' newRecodeDBPath <- paste0(tempdir(),"\\updatedDatabase.xlsx")
+#' newFilePath_temp <- tempfile(fileext = ".xlsx")
 #' # update the data base without overwriting old information (the row containing "Berlin - France" keeps it's old value)
 #' updateRecodeDB(newRecodes = newRecodes,
 #'                oldValues = "city",
 #'                newValues = "country",
-#'                recodeDBPath = recodeDBPath,
-#'                newRecodeDBPath = newRecodeDBPath,
+#'                recodeDBPath = oldFilePath_temp,
+#'                newRecodeDBPath = newFilePath_temp,
 #'                name = "Europe",
 #'                override = FALSE)
-#' getRecodeDB(newRecodeDBPath)
+#' getRecodeDB(newFilePath_temp)
 #' # update the data base, overwriting old information (the row containing "Berlin - France" get's updated)
 #' updateRecodeDB(newRecodes = newRecodes,
 #'                oldValues = "city",
 #'                newValues = "country",
-#'                recodeDBPath = recodeDBPath,
-#'                newRecodeDBPath = newRecodeDBPath,
+#'                recodeDBPath = oldFilePath_temp,
+#'                newRecodeDBPath = newFilePath_temp,
 #'                name = "Europe",
 #'                override = TRUE)
-#' getRecodeDB(newRecodeDBPath)
+#' getRecodeDB(newFilePath_temp)
 #'
 #' @export
 updateRecodeDB <- function(newRecodes, oldValues, newValues = "newValues", recodeDBPath, newRecodeDBPath, name, override = FALSE) {
