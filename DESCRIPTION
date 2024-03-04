@@ -3,7 +3,9 @@ Title: Creating, maintaining, and using recode lists
 Version: 0.0.0.9000
 Authors@R: c( 
     person("Benjamin", "Becker", email = "b.becker@iqb.hu-berlin.de", role = c("aut", "cre")),
-    person("Nicklas", "Hafiz", email = "nicklas.jakob.hafiz@hu-berlin.de", role = c("aut")))
+    person("Nicklas", "Hafiz", email = "nicklas.jakob.hafiz@hu-berlin.de", role = c("aut")),
+    person("Edna", "Grewers", email = "grewered@iqb.hu-berlin.de", role = c("ctb")),
+    person("Alina", "Apel", email = "apelaliz@iqb.hu-berlin.de", role = c("ctb")))
 Description: Creating, maintaining, and using recode lists in the 'eatGADS' framework.
 License: GPL (>= 3)
 Encoding: UTF-8
