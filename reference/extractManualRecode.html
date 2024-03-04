@@ -48,13 +48,13 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">extractManualRecode</span><span class="op">(</span><span class="va">recodedList</span>, <span class="va">varName</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">extractManualRecode</span><span class="op">(</span><span class="va">recodedDf</span>, <span class="va">varName</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>recodedList</dt>
-<dd><p>A data frame with the automatically recoded values.+</p></dd>
+    <dl><dt>recodedDf</dt>
+<dd><p>A data frame with the automatically recoded values.</p></dd>
 
 
 <dt>varName</dt>
@@ -65,13 +65,31 @@
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>Returns a data frame which only includes the values that have to be recoded manually. It can be saved to excel for manual recoding.</p>
+<p>Returns a data frame which only includes the values that have to be recoded manually. It can be saved to Excel for manual recoding.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># tbd</span></span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># example data frame</span></span></span>
+<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span></span>
+<span class="r-in"><span>             country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Berlin"</span>, <span class="st">"Skotland"</span>, <span class="st">"Sweden"</span> , <span class="st">"Cairo"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>             country_recoded <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Germany"</span>, <span class="cn">NA</span>, <span class="st">"Sweden"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># extract values to recode manually</span></span></span>
+<span class="r-in"><span><span class="va">manual_recodes</span> <span class="op">&lt;-</span> <span class="fu">extractManualRecode</span><span class="op">(</span>recodedDf <span class="op">=</span> <span class="va">df</span>, varName <span class="op">=</span> <span class="st">"country_recoded"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">manual_recodes</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id  country newValues</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2 Skotland      &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4    Cairo      &lt;NA&gt;</span>
+<span class="r-in"><span><span class="co"># export to Excel, edit, import</span></span></span>
+<span class="r-in"><span><span class="va">filePath_temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".xlsx"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">writexl</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/writexl/reference/write_xlsx.html" class="external-link">write_xlsx</a></span><span class="op">(</span><span class="va">manual_recodes</span>, path <span class="op">=</span> <span class="va">filePath_temp</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_xlsx</a></span><span class="op">(</span><span class="va">filePath_temp</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      id country  newValues</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     2 Skotland <span style="color: #BB0000;">NA</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     4 Cairo    <span style="color: #BB0000;">NA</span>       </span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
