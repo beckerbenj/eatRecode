@@ -5,7 +5,7 @@ dat1 <- readRDS(test_path("helper_dat.RDS"))
 test_that("errors", {
   expect_error(
     useRecodeList(df = 1, recodeList = rl),
-    "'df' must be a data.frame."
+    "Assertion on 'df' failed: Must be of type 'data.frame', not 'double'."
   )
 })
 

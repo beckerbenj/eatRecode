@@ -1,12 +1,15 @@
 #' Check Recode List
 #'
-#' @param recodeList A recode list.
+#' Checks whether a data frame called 'recodeList' has columns 'oldValues', containing the values to be recoded, and 'newValues', containing the new values which recode the old ones.
+#' @inheritParams useRecodeList
 #'
 #' @return NULL
 #'
 #' @export
 #' @examples
-#' # tbd
+#' recodeList <- data.frame(oldValues = c("Berlin", "Kairo", "Englant", "Schottland"),
+#'                          newValues = c("Deutschland", "Ägypten", "England", "Schottland"))
+#' checkRecodeList(recodeList)
 checkRecodeList <- function(recodeList) {
 
   # Check input object type -------------------------------------------------
