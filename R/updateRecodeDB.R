@@ -21,7 +21,7 @@
 #'                                          newValues = c("France", "Denmark", "Italy" , "Spain")),
 #'                      Asia = data.frame(oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
 #'                                        newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
-#' print(oldDatabase)
+#' oldDatabase
 #' recodeDBPath <- paste0(tempdir(),"\\oldDatabase.xlsx")
 #' createRecodeDB(recodeListList = oldDatabase, filePath = recodeDBPath)
 #' # new recode information
@@ -36,7 +36,7 @@
 #'                newRecodeDBPath = newRecodeDBPath,
 #'                name = "Europe",
 #'                override = FALSE)
-#' print(getRecodeDB(newRecodeDBPath))
+#' getRecodeDB(newRecodeDBPath)
 #' # update the data base, overwriting old information
 #' updateRecodeDB(newRecodes = newRecodes,
 #'                oldValues = "city",
@@ -45,7 +45,7 @@
 #'                newRecodeDBPath = newRecodeDBPath,
 #'                name = "Europe",
 #'                override = TRUE)
-#' print(getRecodeDB(newRecodeDBPath))
+#' getRecodeDB(newRecodeDBPath)
 #'
 #' @export
 updateRecodeDB <- function(newRecodes, oldValues, newValues = "newValues", recodeDBPath, newRecodeDBPath, name, override = FALSE) {
