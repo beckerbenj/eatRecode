@@ -57,18 +57,40 @@
 <dd><p>Path to the <code>.xlsx</code> file in which the data base is stored.</p></dd>
 
 </dl></div>
-    <div class="section level2">
-    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    
-
-<p>A recode list.</p>
-    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># tbd</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create recode list data base using `createRecodeDB`</span></span></span>
+<span class="r-in"><span><span class="va">recodeListList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span> Europe <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>                                  id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span></span>
+<span class="r-in"><span>                                  oldValues <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Berlin"</span>, <span class="st">"Copenhagen"</span>, <span class="st">"Rome"</span>, <span class="st">"Madrid"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                                  newValues <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Germany"</span>, <span class="st">"Denmark"</span>, <span class="st">"Italy"</span> , <span class="st">"Spain"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                        Asia <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>                                  id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span></span>
+<span class="r-in"><span>                                  oldValues <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Baku"</span>, <span class="st">"Tokyo"</span>, <span class="st">"Kathmandu"</span>, <span class="st">"Singapore"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                                  newValues <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Azerbaijan"</span>, <span class="st">"Japan"</span>, <span class="st">"Nepal"</span> , <span class="st">"Singapore"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">recodeListList</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Europe</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id  oldValues newValues</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1     Berlin   Germany</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2 Copenhagen   Denmark</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3       Rome     Italy</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4     Madrid     Spain</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $Asia</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   id oldValues  newValues</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1      Baku Azerbaijan</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2     Tokyo      Japan</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  3 Kathmandu      Nepal</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4 Singapore  Singapore</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="va">filePath_temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".xlsx"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="createRecodeDB.html">createRecodeDB</a></span><span class="op">(</span>recodeListList <span class="op">=</span> <span class="va">recodeListList</span>, filePath <span class="op">=</span> <span class="va">filePath_temp</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-in"><span><span class="co"># Import data base</span></span></span>
+<span class="r-in"><span><span class="fu">namesRecodeDB</span><span class="op">(</span>filePath <span class="op">=</span> <span class="va">filePath_temp</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Europe" "Asia"  </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
