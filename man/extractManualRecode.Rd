@@ -4,19 +4,30 @@
 \alias{extractManualRecode}
 \title{Get manual recodes}
 \usage{
-extractManualRecode(recodedList, varName)
+extractManualRecode(recodedDf, varName)
 }
 \arguments{
-\item{recodedList}{A data frame with the automatically recoded values.+}
+\item{recodedDf}{A data frame with the automatically recoded values.}
 
 \item{varName}{Character string for the column containing the automatically recoded values.}
 }
 \value{
-Returns a data frame which only includes the values that have to be recoded manually. It can be saved to excel for manual recoding.
+Returns a data frame which only includes the values that have to be recoded manually. It can be saved to Excel for manual recoding.
 }
 \description{
 Get manual recodes
 }
 \examples{
-# tbd
+# example data frame
+df <- data.frame(id = 1:4,
+             country = c("Berlin", "Skotland", "Sweden" , "Cairo"),
+             country_recoded = c("Germany", NA, "Sweden", NA))
+# extract values to recode manually
+manual_recodes <- extractManualRecode(recodedDf = df, varName = "country_recoded")
+manual_recodes
+# export to Excel, edit, import
+filePath_temp <- tempfile(fileext = ".xlsx")
+writexl::write_xlsx(manual_recodes, path = filePath_temp)
+readxl::read_xlsx(filePath_temp)
+
 }
