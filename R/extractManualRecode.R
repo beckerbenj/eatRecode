@@ -1,6 +1,6 @@
 #' Get manual recodes
 #'
-#' @param recodedList A data frame with the automatically recoded values.
+#' @param recodedDf A data frame with the automatically recoded values.
 #' @param varName Character string for the column containing the automatically recoded values.
 #' @return Returns a data frame which only includes the values that have to be recoded manually. It can be saved to Excel for manual recoding.
 #'
@@ -10,7 +10,7 @@
 #'              country = c("Berlin", "Skotland", "Sweden" , "Cairo"),
 #'              country_recoded = c("Germany", NA, "Sweden", NA))
 #' # extract values to recode manually
-#' manual_recodes <- extractManualRecode(recodedList = df, varName = "country_recoded")
+#' manual_recodes <- extractManualRecode(recodedDf = df, varName = "country_recoded")
 #' manual_recodes
 #' # export to Excel, edit, import
 #' filePath_temp <- tempfile(fileext = ".xlsx")
@@ -18,14 +18,14 @@
 #' readxl::read_xlsx(filePath_temp)
 #'
 #' @export
-extractManualRecode <- function(recodedList, varName) {
+extractManualRecode <- function(recodedDf, varName) {
   # Check input object type -------------------------------------------------
-  checkmate::assert_data_frame(recodedList)
+  checkmate::assert_data_frame(recodedDf)
 
   # Check column names ------------------------------------------------------
-  checkmate::assert_subset(c(varName), choices = colnames(recodedList))
+  checkmate::assert_subset(c(varName), choices = colnames(recodedDf))
 
-  missing_recodes <- recodedList[is.na(recodedList[, varName]), ]
+  missing_recodes <- recodedDf[is.na(recodedDf[, varName]), ]
   missing_recodes$newValues <- missing_recodes[, varName]
   missing_recodes[, varName] <- NULL
   return(missing_recodes)
