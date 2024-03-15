@@ -26,13 +26,22 @@
 #'
 #' @export
 #'
-createRecodeDB <- function(recodeListList, filePath) {
+createRecodeDB <- function(recodeListList, filePath, fileType = "csv") {
   if (!is.list(recodeListList)) stop("'recodeListList' must be a named list of data.frames.")
   if (!is.data.frame(recodeListList[[1]])) stop("'recodeListList' must be named a list of data.frames.")
   if (is.null(names(recodeListList)) || any(is.na(names(recodeListList)))) stop("'recodeListList' must be named a list of data.frames.")
   lapply(recodeListList, checkRecodeList)
 
-  writexl::write_xlsx(recodeListList, path = filePath, col_names = TRUE)
-
+  switch(fileType,
+         "xlsx" = {
+           writexl::write_xlsx(recodeListList, path = filePath, col_names = TRUE)}
+         "csv" = {
+           for(i in 1:length(recodeListList)){
+            write.csv(recodeListList[i], file = sub(".csv", paste0("_", names(recodeListList)[i],".csv"), filePath))
+           }}
+         "csv2" = {
+           for(i in 1:length(recodeListList)){
+             write.csv2(recodeListList[i], file = sub(".csv", paste0("_", names(recodeListList)[i],".csv"), filePath))
+           }})
   NULL
 }
