@@ -1,10 +1,11 @@
 #' Create Recode Data Base
 #'
-#' Create and store a recode data base in an Excel file.
-#' The Excel file will have sheets corresponding to each recodeList name.
+#' Create and store a recode data base in an Excel (`.csv` or `.xlsx`) file.
+#' For each recodeList, a separate `.csv` file will be generated.
+#' The `.xlsx` file will have sheets corresponding to each recodeList name.
 #'
 #' @param recodeListList A named list of `recodeLists`.
-#' @param filePath Path to the `.xlsx` file in which the data base should be stored.
+#' @param filePath Path to the `.csv` or `.xlsx` file in which the data base should be stored.
 #'
 #' @return NULL
 #'
@@ -20,13 +21,13 @@
 #'                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
 #'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 #' recodeListList
-#' # create csv-file with comma as decimal point (default)
+#' # create .csv file with comma as decimal point (default)
 #' filePath_temp <- tempfile(fileext = ".csv")
 #' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp, fileType = "csv2")
 #' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
-#' # create csv-file
+#' # create .csv file
 #' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp, fileType = "csv")
-#' # create xlsx-file
+#' # create .xlsx file
 #' filePath_temp <- tempfile(fileext = ".xlsx")
 #' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp, fileType = "xlsx")
 #'
