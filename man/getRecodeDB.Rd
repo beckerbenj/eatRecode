@@ -24,7 +24,7 @@ recodeListList <- list( Europe = data.frame(
                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 recodeListList
 filePath_temp <- tempfile(fileext = ".xlsx")
-createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
+createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp, fileType = "xlsx")
 # Import data base
 getRecodeDB(filePath = filePath_temp)
 

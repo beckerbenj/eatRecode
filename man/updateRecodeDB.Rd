@@ -42,12 +42,12 @@ oldDatabase <- list( Europe = data.frame(oldValues = c("Berlin", "Copenhagen", "
                                        newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 oldDatabase
 oldFilePath_temp <- tempfile(fileext = ".xlsx")
-createRecodeDB(recodeListList = oldDatabase, filePath = oldFilePath_temp)
+createRecodeDB(recodeListList = oldDatabase, filePath = oldFilePath_temp, fileType = "xlsx")
 # new recode information
 newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
                           country = c("Germany", "France", "Greece"))
 newFilePath_temp <- tempfile(fileext = ".xlsx")
-# update the data base without overwriting old information (the row containing "Berlin - France" keeps it's old value)
+# update the data base without overwriting old information (the row containing "Berlin - France" keeps its old value)
 updateRecodeDB(newRecodes = newRecodes,
                oldValues = "city",
                newValues = "country",

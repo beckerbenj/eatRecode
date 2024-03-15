@@ -20,7 +20,7 @@
 #'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 #' recodeListList
 #' filePath_temp <- tempfile(fileext = ".xlsx")
-#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
+#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp, fileType = "xlsx")
 #' # Import lists from the data base
 #' getRecodeList(filePath = filePath_temp, name = "Europe")
 #' getRecodeList(filePath = filePath_temp, name = "Asia")
@@ -48,7 +48,7 @@ getRecodeList <- function(filePath, name) {
 #'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 #' recodeListList
 #' filePath_temp <- tempfile(fileext = ".xlsx")
-#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
+#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp, fileType = "xlsx")
 #' # Import data base
 #' getRecodeDB(filePath = filePath_temp)
 #'
@@ -82,7 +82,7 @@ getRecodeDB <- function(filePath) {
 #'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 #' recodeListList
 #' filePath_temp <- tempfile(fileext = ".xlsx")
-#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
+#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp, fileType = "xlsx")
 #' # Import data base
 #' namesRecodeDB(filePath = filePath_temp)
 #'
