@@ -6,6 +6,7 @@
 #'
 #' @param recodeListList A named list of `recodeLists`.
 #' @param filePath Path to the `.csv` or `.xlsx` file in which the data base should be stored.
+#' @param fileType "csv2" (default), "csv", "xlsx"
 #'
 #' @return NULL
 #'
