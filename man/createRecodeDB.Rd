@@ -4,16 +4,17 @@
 \alias{createRecodeDB}
 \title{Create Recode Data Base}
 \usage{
-createRecodeDB(recodeListList, filePath)
+createRecodeDB(recodeListList, filePath, fileType = "csv")
 }
 \arguments{
 \item{recodeListList}{A named list of \code{recodeLists}.}
 
-\item{filePath}{Path to the \code{.xlsx} file in which the data base should be stored.}
+\item{filePath}{Path to the \code{.csv} or \code{.xlsx} file in which the data base should be stored.}
 }
 \description{
-Create and store a recode data base in an Excel file.
-The Excel file will have sheets corresponding to each recodeList name.
+Create and store a recode data base in an Excel (\code{.csv} or \code{.xlsx}) file.
+For each recodeList, a separate \code{.csv} file will be generated.
+The \code{.xlsx} file will have sheets corresponding to each recodeList name.
 }
 \examples{
 # create a named list of data frames
@@ -26,8 +27,14 @@ recodeListList <- list( Europe = data.frame(
                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 recodeListList
-filePath_temp <- tempfile(fileext = ".xlsx")
-# create the Excel-file
+# create .csv file with comma as decimal point (default)
+filePath_temp <- tempfile(fileext = ".csv")
+createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp, fileType = "csv2")
 createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
+# create .csv file
+createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp, fileType = "csv")
+# create .xlsx file
+filePath_temp <- tempfile(fileext = ".xlsx")
+createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp, fileType = "xlsx")
 
 }
