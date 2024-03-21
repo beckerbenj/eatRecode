@@ -10,6 +10,8 @@ createRecodeDB(recodeListList, filePath, fileType = "csv")
 \item{recodeListList}{A named list of \code{recodeLists}.}
 
 \item{filePath}{Path to the \code{.csv} or \code{.xlsx} file in which the data base should be stored.}
+
+\item{fileType}{"csv2" (default), "csv", "xlsx"}
 }
 \description{
 Create and store a recode data base in an Excel (\code{.csv} or \code{.xlsx}) file.

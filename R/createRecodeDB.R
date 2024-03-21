@@ -44,11 +44,11 @@ createRecodeDB <- function(recodeListList, filePath, fileType = "csv") {
            writexl::write_xlsx(recodeListList, path = filePath, col_names = TRUE)},
          "csv" = {
            for(i in 1:length(recodeListList)){
-            write.csv(recodeListList[i], file = sub(".csv", paste0("_", names(recodeListList)[i],".csv"), filePath))
+           utils::write.csv(recodeListList[i], file = sub(".csv", paste0("_", names(recodeListList)[i],".csv"), filePath))
            }},
          "csv2" = {
            for(i in 1:length(recodeListList)){
-             write.csv2(recodeListList[i], file = sub(".csv", paste0("_", names(recodeListList)[i],".csv"), filePath))
+           utils::write.csv2(recodeListList[i], file = sub(".csv", paste0("_", names(recodeListList)[i],".csv"), filePath))
            }})
 
   NULL

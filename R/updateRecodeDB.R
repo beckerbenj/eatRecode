@@ -28,7 +28,8 @@
 #' newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
 #'                           country = c("Germany", "France", "Greece"))
 #' newFilePath_temp <- tempfile(fileext = ".xlsx")
-#' # update the data base without overwriting old information (the row containing "Berlin - France" keeps its old value)
+#' # update the data base without overwriting old information
+#' # (the row containing "Berlin - France" keeps its old value)
 #' updateRecodeDB(newRecodes = newRecodes,
 #'                oldValues = "city",
 #'                newValues = "country",
@@ -37,7 +38,8 @@
 #'                name = "Europe",
 #'                override = FALSE)
 #' getRecodeDB(newFilePath_temp)
-#' # update the data base, overwriting old information (the row containing "Berlin - France" get's updated)
+#' # update the data base, overwriting old information
+#' # (the row containing "Berlin - France" get's updated)
 #' updateRecodeDB(newRecodes = newRecodes,
 #'                oldValues = "city",
 #'                newValues = "country",
