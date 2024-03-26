@@ -11,10 +11,9 @@
 #'
 #' @return NULL
 #'
-#'
 #' @examples
 #' # create a named list of data frames
-#' recodeListList <- list( Europe = data.frame(
+#' Countries <- list( Europe = data.frame(
 #'                                   id = 1:4,
 #'                                   oldValues = c("Berlin", "Copenhagen", "Rome", "Madrid"),
 #'                                   newValues = c("Germany", "Denmark", "Italy" , "Spain")),
@@ -22,17 +21,23 @@
 #'                                   id = 1:4,
 #'                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
 #'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
-#' recodeListList
-#' # create .csv file with comma as decimal point (default)
+#' Countries
 #' directory <- tempdir()
-#' createRecodeDB(recodeListList = recodeListList, directory = directory, DBname = "Countries", fileType = "csv2")
-#'
-#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
+#' # create .csv file with comma as decimal point (default)
+#' createRecodeDB(recodeListList = Countries,
+#'                directory = directory,
+#'                DBname = "Countries",
+#'                fileType = "csv2")
 #' # create .csv file
-#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp, fileType = "csv")
+#' createRecodeDB(recodeListList = Countries,
+#'                directory = directory,
+#'                DBname = "Countries",
+#'                fileType = "csv")
 #' # create .xlsx file
-#' filePath_temp <- tempfile(fileext = ".xlsx")
-#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp, fileType = "xlsx")
+#' createRecodeDB(recodeListList = Countries,
+#'                directory = directory,
+#'                DBname = "Countries",
+#'                fileType = "xlsx")
 #'
 #' @export
 createRecodeDB <- function(recodeListList, directory = getwd(), DBname, fileType = "csv") {
