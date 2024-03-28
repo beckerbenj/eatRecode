@@ -10,6 +10,7 @@
 #' @return A recode list.
 #'
 #' @examples
+#' # Create recode list data base using `createRecodeDB`
 #' Countries <- list( Europe = data.frame(
 #'                                   id = 1:4,
 #'                                   oldValues = c("Berlin", "Copenhagen", "Rome", "Madrid"),
@@ -24,9 +25,16 @@
 #'                directory = directory,
 #'                DBname = "Countries",
 #'                fileType = "csv2")
-#' # Import lists from the data base
+#' createRecodeDB(recodeListList = Countries,
+#'                directory = directory,
+#'                DBname = "Countries",
+#'                fileType = "xlsx")
+#' # Import lists from csv data base
 #' getRecodeList(directory = directory, DBname = "Countries", ListName = "Europe", fileType = "csv2")
-#'
+#' getRecodeList(directory = directory, DBname = "Countries", ListName = "Asia", fileType = "csv2")
+#' # Import lists from xlsx data base
+#' getRecodeList(directory = directory, DBname = "Countries", ListName = "Europe", fileType = "xlsx")
+#' getRecodeList(directory = directory, DBname = "Countries", ListName = "Asia", fileType = "xlsx")
 #' @export
 getRecodeList <- function(directory = getwd(), DBname, ListName, fileType = "csv2") {
   if(fileType == "xlsx") {
@@ -60,10 +68,15 @@ getRecodeList <- function(directory = getwd(), DBname, ListName, fileType = "csv
 #' createRecodeDB(recodeListList = Countries,
 #'                directory = directory,
 #'                DBname = "Countries",
-#'                fileType = "csv")
-#' # Import data base
-#' getRecodeDB(filePath = filePath_temp)
-#'
+#'                fileType = "csv2")
+#' createRecodeDB(recodeListList = Countries,
+#'                directory = directory,
+#'                DBname = "Countries",
+#'                fileType = "xlsx")
+#' # Import csv data base
+#' getRecodeDB(directory = directory, DBname = "Countries", fileType = "csv2")
+#' # Import xlsx data base
+#' getRecodeDB(directory = directory, DBname = "Countries", fileType = "xlsx")
 #' @export
 getRecodeDB <- function(directory = getwd(), DBname, fileType = "csv2") {
 
@@ -92,7 +105,6 @@ getRecodeDB <- function(directory = getwd(), DBname, fileType = "csv2") {
   return(recodeListList)
 }
 
-
 #' Get Names of Recode Data Base
 #'
 #' Get the names of the individual recode lists within a recode data base.
@@ -101,19 +113,27 @@ getRecodeDB <- function(directory = getwd(), DBname, fileType = "csv2") {
 #'
 #' @examples
 #' # Create recode list data base using `createRecodeDB`
-#' recodeListList <- list( Europe = data.frame(
+#' Countries <- list( Europe = data.frame(
 #'                                   id = 1:4,
 #'                                   oldValues = c("Berlin", "Copenhagen", "Rome", "Madrid"),
 #'                                   newValues = c("Germany", "Denmark", "Italy" , "Spain")),
-#'                         Asia = data.frame(
+#'                    Asia = data.frame(
 #'                                   id = 1:4,
 #'                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
 #'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
-#' recodeListList
-#' filePath_temp <- tempfile(fileext = ".xlsx")
-#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp, fileType = "xlsx")
-#' # Import data base
-#' namesRecodeDB(filePath = filePath_temp)
+#' Countries
+#' directory <- tempdir()
+#' createRecodeDB(recodeListList = Countries,
+#'                directory = directory,
+#'                DBname = "Countries",
+#'                fileType = "csv2")
+#' createRecodeDB(recodeListList = Countries,
+#'                directory = directory,
+#'                DBname = "Countries",
+#'                fileType = "xlsx")
+#' # Get names of the recode lists in the data base
+#' namesRecodeDB(directory = directory, DBname = "Countries", fileType = "csv2")
+#' namesRecodeDB(directory = directory, DBname = "Countries", fileType = "xlsx")
 #'
 #' @export
 namesRecodeDB <- function(directory = getwd(), DBname, fileType = "csv2") {

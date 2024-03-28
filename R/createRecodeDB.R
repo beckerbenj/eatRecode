@@ -5,8 +5,8 @@
 #' The `.xlsx` file will have sheets corresponding to each recodeList name.
 #'
 #' @param recodeListList A named list of `recodeLists`.
-#' @param directory path of the directory where the data base will be saved
-#' @param DBname name of the database (will be used as filename)
+#' @param directory Path of the directory where the data base will be saved.
+#' @param DBname Name of the database (will be used as filename).
 #' @param fileType "csv2" (default), "csv", "xlsx"
 #'
 #' @return NULL

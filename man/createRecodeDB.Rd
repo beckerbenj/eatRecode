@@ -9,9 +9,9 @@ createRecodeDB(recodeListList, directory = getwd(), DBname, fileType = "csv")
 \arguments{
 \item{recodeListList}{A named list of \code{recodeLists}.}
 
-\item{directory}{path of the directory where the data base will be saved}
+\item{directory}{Path of the directory where the data base will be saved.}
 
-\item{DBname}{name of the database (will be used as filename)}
+\item{DBname}{Name of the database (will be used as filename).}
 
 \item{fileType}{"csv2" (default), "csv", "xlsx"}
 }
