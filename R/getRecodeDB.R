@@ -2,11 +2,12 @@
 #'
 #' Import a recode list from an Excel file containing a data base of different `recodeLists`.
 #'
-#' @param filePath Path to the `.xlsx` file in which the data base is stored.
-#' @param name Name of the specific recode list (Excel sheet) to be imported.
+#' @param directory Path to the directory where the data base is stored.
+#' @param DBname Name of the database.
+#' @param ListName Name of the specific recode list to be imported.
+#' @param fileType "csv2" (default), "csv", "xlsx"
 #'
 #' @return A recode list.
-#'
 #'
 #' @examples
 #' Countries <- list( Europe = data.frame(
