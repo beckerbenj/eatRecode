@@ -4,28 +4,40 @@
 \alias{getRecodeDB}
 \title{Get Recode Data Base}
 \usage{
-getRecodeDB(filePath)
+getRecodeDB(directory = getwd(), DBname, fileType = "csv2")
 }
 \arguments{
-\item{filePath}{Path to the \code{.xlsx} file in which the data base is stored.}
+\item{directory}{Path to the directory where the data base is stored.}
+
+\item{DBname}{Name of the database.}
+
+\item{fileType}{"csv2" (default), "csv", "xlsx"}
 }
 \description{
 Import a complete recode data base containing multiple \code{recodeLists}.
 }
 \examples{
 # Create recode list data base using `createRecodeDB`
-recodeListList <- list( Europe = data.frame(
+Countries <- list( Europe = data.frame(
                                   id = 1:4,
                                   oldValues = c("Berlin", "Copenhagen", "Rome", "Madrid"),
                                   newValues = c("Germany", "Denmark", "Italy" , "Spain")),
-                        Asia = data.frame(
+                   Asia = data.frame(
                                   id = 1:4,
                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
-recodeListList
-filePath_temp <- tempfile(fileext = ".xlsx")
-createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
-# Import data base
-getRecodeDB(filePath = filePath_temp)
-
+Countries
+directory <- tempdir()
+createRecodeDB(recodeListList = Countries,
+               directory = directory,
+               DBname = "Countries",
+               fileType = "csv2")
+createRecodeDB(recodeListList = Countries,
+               directory = directory,
+               DBname = "Countries",
+               fileType = "xlsx")
+# Import csv data base
+getRecodeDB(directory = directory, DBname = "Countries", fileType = "csv2")
+# Import xlsx data base
+getRecodeDB(directory = directory, DBname = "Countries", fileType = "xlsx")
 }
