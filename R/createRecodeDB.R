@@ -64,11 +64,11 @@ createRecodeDB <- function(recodeListList, directory = getwd(), DBname, fileType
 
   if(fileType == "csv") {
     for(i in 1:length(recodeListList)){
-    utils::write.csv(recodeListList[[i]], file = paste0(dirpath, "\\", names(recodeListList)[i], ".csv"))
+    utils::write.csv(recodeListList[[i]], file = paste0(dirpath, "\\", names(recodeListList)[i], ".csv"), row.names=FALSE)
     }
   } else {
     for(i in 1:length(recodeListList)){
-      utils::write.csv2(recodeListList[[i]], file = paste0(dirpath, "\\", names(recodeListList)[i], ".csv"))
+      utils::write.csv2(recodeListList[[i]], file = paste0(dirpath, "\\", names(recodeListList)[i], ".csv"), row.names=FALSE)
     }
   }
 
