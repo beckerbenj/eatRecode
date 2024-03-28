@@ -115,6 +115,10 @@ getRecodeDB <- function(directory = getwd(), DBname, fileType = "csv2") {
 #' namesRecodeDB(filePath = filePath_temp)
 #'
 #' @export
-namesRecodeDB <- function(filePath) {
-  readxl::excel_sheets(filePath)
+namesRecodeDB <- function(directory = getwd(), DBname, fileType = "csv2") {
+  if(fileType == "xlsx") {
+    readxl::excel_sheets(paste0(directory,"\\",DBname,".xlsx"))
+  } else {
+    sub(".csv", "", list.files(path = paste0(directory,"\\",DBname), pattern = ".csv"))
+  }
 }
