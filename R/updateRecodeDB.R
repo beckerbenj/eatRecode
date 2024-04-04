@@ -3,12 +3,10 @@
 #' Update a recode data base stored in an Excel file.
 #' Takes new recode information, compares it to the existing recode database, and updates the database accordingly.
 #'
+#' @inheritParams getRecodeList
 #' @param newRecodes A `data.frame` containing new recode information.
-#' @param oldValues A character string of the column name containing the old values in the `newRecodes data.frame`.
+#' @param oldValues A character string of the column name containing the old values in the `newRecodes` data.frame.
 #' @param newValues A character string of the column name containing the newly recoded values in the `newRecodes data.frame`.
-#' @param recodeDBPath Path to the `.xlsx` file in which the data base is stored.
-#' @param newRecodeDBPath Path to the `.xlsx` file in which the updated data base should be stored.
-#' @param name Name of the specific recode list.
 #' @param override Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs
 #' are present in the `newRecodes`?
 #'
@@ -22,8 +20,21 @@
 #'                      Asia = data.frame(oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
 #'                                        newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 #' oldDatabase
-#' oldFilePath_temp <- tempfile(fileext = ".xlsx")
-#' createRecodeDB(recodeListList = oldDatabase, filePath = oldFilePath_temp, fileType = "xlsx")
+#' directory <- tempdir()
+#' createRecodeDB(recodeListList = oldDatabase, directory = directory, DBname = "countries")
+#'
+#' newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
+#'                           country = c("Germany", "France", "Greece"))
+#'
+#' updateRecodeDB(newRecodes = newRecodes,
+#'                oldValues = "city",
+#'                newValues = "country",
+#'                directory = directory,
+#'                DBname = "countries",
+#'                ListName = "Europe",
+#'                override = TRUE)
+#'
+#'
 #' # new recode information
 #' newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
 #'                           country = c("Germany", "France", "Greece"))
@@ -50,11 +61,14 @@
 #' getRecodeDB(newFilePath_temp)
 #'
 #' @export
-updateRecodeDB <- function(newRecodes, oldValues, newValues = "newValues", recodeDBPath, newRecodeDBPath, name, override = FALSE) {
-  recode_db <- getRecodeDB(filePath = recodeDBPath)
+updateRecodeDB <- function(newRecodes, oldValues = "oldValues", newValues = "newValues",
+                           directory = getwd(), newDirectory = directory,
+                           DBname, newDBname = DBname, ListName,
+                           fileType = "csv2", override = FALSE) {
+  recode_db <- getRecodeDB(directory, DBname, fileType)
   newRecodes <- prep_newRecodes(newRecodes, oldValues, newValues)
 
-  old_recode_list <- recode_db[[name]]
+  old_recode_list <- recode_db[[ListName]]
   checkRecodeList(old_recode_list)
   checkRecodeList(newRecodes)
 
@@ -79,7 +93,7 @@ updateRecodeDB <- function(newRecodes, oldValues, newValues = "newValues", recod
 
       message(
         "The following recode pairs in the existing data base in sheet '",
-        name, "' will be overwritten:\n",
+        ListName, "' will be overwritten:\n",
         paste(conflict_details, collapse = "\n")
       )
     }
@@ -90,11 +104,9 @@ updateRecodeDB <- function(newRecodes, oldValues, newValues = "newValues", recod
   ## if necessary, override & order
   updated_recode_list <- rbind(old_recode_list[!old_recode_list$oldValues %in% oldValues_conflicts$oldValues, ], newRecodes_manual)
   updated_recode_list <- updated_recode_list[order(updated_recode_list$oldValues), ]
-  recode_db[[name]] <- updated_recode_list
+  recode_db[[ListName]] <- updated_recode_list
 
-  # overwrite existing excel sheet
-  writexl::write_xlsx(recode_db, path = newRecodeDBPath, col_names = TRUE)
-
+  createRecodeDB(recodeListList = recode_db, directory = newDirectory, DBname = newDBname, fileType = fileType)
   NULL
 }
 
