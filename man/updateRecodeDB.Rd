@@ -26,14 +26,18 @@ updateRecodeDB(
 
 \item{directory}{Path to the directory where the data base is stored.}
 
+\item{newDirectory}{If the updated data base should be stored in a different directory, specify its path here.}
+
 \item{DBname}{Name of the database.}
+
+\item{newDBname}{If the updated data base should be stored under a different name, specify it here.
+are present in the \code{newRecodes}?}
 
 \item{ListName}{Name of the specific recode list to be imported.}
 
 \item{fileType}{"csv2" (default), "csv", "xlsx"}
 
-\item{override}{Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs
-are present in the \code{newRecodes}?}
+\item{override}{Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs.}
 }
 \description{
 Update a recode data base stored in an Excel file.
