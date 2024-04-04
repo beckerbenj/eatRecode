@@ -4,7 +4,7 @@
 \alias{createRecodeDB}
 \title{Create Recode Data Base}
 \usage{
-createRecodeDB(recodeListList, directory = getwd(), DBname, fileType = "csv")
+createRecodeDB(recodeListList, directory = getwd(), DBname, fileType = "csv2")
 }
 \arguments{
 \item{recodeListList}{A named list of \code{recodeLists}.}

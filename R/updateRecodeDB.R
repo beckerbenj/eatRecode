@@ -22,10 +22,18 @@
 #' oldDatabase
 #' directory <- tempdir()
 #' createRecodeDB(recodeListList = oldDatabase, directory = directory, DBname = "countries")
-#'
 #' newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
 #'                           country = c("Germany", "France", "Greece"))
-#'
+#' # update the data base without overwriting old information (the row containing "Berlin - France" keeps it's old value)
+#' updateRecodeDB(newRecodes = newRecodes,
+#'                oldValues = "city",
+#'                newValues = "country",
+#'                directory = directory,
+#'                DBname = "countries",
+#'                ListName = "Europe",
+#'                override = FALSE)
+#' getRecodeDB(directory, "countries")
+#' # update the data base, overwriting old information (the row containing "Berlin - France" get's updated)
 #' updateRecodeDB(newRecodes = newRecodes,
 #'                oldValues = "city",
 #'                newValues = "country",
@@ -33,33 +41,7 @@
 #'                DBname = "countries",
 #'                ListName = "Europe",
 #'                override = TRUE)
-#'
-#'
-#' # new recode information
-#' newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
-#'                           country = c("Germany", "France", "Greece"))
-#' newFilePath_temp <- tempfile(fileext = ".xlsx")
-#' # update the data base without overwriting old information
-#' # (the row containing "Berlin - France" keeps its old value)
-#' updateRecodeDB(newRecodes = newRecodes,
-#'                oldValues = "city",
-#'                newValues = "country",
-#'                recodeDBPath = oldFilePath_temp,
-#'                newRecodeDBPath = newFilePath_temp,
-#'                name = "Europe",
-#'                override = FALSE)
-#' getRecodeDB(newFilePath_temp)
-#' # update the data base, overwriting old information
-#' # (the row containing "Berlin - France" get's updated)
-#' updateRecodeDB(newRecodes = newRecodes,
-#'                oldValues = "city",
-#'                newValues = "country",
-#'                recodeDBPath = oldFilePath_temp,
-#'                newRecodeDBPath = newFilePath_temp,
-#'                name = "Europe",
-#'                override = TRUE)
-#' getRecodeDB(newFilePath_temp)
-#'
+#' getRecodeDB(directory, "countries")
 #' @export
 updateRecodeDB <- function(newRecodes, oldValues = "oldValues", newValues = "newValues",
                            directory = getwd(), newDirectory = directory,

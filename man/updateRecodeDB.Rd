@@ -6,26 +6,31 @@
 \usage{
 updateRecodeDB(
   newRecodes,
-  oldValues,
+  oldValues = "oldValues",
   newValues = "newValues",
-  recodeDBPath,
-  newRecodeDBPath,
-  name,
+  directory = getwd(),
+  newDirectory = directory,
+  DBname,
+  newDBname = DBname,
+  ListName,
+  fileType = "csv2",
   override = FALSE
 )
 }
 \arguments{
 \item{newRecodes}{A \code{data.frame} containing new recode information.}
 
-\item{oldValues}{A character string of the column name containing the old values in the \verb{newRecodes data.frame}.}
+\item{oldValues}{A character string of the column name containing the old values in the \code{newRecodes} data.frame.}
 
 \item{newValues}{A character string of the column name containing the newly recoded values in the \verb{newRecodes data.frame}.}
 
-\item{recodeDBPath}{Path to the \code{.xlsx} file in which the data base is stored.}
+\item{directory}{Path to the directory where the data base is stored.}
 
-\item{newRecodeDBPath}{Path to the \code{.xlsx} file in which the updated data base should be stored.}
+\item{DBname}{Name of the database.}
 
-\item{name}{Name of the specific recode list.}
+\item{ListName}{Name of the specific recode list to be imported.}
+
+\item{fileType}{"csv2" (default), "csv", "xlsx"}
 
 \item{override}{Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs
 are present in the \code{newRecodes}?}
@@ -41,31 +46,26 @@ oldDatabase <- list( Europe = data.frame(oldValues = c("Berlin", "Copenhagen", "
                      Asia = data.frame(oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
                                        newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 oldDatabase
-oldFilePath_temp <- tempfile(fileext = ".xlsx")
-createRecodeDB(recodeListList = oldDatabase, filePath = oldFilePath_temp, fileType = "xlsx")
-# new recode information
+directory <- tempdir()
+createRecodeDB(recodeListList = oldDatabase, directory = directory, DBname = "countries")
 newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
                           country = c("Germany", "France", "Greece"))
-newFilePath_temp <- tempfile(fileext = ".xlsx")
-# update the data base without overwriting old information
-# (the row containing "Berlin - France" keeps its old value)
+# update the data base without overwriting old information (the row containing "Berlin - France" keeps it's old value)
 updateRecodeDB(newRecodes = newRecodes,
                oldValues = "city",
                newValues = "country",
-               recodeDBPath = oldFilePath_temp,
-               newRecodeDBPath = newFilePath_temp,
-               name = "Europe",
+               directory = directory,
+               DBname = "countries",
+               ListName = "Europe",
                override = FALSE)
-getRecodeDB(newFilePath_temp)
-# update the data base, overwriting old information
-# (the row containing "Berlin - France" get's updated)
+getRecodeDB(directory, "countries")
+# update the data base, overwriting old information (the row containing "Berlin - France" get's updated)
 updateRecodeDB(newRecodes = newRecodes,
                oldValues = "city",
                newValues = "country",
-               recodeDBPath = oldFilePath_temp,
-               newRecodeDBPath = newFilePath_temp,
-               name = "Europe",
+               directory = directory,
+               DBname = "countries",
+               ListName = "Europe",
                override = TRUE)
-getRecodeDB(newFilePath_temp)
-
+getRecodeDB(directory, "countries")
 }
