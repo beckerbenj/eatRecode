@@ -7,11 +7,12 @@
 #' @param newRecodes A `data.frame` containing new recode information.
 #' @param oldValues A character string of the column name containing the old values in the `newRecodes` data.frame.
 #' @param newValues A character string of the column name containing the newly recoded values in the `newRecodes data.frame`.
-#' @param override Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs
+#' @param override Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs.
+#' @param newDirectory If the updated data base should be stored in a different directory, specify its path here.
+#' @param newDBname If the updated data base should be stored under a different name, specify it here.
 #' are present in the `newRecodes`?
 #'
 #' @return NULL
-#'
 #'
 #' @examples
 #' # example data base
