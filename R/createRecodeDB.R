@@ -4,6 +4,7 @@
 #' For each recodeList, a separate `.csv` file will be generated.
 #' The `.xlsx` file will have sheets corresponding to each recodeList name.
 #'
+#'
 #' @param recodeListList A named list of `recodeLists`.
 #' @param directory Path of the directory where the data base will be saved.
 #' @param DBname Name of the database (will be used as filename).
@@ -40,7 +41,7 @@
 #'                fileType = "xlsx")
 #'
 #' @export
-createRecodeDB <- function(recodeListList, directory = getwd(), DBname, fileType = "csv") {
+createRecodeDB <- function(recodeListList, directory = getwd(), DBname, fileType = "csv2") {
 
   # checks ---------------------------------------------------------------------
   if (!is.list(recodeListList)) stop("'recodeListList' must be a named list of data.frames.")
