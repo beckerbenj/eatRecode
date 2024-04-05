@@ -25,7 +25,8 @@
 #' createRecodeDB(recodeListList = oldDatabase, directory = directory, DBname = "countries")
 #' newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
 #'                           country = c("Germany", "France", "Greece"))
-#' # update the data base without overwriting old information (the row containing "Berlin - France" keeps it's old value)
+#' # update the data base without overwriting old information
+#' # (the row containing "Berlin - France" keeps it's old value)
 #' updateRecodeDB(newRecodes = newRecodes,
 #'                oldValues = "city",
 #'                newValues = "country",
@@ -34,7 +35,8 @@
 #'                ListName = "Europe",
 #'                override = FALSE)
 #' getRecodeDB(directory, "countries")
-#' # update the data base, overwriting old information (the row containing "Berlin - France" get's updated)
+#' # update the data base, overwriting old information
+#' # (the row containing "Berlin - France" get's updated)
 #' updateRecodeDB(newRecodes = newRecodes,
 #'                oldValues = "city",
 #'                newValues = "country",

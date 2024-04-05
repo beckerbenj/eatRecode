@@ -15,74 +15,80 @@ new_recodes3 <- data.frame(
 )
 
 test_that("updating a recode list", {
-  f <- tempfile()
+  d <- tempdir()
   updateRecodeDB(new_recodes1,
-    oldValues = "oldValues",
-    recodeDBPath = test_path("helper_recodeDB.xlsx"),
-    newRecodeDBPath = f,
-    name = "country"
+                 directory = here::here(),
+                 newDirectory = d,
+                 DBname = "helper_recodeDB",
+                 ListName = "country",
+                 fileType = "xlsx"
   )
 
-  out <- getRecodeList(f, name = "country")
+  out <- getRecodeList(d, DBname = "helper_recodeDB", ListName = "country", fileType = "xlsx")
   expect_equal(dim(out), c(6, 2))
   expect_equal(out$oldValues[c(1, 4:5)], c("Bavaria", "Ingland", "Italia"))
   expect_equal(out$newValues[c(1, 4:5)], c("Germany", "England", "Italy"))
 
   updateRecodeDB(new_recodes2,
-    oldValues = "oldValues",
-    recodeDBPath = test_path("helper_recodeDB.xlsx"),
-    newRecodeDBPath = f,
-    name = "country"
+                 directory = here::here(),
+                 newDirectory = d,
+                 DBname = "helper_recodeDB",
+                 ListName = "country",
+                 fileType = "xlsx"
   )
 
-  out <- getRecodeList(f, name = "country")
+  out <- getRecodeList(d, DBname = "helper_recodeDB", ListName = "country", fileType = "xlsx")
   expect_equal(dim(out), c(6, 2))
   expect_equal(out$oldValues[c(1, 4:5)], c("Bavaria", "Ingland", "Italia"))
   expect_equal(out$newValues[c(1, 4:5)], c("Germany", "England", "Italy"))
 })
 
 test_that("updating a recode list while overriding existing recodes", {
-  f2a <- tempfile()
-  updateRecodeDB(new_recodes1,
-    oldValues = "oldValues",
-    recodeDBPath = test_path("helper_recodeDB.xlsx"), newRecodeDBPath = f2a,
-    name = "country",
-    override = TRUE
+  d <- tempdir()
+  updateRecodeDB(new_recodes2,
+                 directory = here::here(),
+                 newDirectory = d,
+                 DBname = "helper_recodeDB",
+                 ListName = "country",
+                 fileType = "xlsx"
   )
 
-  out <- getRecodeList(f2a, name = "country")
+  out <- getRecodeList(d, DBname = "helper_recodeDB", ListName = "country", fileType = "xlsx")
   expect_equal(out$oldValues[c(1, 4:5, 6)], c("Bavaria", "Ingland", "Italia", "Wales"))
   expect_equal(out$newValues[c(1, 4:5, 6)], c("Germany", "England", "Italy", "UK"))
 
-  f2 <- tempfile()
   expect_message(
     updateRecodeDB(new_recodes2,
-      oldValues = "oldValues",
-      recodeDBPath = test_path("helper_recodeDB.xlsx"), newRecodeDBPath = f2,
-      name = "country",
-      override = TRUE
+                   directory = here::here(),
+                   newDirectory = d,
+                   DBname = "helper_recodeDB",
+                   ListName = "country",
+                   fileType = "xlsx",
+                   override = TRUE
     ),
     "The following recode pairs in the existing data base in sheet 'country' will be overwritten:\nWales -> UK; now: Wales\nBavaria -> Germany; now: Austria"
   )
 
-  out2 <- getRecodeList(f2, name = "country")
-  expect_equal(out2$oldValues[c(1, 4:5, 6)], c("Bavaria", "Ingland", "Italia", "Wales"))
-  expect_equal(out2$newValues[c(1, 4:5, 6)], c("Austria", "England", "Italy", "Wales"))
+  out <- getRecodeList(d, DBname = "helper_recodeDB", ListName = "country", fileType = "xlsx")
+  expect_equal(out$oldValues[c(1, 4:5, 6)], c("Bavaria", "Ingland", "Italia", "Wales"))
+  expect_equal(out$newValues[c(1, 4:5, 6)], c("Austria", "England", "Italy", "Wales"))
 })
 
 test_that("updating a recode list while overriding existing recodes with redundant recodes", {
-  f3 <- tempfile()
+  d <- tempdir()
   expect_message(
     updateRecodeDB(new_recodes3,
-      oldValues = "oldValues",
-      recodeDBPath = test_path("helper_recodeDB.xlsx"), newRecodeDBPath = f3,
-      name = "country",
-      override = TRUE
+                   directory = here::here(),
+                   newDirectory = d,
+                   DBname = "helper_recodeDB",
+                   ListName = "country",
+                   fileType = "xlsx",
+                   override = TRUE
     ),
     "The following recode pairs in the existing data base in sheet 'country' will be overwritten:\nBavaria -> Germany; now: Austria"
   )
 
-  out <- getRecodeList(f3, name = "country")
+  out <- getRecodeList(d, DBname = "helper_recodeDB", ListName = "country", fileType = "xlsx")
   expect_equal(out$oldValues[c(1, 4:5, 6)], c("Bavaria", "Ingland", "Italia", "Wales"))
   expect_equal(out$newValues[c(1, 4:5, 6)], c("Austria", "England", "Italy", "UK"))
 })

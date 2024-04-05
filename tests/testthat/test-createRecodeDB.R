@@ -8,6 +8,6 @@ test_that("create recode db", {
   input <- list(country = rl, language = rl2)
   createRecodeDB(input, directory = d, DBname = "input", fileType = "xlsx")
 
-  out <- getRecodeDB(d)
+  out <- getRecodeDB(d, "input", "xlsx")
   expect_equal(input, out)
 })
