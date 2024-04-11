@@ -17,7 +17,7 @@ new_recodes3 <- data.frame(
 test_that("updating a recode list", {
   d <- tempdir()
   updateRecodeDB(new_recodes1,
-                 directory = here::here(),
+                 directory = test_path(),
                  newDirectory = d,
                  DBname = "helper_recodeDB",
                  ListName = "country",
@@ -30,7 +30,7 @@ test_that("updating a recode list", {
   expect_equal(out$newValues[c(1, 4:5)], c("Germany", "England", "Italy"))
 
   updateRecodeDB(new_recodes2,
-                 directory = here::here(),
+                 directory = test_path(),
                  newDirectory = d,
                  DBname = "helper_recodeDB",
                  ListName = "country",
@@ -46,7 +46,7 @@ test_that("updating a recode list", {
 test_that("updating a recode list while overriding existing recodes", {
   d <- tempdir()
   updateRecodeDB(new_recodes2,
-                 directory = here::here(),
+                 directory = test_path(),
                  newDirectory = d,
                  DBname = "helper_recodeDB",
                  ListName = "country",
@@ -59,7 +59,7 @@ test_that("updating a recode list while overriding existing recodes", {
 
   expect_message(
     updateRecodeDB(new_recodes2,
-                   directory = here::here(),
+                   directory = test_path(),
                    newDirectory = d,
                    DBname = "helper_recodeDB",
                    ListName = "country",
@@ -78,7 +78,7 @@ test_that("updating a recode list while overriding existing recodes with redunda
   d <- tempdir()
   expect_message(
     updateRecodeDB(new_recodes3,
-                   directory = here::here(),
+                   directory = test_path(),
                    newDirectory = d,
                    DBname = "helper_recodeDB",
                    ListName = "country",
