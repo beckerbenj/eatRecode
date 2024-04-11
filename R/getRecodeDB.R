@@ -38,11 +38,11 @@
 #' @export
 getRecodeList <- function(directory = getwd(), DBname, ListName, fileType = "csv2") {
   if(fileType == "xlsx") {
-    List <- as.data.frame(readxl::read_xlsx(paste0(directory,"\\",DBname,".xlsx"), sheet = ListName))
+    List <- as.data.frame(readxl::read_xlsx(paste0(directory,"/",DBname,".xlsx"), sheet = ListName))
   } else if (fileType == "csv") {
-    List <- utils::read.csv(paste0(directory,"\\",DBname, "\\", ListName, ".csv"))
+    List <- utils::read.csv(paste0(directory,"/",DBname, "/", ListName, ".csv"))
   } else {
-    List <- utils::read.csv2(paste0(directory,"\\",DBname, "\\", ListName, ".csv"))
+    List <- utils::read.csv2(paste0(directory,"/",DBname, "/", ListName, ".csv"))
   }
   return(List)
 }
@@ -82,24 +82,24 @@ getRecodeDB <- function(directory = getwd(), DBname, fileType = "csv2") {
 
   # xlsx files -----------------------------------------------------------------
   if(fileType == "xlsx") {
-    sheet_names <- readxl::excel_sheets(paste0(directory,"\\",DBname,".xlsx"))
+    sheet_names <- readxl::excel_sheets(paste0(directory,"/",DBname,".xlsx"))
     names(sheet_names) <- sheet_names
     recodeListList <- lapply(sheet_names, function(sheet_name) {
-      as.data.frame(readxl::read_xlsx(paste0(directory,"\\",DBname,".xlsx"), sheet = sheet_name))
+      as.data.frame(readxl::read_xlsx(paste0(directory,"/",DBname,".xlsx"), sheet = sheet_name))
     })
     return(recodeListList) }
 
   # csv files ------------------------------------------------------------------
-  file_names <- list.files(path = paste0(directory,"\\",DBname), pattern = ".csv")
+  file_names <- list.files(path = paste0(directory,"/",DBname), pattern = ".csv")
   names(file_names) <- sub(".csv", "", file_names)
 
   if(fileType == "csv") {
     recodeListList <- lapply(file_names, function(file_name) {
-      utils::read.csv(paste0(directory,"\\",DBname, "\\", file_name))
+      utils::read.csv(paste0(directory,"/",DBname, "/", file_name))
     })
   } else {
     recodeListList <- lapply(file_names, function(file_name) {
-      utils::read.csv2(paste0(directory,"\\",DBname, "\\", file_name))
+      utils::read.csv2(paste0(directory,"/",DBname, "/", file_name))
     })
   }
   return(recodeListList)
@@ -138,8 +138,8 @@ getRecodeDB <- function(directory = getwd(), DBname, fileType = "csv2") {
 #' @export
 namesRecodeDB <- function(directory = getwd(), DBname, fileType = "csv2") {
   if(fileType == "xlsx") {
-    readxl::excel_sheets(paste0(directory,"\\",DBname,".xlsx"))
+    readxl::excel_sheets(paste0(directory,"/",DBname,".xlsx"))
   } else {
-    sub(".csv", "", list.files(path = paste0(directory,"\\",DBname), pattern = ".csv"))
+    sub(".csv", "", list.files(path = paste0(directory,"/",DBname), pattern = ".csv"))
   }
 }

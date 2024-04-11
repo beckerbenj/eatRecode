@@ -4,13 +4,13 @@ rl2 <- readRDS(test_path("helper_recodeList2.RDS"))
 
 
 test_that("get single recode list", {
-  out <- getRecodeList(directory = here::here(),
+  out <- getRecodeList(directory = test_path(),
                        DBname = "helper_recodeDB",
                        ListName = "country",
                        fileType = "xlsx")
   expect_equal(out, rl)
 
-  out2 <- getRecodeList(directory = here::here(),
+  out2 <- getRecodeList(directory = test_path(),
                         DBname = "helper_recodeDB",
                         ListName = "language",
                         fileType = "xlsx")
@@ -19,7 +19,7 @@ test_that("get single recode list", {
 
 
 test_that("get recode list names", {
-  out <- namesRecodeDB(directory = here::here(),
+  out <- namesRecodeDB(directory = test_path(),
                        DBname = "helper_recodeDB",
                        fileType = "xlsx")
   expect_equal(out, c("country", "language"))

@@ -52,24 +52,24 @@ createRecodeDB <- function(recodeListList, directory = getwd(), DBname, fileType
   # xlsx files -----------------------------------------------------------------
   if(fileType == "xlsx") {
     writexl::write_xlsx(recodeListList,
-                        path = paste0(directory,"\\",DBname,".xlsx"),
+                        path = paste0(directory,"/",DBname,".xlsx"),
                         col_names = TRUE)
     return(NULL) }
 
   # csv files ------------------------------------------------------------------
   dirpath <- file.path(directory,
                        DBname,
-                       fsep = "\\")
+                       fsep = "/")
   unlink(dirpath, recursive = TRUE) # delete existing file ("overwrite")
   dir.create(dirpath, showWarnings = FALSE) # create data base directory
 
   if(fileType == "csv") {
     for(i in 1:length(recodeListList)){
-    utils::write.csv(recodeListList[[i]], file = paste0(dirpath, "\\", names(recodeListList)[i], ".csv"), row.names=FALSE)
+    utils::write.csv(recodeListList[[i]], file = paste0(dirpath, "/", names(recodeListList)[i], ".csv"), row.names=FALSE)
     }
   } else {
     for(i in 1:length(recodeListList)){
-      utils::write.csv2(recodeListList[[i]], file = paste0(dirpath, "\\", names(recodeListList)[i], ".csv"), row.names=FALSE)
+      utils::write.csv2(recodeListList[[i]], file = paste0(dirpath, "/", names(recodeListList)[i], ".csv"), row.names=FALSE)
     }
   }
 
