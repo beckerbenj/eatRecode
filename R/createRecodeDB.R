@@ -41,7 +41,7 @@
 #'                fileType = "xlsx")
 #'
 #' @export
-createRecodeDB <- function(recodeListList, directory = getwd(), DBname, fileType = "csv2") {
+createRecodeDB <- function(recodeListList, directory, DBname, fileType = "csv2") {
 
   # checks ---------------------------------------------------------------------
   if (!is.list(recodeListList)) stop("'recodeListList' must be a named list of data.frames.")

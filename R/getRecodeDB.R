@@ -36,7 +36,7 @@
 #' getRecodeList(directory = directory, DBname = "Countries", ListName = "Europe", fileType = "xlsx")
 #' getRecodeList(directory = directory, DBname = "Countries", ListName = "Asia", fileType = "xlsx")
 #' @export
-getRecodeList <- function(directory = getwd(), DBname, ListName, fileType = "csv2") {
+getRecodeList <- function(directory, DBname, ListName, fileType = "csv2") {
   if(fileType == "xlsx") {
     List <- as.data.frame(readxl::read_xlsx(paste0(directory,"/",DBname,".xlsx"), sheet = ListName))
   } else if (fileType == "csv") {
@@ -78,7 +78,7 @@ getRecodeList <- function(directory = getwd(), DBname, ListName, fileType = "csv
 #' # Import xlsx data base
 #' getRecodeDB(directory = directory, DBname = "Countries", fileType = "xlsx")
 #' @export
-getRecodeDB <- function(directory = getwd(), DBname, fileType = "csv2") {
+getRecodeDB <- function(directory, DBname, fileType = "csv2") {
 
   # xlsx files -----------------------------------------------------------------
   if(fileType == "xlsx") {
@@ -136,7 +136,7 @@ getRecodeDB <- function(directory = getwd(), DBname, fileType = "csv2") {
 #' namesRecodeDB(directory = directory, DBname = "Countries", fileType = "xlsx")
 #'
 #' @export
-namesRecodeDB <- function(directory = getwd(), DBname, fileType = "csv2") {
+namesRecodeDB <- function(directory, DBname, fileType = "csv2") {
   if(fileType == "xlsx") {
     readxl::excel_sheets(paste0(directory,"/",DBname,".xlsx"))
   } else {

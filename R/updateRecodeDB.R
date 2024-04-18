@@ -47,7 +47,7 @@
 #' getRecodeDB(directory, "countries")
 #' @export
 updateRecodeDB <- function(newRecodes, oldValues = "oldValues", newValues = "newValues",
-                           directory = getwd(), newDirectory = directory,
+                           directory, newDirectory = directory,
                            DBname, newDBname = DBname, ListName,
                            fileType = "csv2", override = FALSE) {
   recode_db <- getRecodeDB(directory, DBname, fileType)
