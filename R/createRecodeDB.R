@@ -54,7 +54,7 @@ createRecodeDB <- function(recodeListList, directory, DBname, fileType = "csv2")
     writexl::write_xlsx(recodeListList,
                         path = paste0(directory,"/",DBname,".xlsx"),
                         col_names = TRUE)
-    return(paste0("Successfully created ", DBname, ".xlsx")) }
+   return(paste0("Successfully created ", DBname, ".xlsx")) }
 
   # csv files ------------------------------------------------------------------
   dirpath <- file.path(directory,
@@ -67,11 +67,11 @@ createRecodeDB <- function(recodeListList, directory, DBname, fileType = "csv2")
     for(i in 1:length(recodeListList)){
     utils::write.csv(recodeListList[[i]], file = paste0(dirpath, "/", names(recodeListList)[i], ".csv"), row.names=FALSE)
     }
-  } else {
+  } else if (fileType == "csv2") {
     for(i in 1:length(recodeListList)){
       utils::write.csv2(recodeListList[[i]], file = paste0(dirpath, "/", names(recodeListList)[i], ".csv"), row.names=FALSE)
     }
-  }
+  } else {return("FileType must be `csv2`, `csv`, or `xlsx`")}
 
   return(paste0("Successfully created ", DBname, ".csv"))
 }

@@ -41,9 +41,9 @@ getRecodeList <- function(directory, DBname, ListName, fileType = "csv2") {
     List <- as.data.frame(readxl::read_xlsx(paste0(directory,"/",DBname,".xlsx"), sheet = ListName))
   } else if (fileType == "csv") {
     List <- utils::read.csv(paste0(directory,"/",DBname, "/", ListName, ".csv"))
-  } else {
+  } else if (fileType == "csv2") {
     List <- utils::read.csv2(paste0(directory,"/",DBname, "/", ListName, ".csv"))
-  }
+  } else {return("FileType must be `csv2`, `csv`, or `xlsx`")}
   return(List)
 }
 
@@ -97,11 +97,11 @@ getRecodeDB <- function(directory, DBname, fileType = "csv2") {
     recodeListList <- lapply(file_names, function(file_name) {
       utils::read.csv(paste0(directory,"/",DBname, "/", file_name))
     })
-  } else {
+  } else if (fileType == "csv2"){
     recodeListList <- lapply(file_names, function(file_name) {
       utils::read.csv2(paste0(directory,"/",DBname, "/", file_name))
     })
-  }
+  } else {return("FileType must be `csv2`, `csv`, or `xlsx`")}
   return(recodeListList)
 }
 
@@ -139,7 +139,7 @@ getRecodeDB <- function(directory, DBname, fileType = "csv2") {
 namesRecodeDB <- function(directory, DBname, fileType = "csv2") {
   if(fileType == "xlsx") {
     readxl::excel_sheets(paste0(directory,"/",DBname,".xlsx"))
-  } else {
+  } else if (fileType == "csv" || fileType == "csv2") {
     sub(".csv", "", list.files(path = paste0(directory,"/",DBname), pattern = ".csv"))
-  }
+  } else {return("FileType must be `csv2`, `csv`, or `xlsx`")}
 }
