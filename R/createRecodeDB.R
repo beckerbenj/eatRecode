@@ -8,7 +8,7 @@
 #' @param recodeListList A named list of `recodeLists`.
 #' @param directory Path of the directory where the data base will be saved.
 #' @param DBname Name of the database (will be used as filename).
-#' @param fileType "csv2" (default), "csv", "xlsx"
+#' @param fileType `csv2` (default), `csv`, `xlsx`
 #'
 #' @return NULL
 #'

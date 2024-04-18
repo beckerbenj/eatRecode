@@ -5,7 +5,7 @@
 #' @param directory Path to the directory where the data base is stored.
 #' @param DBname Name of the database.
 #' @param ListName Name of the specific recode list to be imported.
-#' @param fileType "csv2" (default), "csv", "xlsx"
+#' @param fileType `csv2` (default), `csv`, `xlsx`
 #'
 #' @return A recode list.
 #'
