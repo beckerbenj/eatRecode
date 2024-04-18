@@ -1,6 +1,6 @@
 #' Get Recode List
 #'
-#' Import a recode list from an Excel file containing a data base of different `recodeLists`.
+#' Import a single recode list from an Excel file containing a data base of different `recodeLists`.
 #'
 #' @param directory Path to the directory where the data base is stored.
 #' @param DBname Name of the database.
