@@ -8,7 +8,7 @@ updateRecodeDB(
   newRecodes,
   oldValues = "oldValues",
   newValues = "newValues",
-  directory = getwd(),
+  directory,
   newDirectory = directory,
   DBname,
   newDBname = DBname,
@@ -35,7 +35,7 @@ are present in the \code{newRecodes}?}
 
 \item{ListName}{Name of the specific recode list to be imported.}
 
-\item{fileType}{"csv2" (default), "csv", "xlsx"}
+\item{fileType}{\code{csv2} (default), \code{csv}, \code{xlsx}}
 
 \item{override}{Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs.}
 }

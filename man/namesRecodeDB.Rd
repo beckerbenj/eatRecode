@@ -4,14 +4,14 @@
 \alias{namesRecodeDB}
 \title{Get Names of Recode Data Base}
 \usage{
-namesRecodeDB(directory = getwd(), DBname, fileType = "csv2")
+namesRecodeDB(directory, DBname, fileType = "csv2")
 }
 \arguments{
 \item{directory}{Path to the directory where the data base is stored.}
 
 \item{DBname}{Name of the database.}
 
-\item{fileType}{"csv2" (default), "csv", "xlsx"}
+\item{fileType}{\code{csv2} (default), \code{csv}, \code{xlsx}}
 }
 \description{
 Get the names of the individual recode lists within a recode data base.

@@ -4,7 +4,7 @@
 \alias{createRecodeDB}
 \title{Create Recode Data Base}
 \usage{
-createRecodeDB(recodeListList, directory = getwd(), DBname, fileType = "csv2")
+createRecodeDB(recodeListList, directory, DBname, fileType = "csv2")
 }
 \arguments{
 \item{recodeListList}{A named list of \code{recodeLists}.}
@@ -13,7 +13,7 @@ createRecodeDB(recodeListList, directory = getwd(), DBname, fileType = "csv2")
 
 \item{DBname}{Name of the database (will be used as filename).}
 
-\item{fileType}{"csv2" (default), "csv", "xlsx"}
+\item{fileType}{\code{csv2} (default), \code{csv}, \code{xlsx}}
 }
 \description{
 Create and store a recode data base in an Excel (\code{.csv} or \code{.xlsx}) file.

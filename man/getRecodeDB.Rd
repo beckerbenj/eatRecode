@@ -4,14 +4,14 @@
 \alias{getRecodeDB}
 \title{Get Recode Data Base}
 \usage{
-getRecodeDB(directory = getwd(), DBname, fileType = "csv2")
+getRecodeDB(directory, DBname, fileType = "csv2")
 }
 \arguments{
 \item{directory}{Path to the directory where the data base is stored.}
 
 \item{DBname}{Name of the database.}
 
-\item{fileType}{"csv2" (default), "csv", "xlsx"}
+\item{fileType}{\code{csv2} (default), \code{csv}, \code{xlsx}}
 }
 \description{
 Import a complete recode data base containing multiple \code{recodeLists}.

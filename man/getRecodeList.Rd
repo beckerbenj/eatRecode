@@ -4,7 +4,7 @@
 \alias{getRecodeList}
 \title{Get Recode List}
 \usage{
-getRecodeList(directory = getwd(), DBname, ListName, fileType = "csv2")
+getRecodeList(directory, DBname, ListName, fileType = "csv2")
 }
 \arguments{
 \item{directory}{Path to the directory where the data base is stored.}
@@ -13,7 +13,7 @@ getRecodeList(directory = getwd(), DBname, ListName, fileType = "csv2")
 
 \item{ListName}{Name of the specific recode list to be imported.}
 
-\item{fileType}{"csv2" (default), "csv", "xlsx"}
+\item{fileType}{\code{csv2} (default), \code{csv}, \code{xlsx}}
 }
 \value{
 A recode list.

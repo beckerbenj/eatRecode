@@ -92,7 +92,9 @@ updateRecodeDB <- function(newRecodes, oldValues = "oldValues", newValues = "new
   recode_db[[ListName]] <- updated_recode_list
 
   createRecodeDB(recodeListList = recode_db, directory = newDirectory, DBname = newDBname, fileType = fileType)
-  NULL
+
+  if(fileType == "xlsx"){ return(paste0("Successfully updated ", DBname, ".xlsx"))
+  } else { return(paste0("Successfully updated ", DBname, ".csv")) }
 }
 
 prep_newRecodes <- function(newRecodes, oldValues, newValues){
