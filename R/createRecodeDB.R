@@ -60,7 +60,7 @@ createRecodeDB <- function(recodeListList, directory, DBname, fileType = "csv2")
   dirpath <- file.path(directory,
                        DBname,
                        fsep = "/")
-  unlink(dirpath, recursive = TRUE) # delete existing file ("overwrite")
+  if(dir.exists(dirpath)){stop("There already is a database on your path. Please rename or move.")}
   dir.create(dirpath, showWarnings = FALSE) # create data base directory
 
   if(fileType == "csv") {
