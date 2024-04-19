@@ -73,5 +73,5 @@ updateRecodeDB(newRecodes = newRecodes,
                DBname = "countries",
                ListName = "Europe",
                override = TRUE)
-getRecodeDB(directory, "countries")docu
+getRecodeDB(directory, "countries")
 }
