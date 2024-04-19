@@ -44,12 +44,15 @@
 #'                DBname = "countries",
 #'                ListName = "Europe",
 #'                override = TRUE)
-#' getRecodeDB(directory, "countries")
+#' getRecodeDB(directory, "countries")docu
 #' @export
 updateRecodeDB <- function(newRecodes, oldValues = "oldValues", newValues = "newValues",
                            directory, newDirectory = directory,
                            DBname, newDBname = DBname, ListName,
                            fileType = "csv2", override = FALSE) {
+
+  if(!fileType %in% c("xlsx","csv","csv2")) {stop("FileType must be `csv2`, `csv`, or `xlsx`.")}
+
   recode_db <- getRecodeDB(directory, DBname, fileType)
   newRecodes <- prep_newRecodes(newRecodes, oldValues, newValues)
 

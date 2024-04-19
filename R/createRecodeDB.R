@@ -60,7 +60,8 @@ createRecodeDB <- function(recodeListList, directory, DBname, fileType = "csv2")
   dirpath <- file.path(directory,
                        DBname,
                        fsep = "/")
-  if(dir.exists(dirpath)){stop("There already is a database on your path. Please rename or move.")}
+  #if(dir.exists(dirpath)){stop("There already is a database on your path. Please rename or move.")}
+  unlink(dirpath, recursive = TRUE) # delete existing file ("overwrite")
   dir.create(dirpath, showWarnings = FALSE) # create data base directory
 
   if(fileType == "csv") {
@@ -71,7 +72,7 @@ createRecodeDB <- function(recodeListList, directory, DBname, fileType = "csv2")
     for(i in 1:length(recodeListList)){
       utils::write.csv2(recodeListList[[i]], file = paste0(dirpath, "/", names(recodeListList)[i], ".csv"), row.names=FALSE)
     }
-  } else {return("FileType must be `csv2`, `csv`, or `xlsx`")}
+  } else {return("FileType must be `csv2`, `csv`, or `xlsx`.")}
 
   return(paste0("Successfully created ", DBname, ".csv"))
 }

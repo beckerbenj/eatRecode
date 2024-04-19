@@ -19,7 +19,7 @@ getRecodeList(directory, DBname, ListName, fileType = "csv2")
 A recode list.
 }
 \description{
-Import a recode list from an Excel file containing a data base of different \code{recodeLists}.
+Import a single recode list from an Excel file containing a data base of different \code{recodeLists}.
 }
 \examples{
 # Create recode list data base using `createRecodeDB`
