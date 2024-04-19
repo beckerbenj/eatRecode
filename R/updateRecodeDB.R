@@ -22,7 +22,10 @@
 #'                                        newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 #' oldDatabase
 #' directory <- tempdir()
-#' createRecodeDB(recodeListList = oldDatabase, directory = directory, DBname = "countries")
+#' createRecodeDB(recodeListList = oldDatabase,
+#'                directory = directory,
+#'                DBname = "countries",
+#'                overwrite = TRUE)
 #' newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
 #'                           country = c("Germany", "France", "Greece"))
 #' # update the data base without overwriting old information
@@ -94,7 +97,7 @@ updateRecodeDB <- function(newRecodes, oldValues = "oldValues", newValues = "new
   updated_recode_list <- updated_recode_list[order(updated_recode_list$oldValues), ]
   recode_db[[ListName]] <- updated_recode_list
 
-  createRecodeDB(recodeListList = recode_db, directory = newDirectory, DBname = newDBname, fileType = fileType)
+  createRecodeDB(recodeListList = recode_db, directory = newDirectory, DBname = newDBname, fileType = fileType, overwrite = TRUE)
 
   if(fileType == "xlsx"){ return(paste0("Successfully updated ", DBname, ".xlsx"))
   } else { return(paste0("Successfully updated ", DBname, ".csv")) }

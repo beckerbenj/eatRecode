@@ -31,11 +31,13 @@ directory <- tempdir()
 createRecodeDB(recodeListList = Countries,
                directory = directory,
                DBname = "Countries",
-               fileType = "csv2")
+               fileType = "csv2",
+               overwrite = TRUE)
 createRecodeDB(recodeListList = Countries,
                directory = directory,
                DBname = "Countries",
-               fileType = "xlsx")
+               fileType = "xlsx",
+               overwrite = TRUE)
 # Get names of the recode lists in the data base
 namesRecodeDB(directory = directory, DBname = "Countries", fileType = "csv2")
 namesRecodeDB(directory = directory, DBname = "Countries", fileType = "xlsx")

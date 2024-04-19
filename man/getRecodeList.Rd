@@ -36,15 +36,18 @@ directory <- tempdir()
 createRecodeDB(recodeListList = Countries,
                directory = directory,
                DBname = "Countries",
-               fileType = "csv2")
+               fileType = "csv2",
+               overwrite = TRUE)
 createRecodeDB(recodeListList = Countries,
                directory = directory,
                DBname = "Countries",
-               fileType = "xlsx")
+               fileType = "xlsx",
+               overwrite = TRUE)
 # Import lists from csv data base
 getRecodeList(directory = directory, DBname = "Countries", ListName = "Europe", fileType = "csv2")
 getRecodeList(directory = directory, DBname = "Countries", ListName = "Asia", fileType = "csv2")
 # Import lists from xlsx data base
 getRecodeList(directory = directory, DBname = "Countries", ListName = "Europe", fileType = "xlsx")
 getRecodeList(directory = directory, DBname = "Countries", ListName = "Asia", fileType = "xlsx")
+
 }

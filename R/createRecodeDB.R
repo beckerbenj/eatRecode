@@ -8,7 +8,8 @@
 #' @param recodeListList A named list of `recodeLists`.
 #' @param directory Path of the directory where the data base will be saved.
 #' @param DBname Name of the database (will be used as filename).
-#' @param fileType `csv2` (default), `csv`, `xlsx`
+#' @param fileType `csv2` (default), `csv`, `xlsx`.
+#' @param overwrite If there already is a database on the specified path, should it be overwritten?
 #'
 #' @return NULL
 #'
@@ -28,20 +29,23 @@
 #' createRecodeDB(recodeListList = Countries,
 #'                directory = directory,
 #'                DBname = "Countries",
-#'                fileType = "csv2")
+#'                fileType = "csv2",
+#'                overwrite = TRUE)
 #' # create .csv file
 #' createRecodeDB(recodeListList = Countries,
 #'                directory = directory,
 #'                DBname = "Countries",
-#'                fileType = "csv")
+#'                fileType = "csv",
+#'                overwrite = TRUE)
 #' # create .xlsx file
 #' createRecodeDB(recodeListList = Countries,
 #'                directory = directory,
 #'                DBname = "Countries",
-#'                fileType = "xlsx")
+#'                fileType = "xlsx",
+#'                overwrite = TRUE)
 #'
 #' @export
-createRecodeDB <- function(recodeListList, directory, DBname, fileType = "csv2") {
+createRecodeDB <- function(recodeListList, directory, DBname, fileType = "csv2", overwrite = FALSE) {
 
   # checks ---------------------------------------------------------------------
   if (!is.list(recodeListList)) stop("'recodeListList' must be a named list of data.frames.")
@@ -51,6 +55,7 @@ createRecodeDB <- function(recodeListList, directory, DBname, fileType = "csv2")
 
   # xlsx files -----------------------------------------------------------------
   if(fileType == "xlsx") {
+    if(file.exists(paste0(directory,"/",DBname,".xlsx")) & !overwrite) {stop("There already is a database on your path. Please rename or move.")}
     writexl::write_xlsx(recodeListList,
                         path = paste0(directory,"/",DBname,".xlsx"),
                         col_names = TRUE)
@@ -60,8 +65,8 @@ createRecodeDB <- function(recodeListList, directory, DBname, fileType = "csv2")
   dirpath <- file.path(directory,
                        DBname,
                        fsep = "/")
-  #if(dir.exists(dirpath)){stop("There already is a database on your path. Please rename or move.")}
-  unlink(dirpath, recursive = TRUE) # delete existing file ("overwrite")
+  if(dir.exists(dirpath) & !overwrite){stop("There already is a database on your path. Please rename or move.")}
+  if(overwrite) {unlink(dirpath, recursive = TRUE)} # delete existing file
   dir.create(dirpath, showWarnings = FALSE) # create data base directory
 
   if(fileType == "csv") {

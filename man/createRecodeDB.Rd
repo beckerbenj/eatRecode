@@ -4,7 +4,13 @@
 \alias{createRecodeDB}
 \title{Create Recode Data Base}
 \usage{
-createRecodeDB(recodeListList, directory, DBname, fileType = "csv2")
+createRecodeDB(
+  recodeListList,
+  directory,
+  DBname,
+  fileType = "csv2",
+  overwrite = FALSE
+)
 }
 \arguments{
 \item{recodeListList}{A named list of \code{recodeLists}.}
@@ -13,7 +19,9 @@ createRecodeDB(recodeListList, directory, DBname, fileType = "csv2")
 
 \item{DBname}{Name of the database (will be used as filename).}
 
-\item{fileType}{\code{csv2} (default), \code{csv}, \code{xlsx}}
+\item{fileType}{\code{csv2} (default), \code{csv}, \code{xlsx}.}
+
+\item{overwrite}{If there already is a database on the specified path, should it be overwritten?}
 }
 \description{
 Create and store a recode data base in an Excel (\code{.csv} or \code{.xlsx}) file.
@@ -36,16 +44,19 @@ directory <- tempdir()
 createRecodeDB(recodeListList = Countries,
                directory = directory,
                DBname = "Countries",
-               fileType = "csv2")
+               fileType = "csv2",
+               overwrite = TRUE)
 # create .csv file
 createRecodeDB(recodeListList = Countries,
                directory = directory,
                DBname = "Countries",
-               fileType = "csv")
+               fileType = "csv",
+               overwrite = TRUE)
 # create .xlsx file
 createRecodeDB(recodeListList = Countries,
                directory = directory,
                DBname = "Countries",
-               fileType = "xlsx")
+               fileType = "xlsx",
+               overwrite = TRUE)
 
 }

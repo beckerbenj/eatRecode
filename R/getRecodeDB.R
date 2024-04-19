@@ -24,17 +24,20 @@
 #' createRecodeDB(recodeListList = Countries,
 #'                directory = directory,
 #'                DBname = "Countries",
-#'                fileType = "csv2")
+#'                fileType = "csv2",
+#'                overwrite = TRUE)
 #' createRecodeDB(recodeListList = Countries,
 #'                directory = directory,
 #'                DBname = "Countries",
-#'                fileType = "xlsx")
+#'                fileType = "xlsx",
+#'                overwrite = TRUE)
 #' # Import lists from csv data base
 #' getRecodeList(directory = directory, DBname = "Countries", ListName = "Europe", fileType = "csv2")
 #' getRecodeList(directory = directory, DBname = "Countries", ListName = "Asia", fileType = "csv2")
 #' # Import lists from xlsx data base
 #' getRecodeList(directory = directory, DBname = "Countries", ListName = "Europe", fileType = "xlsx")
 #' getRecodeList(directory = directory, DBname = "Countries", ListName = "Asia", fileType = "xlsx")
+#'
 #' @export
 getRecodeList <- function(directory, DBname, ListName, fileType = "csv2") {
   if(fileType == "xlsx") {
@@ -68,11 +71,13 @@ getRecodeList <- function(directory, DBname, ListName, fileType = "csv2") {
 #' createRecodeDB(recodeListList = Countries,
 #'                directory = directory,
 #'                DBname = "Countries",
-#'                fileType = "csv2")
+#'                fileType = "csv2",
+#'                overwrite = TRUE)
 #' createRecodeDB(recodeListList = Countries,
 #'                directory = directory,
 #'                DBname = "Countries",
-#'                fileType = "xlsx")
+#'                fileType = "xlsx",
+#'                overwrite = TRUE)
 #' # Import csv data base
 #' getRecodeDB(directory = directory, DBname = "Countries", fileType = "csv2")
 #' # Import xlsx data base
@@ -126,11 +131,13 @@ getRecodeDB <- function(directory, DBname, fileType = "csv2") {
 #' createRecodeDB(recodeListList = Countries,
 #'                directory = directory,
 #'                DBname = "Countries",
-#'                fileType = "csv2")
+#'                fileType = "csv2",
+#'                overwrite = TRUE)
 #' createRecodeDB(recodeListList = Countries,
 #'                directory = directory,
 #'                DBname = "Countries",
-#'                fileType = "xlsx")
+#'                fileType = "xlsx",
+#'                overwrite = TRUE)
 #' # Get names of the recode lists in the data base
 #' namesRecodeDB(directory = directory, DBname = "Countries", fileType = "csv2")
 #' namesRecodeDB(directory = directory, DBname = "Countries", fileType = "xlsx")

@@ -51,7 +51,10 @@ oldDatabase <- list( Europe = data.frame(oldValues = c("Berlin", "Copenhagen", "
                                        newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 oldDatabase
 directory <- tempdir()
-createRecodeDB(recodeListList = oldDatabase, directory = directory, DBname = "countries")
+createRecodeDB(recodeListList = oldDatabase,
+               directory = directory,
+               DBname = "countries",
+               overwrite = TRUE)
 newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
                           country = c("Germany", "France", "Greece"))
 # update the data base without overwriting old information
