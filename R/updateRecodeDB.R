@@ -44,7 +44,7 @@
 #'                DBname = "countries",
 #'                ListName = "Europe",
 #'                override = TRUE)
-#' getRecodeDB(directory, "countries")docu
+#' getRecodeDB(directory, "countries")
 #' @export
 updateRecodeDB <- function(newRecodes, oldValues = "oldValues", newValues = "newValues",
                            directory, newDirectory = directory,
