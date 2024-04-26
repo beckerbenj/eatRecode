@@ -7,7 +7,7 @@
 #' @param newRecodes A `data.frame` containing new recode information.
 #' @param oldValues A character string of the column name containing the old values in the `newRecodes` data.frame.
 #' @param newValues A character string of the column name containing the newly recoded values in the `newRecodes data.frame`.
-#' @param override Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs.
+#' @param replace Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs.
 #' @param newDirectory If the updated data base should be stored in a different directory, specify its path here.
 #' @param newDBname If the updated data base should be stored under a different name, specify it here.
 #' are present in the `newRecodes`?
@@ -36,7 +36,7 @@
 #'                directory = directory,
 #'                DBname = "countries",
 #'                ListName = "Europe",
-#'                override = FALSE)
+#'                replace = FALSE)
 #' getRecodeDB(directory, "countries")
 #' # update the data base, overwriting old information
 #' # (the row containing "Berlin - France" get's updated)
@@ -46,13 +46,13 @@
 #'                directory = directory,
 #'                DBname = "countries",
 #'                ListName = "Europe",
-#'                override = TRUE)
+#'                replace = TRUE)
 #' getRecodeDB(directory, "countries")
 #' @export
 updateRecodeDB <- function(newRecodes, oldValues = "oldValues", newValues = "newValues",
                            directory, newDirectory = directory,
                            DBname, newDBname = DBname, ListName,
-                           fileType = "csv2", override = FALSE) {
+                           fileType = "csv2", replace = FALSE) {
 
   if(!fileType %in% c("xlsx","csv","csv2")) {stop("FileType must be `csv2`, `csv`, or `xlsx`.")}
 
@@ -64,7 +64,7 @@ updateRecodeDB <- function(newRecodes, oldValues = "oldValues", newValues = "new
   checkRecodeList(newRecodes)
 
   oldValues_conflicts <- data.frame(oldValues = character(), newValues = character())
-  if (override) {
+  if (replace) {
     newRecodes_manual <- unique(newRecodes)
     oldValues_conflicts <- newRecodes_manual[newRecodes_manual$oldValues %in% old_recode_list$oldValues, ]
 
@@ -92,7 +92,7 @@ updateRecodeDB <- function(newRecodes, oldValues = "oldValues", newValues = "new
     newRecodes_manual <- unique(newRecodes[!newRecodes$oldValues %in% old_recode_list$oldValues, ])
   }
 
-  ## if necessary, override & order
+  ## if necessary, replace & order
   updated_recode_list <- rbind(old_recode_list[!old_recode_list$oldValues %in% oldValues_conflicts$oldValues, ], newRecodes_manual)
   updated_recode_list <- updated_recode_list[order(updated_recode_list$oldValues), ]
   recode_db[[ListName]] <- updated_recode_list

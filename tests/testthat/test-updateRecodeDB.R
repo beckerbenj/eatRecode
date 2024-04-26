@@ -65,7 +65,7 @@ test_that("updating a recode list while overriding existing recodes: xlsx", {
                    DBname = "helper_recodeDB",
                    ListName = "country",
                    fileType = "xlsx",
-                   override = TRUE
+                   replace = TRUE
     ),
     "The following recode pairs in the existing data base in sheet 'country' will be overwritten:\nWales -> UK; now: Wales\nBavaria -> Germany; now: Austria"
   )
@@ -84,7 +84,7 @@ test_that("updating a recode list while overriding existing recodes with redunda
                    DBname = "helper_recodeDB",
                    ListName = "country",
                    fileType = "xlsx",
-                   override = TRUE
+                   replace = TRUE
     ),
     "The following recode pairs in the existing data base in sheet 'country' will be overwritten:\nBavaria -> Germany; now: Austria"
   )
@@ -144,7 +144,7 @@ test_that("updating a recode list while overriding existing recodes: xlsx", {
                    DBname = "helper_recodeDB",
                    ListName = "country",
                    fileType = "xlsx",
-                   override = TRUE
+                   replace = TRUE
     ),
     "The following recode pairs in the existing data base in sheet 'country' will be overwritten:\nWales -> UK; now: Wales\nBavaria -> Germany; now: Austria"
   )
@@ -163,7 +163,7 @@ test_that("updating a recode list while overriding existing recodes with redunda
                    DBname = "helper_recodeDB",
                    ListName = "country",
                    fileType = "xlsx",
-                   override = TRUE
+                   replace = TRUE
     ),
     "The following recode pairs in the existing data base in sheet 'country' will be overwritten:\nBavaria -> Germany; now: Austria"
   )
@@ -225,7 +225,7 @@ test_that("updating a recode list while overriding existing recodes: csv", {
                    DBname = "helper_recodeDB_csv",
                    ListName = "country",
                    fileType = "csv",
-                   override = TRUE
+                   replace = TRUE
     ),
     "The following recode pairs in the existing data base in sheet 'country' will be overwritten:\nWales -> UK; now: Wales\nBavaria -> Germany; now: Austria"
   )
@@ -244,7 +244,7 @@ test_that("updating a recode list while overriding existing recodes with redunda
                    DBname = "helper_recodeDB_csv",
                    ListName = "country",
                    fileType = "csv",
-                   override = TRUE
+                   replace = TRUE
     ),
     "The following recode pairs in the existing data base in sheet 'country' will be overwritten:\nBavaria -> Germany; now: Austria"
   )
@@ -304,7 +304,7 @@ test_that("updating a recode list while overriding existing recodes: csv", {
                    DBname = "helper_recodeDB_csv",
                    ListName = "country",
                    fileType = "csv",
-                   override = TRUE
+                   replace = TRUE
     ),
     "The following recode pairs in the existing data base in sheet 'country' will be overwritten:\nWales -> UK; now: Wales\nBavaria -> Germany; now: Austria"
   )
@@ -323,7 +323,7 @@ test_that("updating a recode list while overriding existing recodes with redunda
                    DBname = "helper_recodeDB_csv",
                    ListName = "country",
                    fileType = "csv",
-                   override = TRUE
+                   replace = TRUE
     ),
     "The following recode pairs in the existing data base in sheet 'country' will be overwritten:\nBavaria -> Germany; now: Austria"
   )

@@ -14,7 +14,7 @@ updateRecodeDB(
   newDBname = DBname,
   ListName,
   fileType = "csv2",
-  override = FALSE
+  replace = FALSE
 )
 }
 \arguments{
@@ -37,7 +37,7 @@ are present in the \code{newRecodes}?}
 
 \item{fileType}{\code{csv2} (default), \code{csv}, \code{xlsx}}
 
-\item{override}{Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs.}
+\item{replace}{Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs.}
 }
 \description{
 Update a recode data base stored in an Excel file.
@@ -65,7 +65,7 @@ updateRecodeDB(newRecodes = newRecodes,
                directory = directory,
                DBname = "countries",
                ListName = "Europe",
-               override = FALSE)
+               replace = FALSE)
 getRecodeDB(directory, "countries")
 # update the data base, overwriting old information
 # (the row containing "Berlin - France" get's updated)
@@ -75,6 +75,6 @@ updateRecodeDB(newRecodes = newRecodes,
                directory = directory,
                DBname = "countries",
                ListName = "Europe",
-               override = TRUE)
+               replace = TRUE)
 getRecodeDB(directory, "countries")
 }
