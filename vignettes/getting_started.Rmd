@@ -85,10 +85,11 @@ manual_recodes$newValues <- c("Egypt", "UK")
 The next step is to update your recode data base, so it contains all needed values:
 ```{r}
 updateRecodeDB(newRecodes = manual_recodes,
-                            oldValues = "country",
-                            recodeDBPath = here::here("tests", "testthat", "helper_recodeDB.xlsx"), # I use the here package to set the path to the data base
-                            newRecodeDBPath = here::here("tests", "testthat", "helper_recodeDB_2.xlsx"), 
-                            name = "country")
+               oldValues = "country",
+               directory = here::here("tests", "testthat"), # I use the here package to set the path to the data base
+               DBname = "helper_recodeDB_2",             
+               ListName = "country",
+               fileType = "xlsx")
 ```
 
 ## 4. Apply this Updated Recode List to Your Data Frame 

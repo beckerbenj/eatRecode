@@ -1,33 +1,53 @@
 #' Get Recode List
 #'
-#' Import a recode list from an Excel file containing a data base of different `recodeLists`.
+#' Import a single recode list from an Excel file containing a data base of different `recodeLists`.
 #'
-#' @param filePath Path to the `.xlsx` file in which the data base is stored.
-#' @param name Name of the specific recode list (Excel sheet) to be imported.
+#' @param directory Path to the directory where the data base is stored.
+#' @param DBname Name of the database.
+#' @param ListName Name of the specific recode list to be imported.
+#' @param fileType `csv2` (default), `csv`, `xlsx`
 #'
 #' @return A recode list.
 #'
-#'
 #' @examples
 #' # Create recode list data base using `createRecodeDB`
-#' recodeListList <- list( Europe = data.frame(
+#' Countries <- list( Europe = data.frame(
 #'                                   id = 1:4,
 #'                                   oldValues = c("Berlin", "Copenhagen", "Rome", "Madrid"),
 #'                                   newValues = c("Germany", "Denmark", "Italy" , "Spain")),
-#'                         Asia = data.frame(
+#'                    Asia = data.frame(
 #'                                   id = 1:4,
 #'                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
 #'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
-#' recodeListList
-#' filePath_temp <- tempfile(fileext = ".xlsx")
-#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
-#' # Import lists from the data base
-#' getRecodeList(filePath = filePath_temp, name = "Europe")
-#' getRecodeList(filePath = filePath_temp, name = "Asia")
+#' Countries
+#' directory <- tempdir()
+#' createRecodeDB(recodeListList = Countries,
+#'                directory = directory,
+#'                DBname = "Countries",
+#'                fileType = "csv2",
+#'                overwrite = TRUE)
+#' createRecodeDB(recodeListList = Countries,
+#'                directory = directory,
+#'                DBname = "Countries",
+#'                fileType = "xlsx",
+#'                overwrite = TRUE)
+#' # Import lists from csv data base
+#' getRecodeList(directory = directory, DBname = "Countries", ListName = "Europe", fileType = "csv2")
+#' getRecodeList(directory = directory, DBname = "Countries", ListName = "Asia", fileType = "csv2")
+#' # Import lists from xlsx data base
+#' getRecodeList(directory = directory, DBname = "Countries", ListName = "Europe", fileType = "xlsx")
+#' getRecodeList(directory = directory, DBname = "Countries", ListName = "Asia", fileType = "xlsx")
 #'
 #' @export
-getRecodeList <- function(filePath, name) {
-  as.data.frame(readxl::read_xlsx(filePath, sheet = name))
+getRecodeList <- function(directory, DBname, ListName, fileType = "csv2") {
+  if(fileType == "xlsx") {
+    List <- as.data.frame(readxl::read_xlsx(paste0(directory,"/",DBname,".xlsx"), sheet = ListName))
+  } else if (fileType == "csv") {
+    List <- utils::read.csv(paste0(directory,"/",DBname, "/", ListName, ".csv"))
+  } else if (fileType == "csv2") {
+    List <- utils::read.csv2(paste0(directory,"/",DBname, "/", ListName, ".csv"))
+  } else {return("FileType must be `csv2`, `csv`, or `xlsx`.")}
+  return(List)
 }
 
 #' Get Recode Data Base
@@ -38,31 +58,57 @@ getRecodeList <- function(filePath, name) {
 #'
 #' @examples
 #' # Create recode list data base using `createRecodeDB`
-#' recodeListList <- list( Europe = data.frame(
+#' Countries <- list( Europe = data.frame(
 #'                                   id = 1:4,
 #'                                   oldValues = c("Berlin", "Copenhagen", "Rome", "Madrid"),
 #'                                   newValues = c("Germany", "Denmark", "Italy" , "Spain")),
-#'                         Asia = data.frame(
+#'                    Asia = data.frame(
 #'                                   id = 1:4,
 #'                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
 #'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
-#' recodeListList
-#' filePath_temp <- tempfile(fileext = ".xlsx")
-#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
-#' # Import data base
-#' getRecodeDB(filePath = filePath_temp)
-#'
+#' Countries
+#' directory <- tempdir()
+#' createRecodeDB(recodeListList = Countries,
+#'                directory = directory,
+#'                DBname = "Countries",
+#'                fileType = "csv2",
+#'                overwrite = TRUE)
+#' createRecodeDB(recodeListList = Countries,
+#'                directory = directory,
+#'                DBname = "Countries",
+#'                fileType = "xlsx",
+#'                overwrite = TRUE)
+#' # Import csv data base
+#' getRecodeDB(directory = directory, DBname = "Countries", fileType = "csv2")
+#' # Import xlsx data base
+#' getRecodeDB(directory = directory, DBname = "Countries", fileType = "xlsx")
 #' @export
-getRecodeDB <- function(filePath) {
-  sheet_names <- readxl::excel_sheets(filePath)
-  names(sheet_names) <- sheet_names
-  recodeListList <- lapply(sheet_names, function(sheet_name) {
-    as.data.frame(readxl::read_xlsx(filePath, sheet = sheet_name))
-  })
+getRecodeDB <- function(directory, DBname, fileType = "csv2") {
 
-  recodeListList
+  # xlsx files -----------------------------------------------------------------
+  if(fileType == "xlsx") {
+    sheet_names <- readxl::excel_sheets(paste0(directory,"/",DBname,".xlsx"))
+    names(sheet_names) <- sheet_names
+    recodeListList <- lapply(sheet_names, function(sheet_name) {
+      as.data.frame(readxl::read_xlsx(paste0(directory,"/",DBname,".xlsx"), sheet = sheet_name))
+    })
+    return(recodeListList) }
+
+  # csv files ------------------------------------------------------------------
+  file_names <- list.files(path = paste0(directory,"/",DBname), pattern = ".csv")
+  names(file_names) <- sub(".csv", "", file_names)
+
+  if(fileType == "csv") {
+    recodeListList <- lapply(file_names, function(file_name) {
+      utils::read.csv(paste0(directory,"/",DBname, "/", file_name))
+    })
+  } else if (fileType == "csv2"){
+    recodeListList <- lapply(file_names, function(file_name) {
+      utils::read.csv2(paste0(directory,"/",DBname, "/", file_name))
+    })
+  } else {return("FileType must be `csv2`, `csv`, or `xlsx`.")}
+  return(recodeListList)
 }
-
 
 #' Get Names of Recode Data Base
 #'
@@ -72,21 +118,35 @@ getRecodeDB <- function(filePath) {
 #'
 #' @examples
 #' # Create recode list data base using `createRecodeDB`
-#' recodeListList <- list( Europe = data.frame(
+#' Countries <- list( Europe = data.frame(
 #'                                   id = 1:4,
 #'                                   oldValues = c("Berlin", "Copenhagen", "Rome", "Madrid"),
 #'                                   newValues = c("Germany", "Denmark", "Italy" , "Spain")),
-#'                         Asia = data.frame(
+#'                    Asia = data.frame(
 #'                                   id = 1:4,
 #'                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
 #'                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
-#' recodeListList
-#' filePath_temp <- tempfile(fileext = ".xlsx")
-#' createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
-#' # Import data base
-#' namesRecodeDB(filePath = filePath_temp)
+#' Countries
+#' directory <- tempdir()
+#' createRecodeDB(recodeListList = Countries,
+#'                directory = directory,
+#'                DBname = "Countries",
+#'                fileType = "csv2",
+#'                overwrite = TRUE)
+#' createRecodeDB(recodeListList = Countries,
+#'                directory = directory,
+#'                DBname = "Countries",
+#'                fileType = "xlsx",
+#'                overwrite = TRUE)
+#' # Get names of the recode lists in the data base
+#' namesRecodeDB(directory = directory, DBname = "Countries", fileType = "csv2")
+#' namesRecodeDB(directory = directory, DBname = "Countries", fileType = "xlsx")
 #'
 #' @export
-namesRecodeDB <- function(filePath) {
-  readxl::excel_sheets(filePath)
+namesRecodeDB <- function(directory, DBname, fileType = "csv2") {
+  if(fileType == "xlsx") {
+    readxl::excel_sheets(paste0(directory,"/",DBname,".xlsx"))
+  } else if (fileType == "csv" || fileType == "csv2") {
+    sub(".csv", "", list.files(path = paste0(directory,"/",DBname), pattern = ".csv"))
+  } else {return("FileType must be `csv2`, `csv`, or `xlsx`.")}
 }

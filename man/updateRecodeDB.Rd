@@ -6,29 +6,38 @@
 \usage{
 updateRecodeDB(
   newRecodes,
-  oldValues,
+  oldValues = "oldValues",
   newValues = "newValues",
-  recodeDBPath,
-  newRecodeDBPath,
-  name,
-  override = FALSE
+  directory,
+  newDirectory = directory,
+  DBname,
+  newDBname = DBname,
+  ListName,
+  fileType = "csv2",
+  replace = FALSE
 )
 }
 \arguments{
 \item{newRecodes}{A \code{data.frame} containing new recode information.}
 
-\item{oldValues}{A character string of the column name containing the old values in the \verb{newRecodes data.frame}.}
+\item{oldValues}{A character string of the column name containing the old values in the \code{newRecodes} data.frame.}
 
 \item{newValues}{A character string of the column name containing the newly recoded values in the \verb{newRecodes data.frame}.}
 
-\item{recodeDBPath}{Path to the \code{.xlsx} file in which the data base is stored.}
+\item{directory}{Path to the directory where the data base is stored.}
 
-\item{newRecodeDBPath}{Path to the \code{.xlsx} file in which the updated data base should be stored.}
+\item{newDirectory}{If the updated data base should be stored in a different directory, specify its path here.}
 
-\item{name}{Name of the specific recode list.}
+\item{DBname}{Name of the database.}
 
-\item{override}{Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs
+\item{newDBname}{If the updated data base should be stored under a different name, specify it here.
 are present in the \code{newRecodes}?}
+
+\item{ListName}{Name of the specific recode list to be imported.}
+
+\item{fileType}{\code{csv2} (default), \code{csv}, \code{xlsx}}
+
+\item{replace}{Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs.}
 }
 \description{
 Update a recode data base stored in an Excel file.
@@ -41,29 +50,31 @@ oldDatabase <- list( Europe = data.frame(oldValues = c("Berlin", "Copenhagen", "
                      Asia = data.frame(oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
                                        newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 oldDatabase
-oldFilePath_temp <- tempfile(fileext = ".xlsx")
-createRecodeDB(recodeListList = oldDatabase, filePath = oldFilePath_temp)
-# new recode information
+directory <- tempdir()
+createRecodeDB(recodeListList = oldDatabase,
+               directory = directory,
+               DBname = "countries",
+               overwrite = TRUE)
 newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
                           country = c("Germany", "France", "Greece"))
-newFilePath_temp <- tempfile(fileext = ".xlsx")
-# update the data base without overwriting old information (the row containing "Berlin - France" keeps it's old value)
+# update the data base without overwriting old information
+# (the row containing "Berlin - France" keeps it's old value)
 updateRecodeDB(newRecodes = newRecodes,
                oldValues = "city",
                newValues = "country",
-               recodeDBPath = oldFilePath_temp,
-               newRecodeDBPath = newFilePath_temp,
-               name = "Europe",
-               override = FALSE)
-getRecodeDB(newFilePath_temp)
-# update the data base, overwriting old information (the row containing "Berlin - France" get's updated)
+               directory = directory,
+               DBname = "countries",
+               ListName = "Europe",
+               replace = FALSE)
+getRecodeDB(directory, "countries")
+# update the data base, overwriting old information
+# (the row containing "Berlin - France" get's updated)
 updateRecodeDB(newRecodes = newRecodes,
                oldValues = "city",
                newValues = "country",
-               recodeDBPath = oldFilePath_temp,
-               newRecodeDBPath = newFilePath_temp,
-               name = "Europe",
-               override = TRUE)
-getRecodeDB(newFilePath_temp)
-
+               directory = directory,
+               DBname = "countries",
+               ListName = "Europe",
+               replace = TRUE)
+getRecodeDB(directory, "countries")
 }

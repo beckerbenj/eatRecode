@@ -4,34 +4,50 @@
 \alias{getRecodeList}
 \title{Get Recode List}
 \usage{
-getRecodeList(filePath, name)
+getRecodeList(directory, DBname, ListName, fileType = "csv2")
 }
 \arguments{
-\item{filePath}{Path to the \code{.xlsx} file in which the data base is stored.}
+\item{directory}{Path to the directory where the data base is stored.}
 
-\item{name}{Name of the specific recode list (Excel sheet) to be imported.}
+\item{DBname}{Name of the database.}
+
+\item{ListName}{Name of the specific recode list to be imported.}
+
+\item{fileType}{\code{csv2} (default), \code{csv}, \code{xlsx}}
 }
 \value{
 A recode list.
 }
 \description{
-Import a recode list from an Excel file containing a data base of different \code{recodeLists}.
+Import a single recode list from an Excel file containing a data base of different \code{recodeLists}.
 }
 \examples{
 # Create recode list data base using `createRecodeDB`
-recodeListList <- list( Europe = data.frame(
+Countries <- list( Europe = data.frame(
                                   id = 1:4,
                                   oldValues = c("Berlin", "Copenhagen", "Rome", "Madrid"),
                                   newValues = c("Germany", "Denmark", "Italy" , "Spain")),
-                        Asia = data.frame(
+                   Asia = data.frame(
                                   id = 1:4,
                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
-recodeListList
-filePath_temp <- tempfile(fileext = ".xlsx")
-createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
-# Import lists from the data base
-getRecodeList(filePath = filePath_temp, name = "Europe")
-getRecodeList(filePath = filePath_temp, name = "Asia")
+Countries
+directory <- tempdir()
+createRecodeDB(recodeListList = Countries,
+               directory = directory,
+               DBname = "Countries",
+               fileType = "csv2",
+               overwrite = TRUE)
+createRecodeDB(recodeListList = Countries,
+               directory = directory,
+               DBname = "Countries",
+               fileType = "xlsx",
+               overwrite = TRUE)
+# Import lists from csv data base
+getRecodeList(directory = directory, DBname = "Countries", ListName = "Europe", fileType = "csv2")
+getRecodeList(directory = directory, DBname = "Countries", ListName = "Asia", fileType = "csv2")
+# Import lists from xlsx data base
+getRecodeList(directory = directory, DBname = "Countries", ListName = "Europe", fileType = "xlsx")
+getRecodeList(directory = directory, DBname = "Countries", ListName = "Asia", fileType = "xlsx")
 
 }

@@ -3,17 +3,16 @@
 #' Update a recode data base stored in an Excel file.
 #' Takes new recode information, compares it to the existing recode database, and updates the database accordingly.
 #'
+#' @inheritParams getRecodeList
 #' @param newRecodes A `data.frame` containing new recode information.
-#' @param oldValues A character string of the column name containing the old values in the `newRecodes data.frame`.
+#' @param oldValues A character string of the column name containing the old values in the `newRecodes` data.frame.
 #' @param newValues A character string of the column name containing the newly recoded values in the `newRecodes data.frame`.
-#' @param recodeDBPath Path to the `.xlsx` file in which the data base is stored.
-#' @param newRecodeDBPath Path to the `.xlsx` file in which the updated data base should be stored.
-#' @param name Name of the specific recode list.
-#' @param override Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs
+#' @param replace Logical of length 1. Should existing recode pairs be overwritten when conflicting newer recode pairs.
+#' @param newDirectory If the updated data base should be stored in a different directory, specify its path here.
+#' @param newDBname If the updated data base should be stored under a different name, specify it here.
 #' are present in the `newRecodes`?
 #'
 #' @return NULL
-#'
 #'
 #' @examples
 #' # example data base
@@ -22,42 +21,50 @@
 #'                      Asia = data.frame(oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
 #'                                        newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
 #' oldDatabase
-#' oldFilePath_temp <- tempfile(fileext = ".xlsx")
-#' createRecodeDB(recodeListList = oldDatabase, filePath = oldFilePath_temp)
-#' # new recode information
+#' directory <- tempdir()
+#' createRecodeDB(recodeListList = oldDatabase,
+#'                directory = directory,
+#'                DBname = "countries",
+#'                overwrite = TRUE)
 #' newRecodes <- data.frame( city = c("Berlin", "Paris", "Athens"),
 #'                           country = c("Germany", "France", "Greece"))
-#' newFilePath_temp <- tempfile(fileext = ".xlsx")
-#' # update the data base without overwriting old information (the row containing "Berlin - France" keeps it's old value)
+#' # update the data base without overwriting old information
+#' # (the row containing "Berlin - France" keeps it's old value)
 #' updateRecodeDB(newRecodes = newRecodes,
 #'                oldValues = "city",
 #'                newValues = "country",
-#'                recodeDBPath = oldFilePath_temp,
-#'                newRecodeDBPath = newFilePath_temp,
-#'                name = "Europe",
-#'                override = FALSE)
-#' getRecodeDB(newFilePath_temp)
-#' # update the data base, overwriting old information (the row containing "Berlin - France" get's updated)
+#'                directory = directory,
+#'                DBname = "countries",
+#'                ListName = "Europe",
+#'                replace = FALSE)
+#' getRecodeDB(directory, "countries")
+#' # update the data base, overwriting old information
+#' # (the row containing "Berlin - France" get's updated)
 #' updateRecodeDB(newRecodes = newRecodes,
 #'                oldValues = "city",
 #'                newValues = "country",
-#'                recodeDBPath = oldFilePath_temp,
-#'                newRecodeDBPath = newFilePath_temp,
-#'                name = "Europe",
-#'                override = TRUE)
-#' getRecodeDB(newFilePath_temp)
-#'
+#'                directory = directory,
+#'                DBname = "countries",
+#'                ListName = "Europe",
+#'                replace = TRUE)
+#' getRecodeDB(directory, "countries")
 #' @export
-updateRecodeDB <- function(newRecodes, oldValues, newValues = "newValues", recodeDBPath, newRecodeDBPath, name, override = FALSE) {
-  recode_db <- getRecodeDB(filePath = recodeDBPath)
+updateRecodeDB <- function(newRecodes, oldValues = "oldValues", newValues = "newValues",
+                           directory, newDirectory = directory,
+                           DBname, newDBname = DBname, ListName,
+                           fileType = "csv2", replace = FALSE) {
+
+  if(!fileType %in% c("xlsx","csv","csv2")) {stop("FileType must be `csv2`, `csv`, or `xlsx`.")}
+
+  recode_db <- getRecodeDB(directory, DBname, fileType)
   newRecodes <- prep_newRecodes(newRecodes, oldValues, newValues)
 
-  old_recode_list <- recode_db[[name]]
+  old_recode_list <- recode_db[[ListName]]
   checkRecodeList(old_recode_list)
   checkRecodeList(newRecodes)
 
   oldValues_conflicts <- data.frame(oldValues = character(), newValues = character())
-  if (override) {
+  if (replace) {
     newRecodes_manual <- unique(newRecodes)
     oldValues_conflicts <- newRecodes_manual[newRecodes_manual$oldValues %in% old_recode_list$oldValues, ]
 
@@ -77,7 +84,7 @@ updateRecodeDB <- function(newRecodes, oldValues, newValues = "newValues", recod
 
       message(
         "The following recode pairs in the existing data base in sheet '",
-        name, "' will be overwritten:\n",
+        ListName, "' will be overwritten:\n",
         paste(conflict_details, collapse = "\n")
       )
     }
@@ -85,15 +92,15 @@ updateRecodeDB <- function(newRecodes, oldValues, newValues = "newValues", recod
     newRecodes_manual <- unique(newRecodes[!newRecodes$oldValues %in% old_recode_list$oldValues, ])
   }
 
-  ## if necessary, override & order
+  ## if necessary, replace & order
   updated_recode_list <- rbind(old_recode_list[!old_recode_list$oldValues %in% oldValues_conflicts$oldValues, ], newRecodes_manual)
   updated_recode_list <- updated_recode_list[order(updated_recode_list$oldValues), ]
-  recode_db[[name]] <- updated_recode_list
+  recode_db[[ListName]] <- updated_recode_list
 
-  # overwrite existing excel sheet
-  writexl::write_xlsx(recode_db, path = newRecodeDBPath, col_names = TRUE)
+  createRecodeDB(recodeListList = recode_db, directory = newDirectory, DBname = newDBname, fileType = fileType, overwrite = TRUE)
 
-  NULL
+  if(fileType == "xlsx"){ return(paste0("Successfully updated ", DBname, ".xlsx"))
+  } else { return(paste0("Successfully updated ", DBname, ".csv")) }
 }
 
 prep_newRecodes <- function(newRecodes, oldValues, newValues){

@@ -4,20 +4,33 @@
 \alias{createRecodeDB}
 \title{Create Recode Data Base}
 \usage{
-createRecodeDB(recodeListList, filePath)
+createRecodeDB(
+  recodeListList,
+  directory,
+  DBname,
+  fileType = "csv2",
+  overwrite = FALSE
+)
 }
 \arguments{
 \item{recodeListList}{A named list of \code{recodeLists}.}
 
-\item{filePath}{Path to the \code{.xlsx} file in which the data base should be stored.}
+\item{directory}{Path of the directory where the data base will be saved.}
+
+\item{DBname}{Name of the database (will be used as filename).}
+
+\item{fileType}{\code{csv2} (default), \code{csv}, \code{xlsx}.}
+
+\item{overwrite}{If there already is a database on the specified path, should it be overwritten?}
 }
 \description{
-Create and store a recode data base in an Excel file.
-The Excel file will have sheets corresponding to each recodeList name.
+Create and store a recode data base in an Excel (\code{.csv} or \code{.xlsx}) file.
+For each recodeList, a separate \code{.csv} file will be generated.
+The \code{.xlsx} file will have sheets corresponding to each recodeList name.
 }
 \examples{
 # create a named list of data frames
-recodeListList <- list( Europe = data.frame(
+Countries <- list( Europe = data.frame(
                                   id = 1:4,
                                   oldValues = c("Berlin", "Copenhagen", "Rome", "Madrid"),
                                   newValues = c("Germany", "Denmark", "Italy" , "Spain")),
@@ -25,9 +38,25 @@ recodeListList <- list( Europe = data.frame(
                                   id = 1:4,
                                   oldValues = c("Baku", "Tokyo", "Kathmandu", "Singapore"),
                                   newValues = c("Azerbaijan", "Japan", "Nepal" , "Singapore")))
-recodeListList
-filePath_temp <- tempfile(fileext = ".xlsx")
-# create the Excel-file
-createRecodeDB(recodeListList = recodeListList, filePath = filePath_temp)
+Countries
+directory <- tempdir()
+# create .csv file with comma as decimal point (default)
+createRecodeDB(recodeListList = Countries,
+               directory = directory,
+               DBname = "Countries",
+               fileType = "csv2",
+               overwrite = TRUE)
+# create .csv file
+createRecodeDB(recodeListList = Countries,
+               directory = directory,
+               DBname = "Countries",
+               fileType = "csv",
+               overwrite = TRUE)
+# create .xlsx file
+createRecodeDB(recodeListList = Countries,
+               directory = directory,
+               DBname = "Countries",
+               fileType = "xlsx",
+               overwrite = TRUE)
 
 }
