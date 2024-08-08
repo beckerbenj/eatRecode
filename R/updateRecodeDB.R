@@ -53,6 +53,8 @@ updateRecodeDB <- function(newRecodes, oldValues = "oldValues", newValues = "new
                            directory, newDirectory = directory,
                            DBname, newDBname = DBname, ListName,
                            fileType = "csv2", replace = FALSE) {
+  # checks
+  checkmate::assert_subset(colnames(newRecodes), choices = c(oldValues, newValues))
 
   if(!fileType %in% c("xlsx","csv","csv2")) {stop("FileType must be `csv2`, `csv`, or `xlsx`.")}
 
