@@ -1,48 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/404.html</loc>
-  </url>
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/articles/getting_started.html</loc>
-  </url>
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/index.html</loc>
-  </url>
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/reference/checkRecodeList.html</loc>
-  </url>
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/reference/createRecodeDB.html</loc>
-  </url>
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/reference/extractManualRecode.html</loc>
-  </url>
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/reference/getRecodeDB.html</loc>
-  </url>
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/reference/getRecodeList.html</loc>
-  </url>
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/reference/namesRecodeDB.html</loc>
-  </url>
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/reference/updateRecodeDB.html</loc>
-  </url>
-  <url>
-    <loc>https://beckerbenj.github.io/eatRecode/reference/useRecodeList.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://beckerbenj.github.io/eatRecode/404.html</loc></url>
+<url><loc>https://beckerbenj.github.io/eatRecode/LICENSE.html</loc></url>
+<url><loc>https://beckerbenj.github.io/eatRecode/articles/getting_started.html</loc></url>
+<url><loc>https://beckerbenj.github.io/eatRecode/articles/index.html</loc></url>
+<url><loc>https://beckerbenj.github.io/eatRecode/authors.html</loc></url>
+<url><loc>https://beckerbenj.github.io/eatRecode/index.html</loc></url>
+<url><loc>https://beckerbenj.github.io/eatRecode/reference/checkRecodeList.html</loc></url>
+<url><loc>https://beckerbenj.github.io/eatRecode/reference/createRecodeDB.html</loc></url>
+<url><loc>https://beckerbenj.github.io/eatRecode/reference/extractManualRecode.html</loc></url>
+<url><loc>https://beckerbenj.github.io/eatRecode/reference/getRecodeDB.html</loc></url>
+<url><loc>https://beckerbenj.github.io/eatRecode/reference/getRecodeList.html</loc></url>
+<url><loc>https://beckerbenj.github.io/eatRecode/reference/index.html</loc></url>
+<url><loc>https://beckerbenj.github.io/eatRecode/reference/namesRecodeDB.html</loc></url>
+<url><loc>https://beckerbenj.github.io/eatRecode/reference/updateRecodeDB.html</loc></url>
+<url><loc>https://beckerbenj.github.io/eatRecode/reference/useRecodeList.html</loc></url>
 </urlset>
+
