@@ -54,7 +54,9 @@ updateRecodeDB <- function(newRecodes, oldValues = "oldValues", newValues = "new
                            DBname, newDBname = DBname, ListName,
                            fileType = "csv2", replace = FALSE) {
   # checks
-  checkmate::assert_subset(c(oldValues, newValues), choices = colnames(newRecodes))
+  if(!checkmate::test_subset(c(oldValues, newValues), choices = colnames(newRecodes))){
+    stop("Your data.frame `newRecodes` must contain the columns `oldValues` and `newValues`.")
+  }
 
   if(!fileType %in% c("xlsx","csv","csv2")) {stop("FileType must be `csv2`, `csv`, or `xlsx`.")}
 
