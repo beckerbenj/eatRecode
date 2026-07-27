@@ -1,4 +1,4 @@
-# eatRecode
+# eatRecode <a href="https://beckerbenj.github.io/eatRecode/"><img src="man/figures/logo.png" align="right" height="120" alt="eatATA website" /></a>
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/beckerbenj/eatRecode/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/beckerbenj/eatRecode/actions/workflows/R-CMD-check.yaml)
